@@ -1,0 +1,4165 @@
+import ExplorationLaws
+import equational_theories.EquationalResult
+import Mathlib.Tactic.TypeStar
+
+set_option linter.unusedVariables false
+
+namespace Semigroup4
+
+theorem Equation4301_4512_implies_Equation4296 (G : Type*) [Magma G] (h4301 : Equation4301 G) (h4512 : Equation4512 G) : Equation4296 G := by
+  have l0 : ∀ sK0 sK1 X0 : G, (sK0 ◇ (sK0 ◇ sK1)) = (sK0 ◇ (sK0 ◇ X0)) := by
+    intro sK0 sK1 X0
+    conv => enter [1]; rw [h4301 sK0 sK1 sK0]
+    conv => enter [1]; rw [← h4301 sK0 X0 sK0]
+  have l1 : ∀ X0 X1 sK0 sK1 : G, (X0 ◇ (X0 ◇ X1)) = ((sK0 ◇ X0) ◇ (sK0 ◇ (sK0 ◇ sK1))) := by
+    intro X0 X1 sK0 sK1
+    conv => enter [1]; rw [h4301 X0 X1 (sK0 ◇ X0)]
+    conv => enter [1, 2]; rw [← h4301 sK0 sK1 X0]
+  have l2 : ∀ X0 X1 sK0 sK1 : G, (X0 ◇ (X0 ◇ X1)) = (sK0 ◇ (X0 ◇ (sK0 ◇ (sK0 ◇ sK1)))) := by
+    intro X0 X1 sK0 sK1
+    conv => enter [1]; rw [l1 X0 X1 sK0 sK1]
+    conv => enter [1]; rw [← h4512 sK0 X0 (sK0 ◇ (sK0 ◇ sK1))]
+  have l3 : ∀ sK0 sK1 X0 : G, ((sK0 ◇ sK1) ◇ ((sK0 ◇ sK1) ◇ X0)) = ((sK0 ◇ (sK0 ◇ sK1)) ◇ (sK0 ◇ (sK0 ◇ sK1))) := by
+    intro sK0 sK1 X0
+    conv => enter [1]; rw [h4301 (sK0 ◇ sK1) X0 (sK0 ◇ (sK0 ◇ sK1))]
+    conv => enter [1, 2]; rw [← h4301 sK0 sK1 (sK0 ◇ sK1)]
+  have l4 : ∀ sK0 sK1 : G, ((sK0 ◇ (sK0 ◇ sK1)) ◇ (sK0 ◇ (sK0 ◇ sK1))) = (sK0 ◇ ((sK0 ◇ sK1) ◇ (sK0 ◇ (sK0 ◇ sK1)))) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [← l3 sK0 sK1 sK0]
+    conv => enter [1]; rw [l2 (sK0 ◇ sK1) sK0 sK0 sK1]
+  have l5 : ∀ sK0 sK1 : G, (sK0 ◇ (sK0 ◇ (sK0 ◇ sK1))) = ((sK0 ◇ (sK0 ◇ sK1)) ◇ (sK0 ◇ (sK0 ◇ sK1))) := by
+    intro sK0 sK1
+    conv => enter [1, 2]; rw [h4301 sK0 sK1 (sK0 ◇ sK1)]
+    conv => enter [1]; rw [← l4 sK0 sK1]
+  have l6 : ∀ sK0 sK1 : G, (sK0 ◇ (sK0 ◇ sK1)) = (sK0 ◇ (sK0 ◇ (sK0 ◇ sK1))) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [l0 sK0 sK1 (sK0 ◇ sK0)]
+    conv => enter [1, 2]; rw [← h4301 sK0 sK1 sK0]
+  have l7 : ∀ sK0 sK1 X0 : G, (sK0 ◇ (sK0 ◇ sK1)) = ((sK0 ◇ X0) ◇ (sK0 ◇ (sK0 ◇ sK1))) := by
+    intro sK0 sK1 X0
+    conv => enter [1]; rw [h4301 sK0 sK1 (sK0 ◇ X0)]
+    conv => enter [1, 2]; rw [l0 sK0 X0 sK1]
+  have l8 : ∀ sK0 sK1 X0 : G, (sK0 ◇ (sK0 ◇ sK1)) = (sK0 ◇ (X0 ◇ (sK0 ◇ (sK0 ◇ sK1)))) := by
+    intro sK0 sK1 X0
+    conv => enter [1]; rw [l7 sK0 sK1 X0]
+    conv => enter [1]; rw [← h4512 sK0 X0 (sK0 ◇ (sK0 ◇ sK1))]
+  have l9 : ∀ sK0 sK1 X0 : G, (sK0 ◇ (sK0 ◇ sK1)) = ((X0 ◇ (sK0 ◇ (sK0 ◇ sK1))) ◇ (sK0 ◇ (sK0 ◇ sK1))) := by
+    intro sK0 sK1 X0
+    conv => enter [1]; rw [h4301 sK0 sK1 (X0 ◇ (sK0 ◇ (sK0 ◇ sK1)))]
+    conv => enter [1, 2]; rw [← l8 sK0 sK1 X0]
+  have l10 : ∀ sK0 sK1 X0 : G, (sK0 ◇ (sK0 ◇ sK1)) = (X0 ◇ ((sK0 ◇ (sK0 ◇ sK1)) ◇ (sK0 ◇ (sK0 ◇ sK1)))) := by
+    intro sK0 sK1 X0
+    conv => enter [1]; rw [l9 sK0 sK1 X0]
+    conv => enter [1]; rw [← h4512 X0 (sK0 ◇ (sK0 ◇ sK1)) (sK0 ◇ (sK0 ◇ sK1))]
+  have l11 : ∀ sK0 sK1 X0 : G, (sK0 ◇ (sK0 ◇ sK1)) = (X0 ◇ (sK0 ◇ (sK0 ◇ (sK0 ◇ sK1)))) := by
+    intro sK0 sK1 X0
+    conv => enter [1]; rw [l10 sK0 sK1 X0]
+    conv => enter [1, 2]; rw [← l5 sK0 sK1]
+  have l12 : ∀ sK0 sK1 X0 : G, (sK0 ◇ (sK0 ◇ sK1)) = (X0 ◇ (sK0 ◇ (sK0 ◇ sK1))) := by
+    intro sK0 sK1 X0
+    conv => enter [1]; rw [l11 sK0 sK1 X0]
+    conv => enter [1, 2]; rw [← l6 sK0 sK1]
+  have l13 : ∀ X0 X1 sK0 sK1 : G, (X0 ◇ (X0 ◇ X1)) = ((sK0 ◇ (sK0 ◇ sK1)) ◇ (sK0 ◇ (sK0 ◇ sK1))) := by
+    intro X0 X1 sK0 sK1
+    conv => enter [1]; rw [h4301 X0 X1 (sK0 ◇ (sK0 ◇ sK1))]
+    conv => enter [1, 2]; rw [← l12 sK0 sK1 X0]
+  have l14 : ∀ X0 X1 sK0 sK1 : G, (X0 ◇ (X0 ◇ X1)) = (sK0 ◇ (sK0 ◇ sK1)) := by
+    intro X0 X1 sK0 sK1
+    conv => enter [1]; rw [l13 X0 X1 sK0 sK1]
+    conv => enter [1]; rw [← l12 sK0 sK1 (sK0 ◇ (sK0 ◇ sK1))]
+  have l15 : ∀ X2 X0 sK0 sK1 : G, (X2 ◇ (X0 ◇ X2)) = (sK0 ◇ (sK0 ◇ sK1)) := by
+    intro X2 X0 sK0 sK1
+    conv => enter [1]; rw [← h4301 X0 X2 X2]
+    conv => enter [1]; rw [l14 X0 X2 sK0 sK1]
+  intro x y z
+  conv => enter [1]; rw [← l15 y z x y]
+
+theorem Equation4301_4512_implies_Equation4279 (G : Type*) [Magma G] (h4301 : Equation4301 G) (h4512 : Equation4512 G) : Equation4279 G := by
+  have l0 : ∀ sK0 X0 X1 : G, (sK0 ◇ (sK0 ◇ X0)) = ((sK0 ◇ X1) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0 X1
+    conv => enter [1]; rw [h4301 sK0 X0 (sK0 ◇ X1)]
+    conv => enter [1, 2]; rw [h4301 sK0 X1 sK0]
+  have l1 : ∀ sK0 X0 X1 : G, (sK0 ◇ (sK0 ◇ X0)) = (sK0 ◇ (X1 ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK0 X0 X1
+    conv => enter [1]; rw [l0 sK0 X0 X1]
+    conv => enter [1]; rw [← h4512 sK0 X1 (sK0 ◇ (sK0 ◇ sK0))]
+  have l2 : ∀ sK0 X1 : G, ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))) = (sK0 ◇ (X1 ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK0 X1
+    conv => enter [1]; rw [← h4301 sK0 sK0 (sK0 ◇ sK0)]
+    conv => enter [1]; rw [l1 sK0 sK0 X1]
+  have l3 : ∀ X0 X1 sK0 : G, (X0 ◇ (X0 ◇ X1)) = ((sK0 ◇ X0) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro X0 X1 sK0
+    conv => enter [1]; rw [h4301 X0 X1 (sK0 ◇ X0)]
+    conv => enter [1, 2]; rw [← h4301 sK0 sK0 X0]
+  have l4 : ∀ X0 X1 sK0 : G, (X0 ◇ (X0 ◇ X1)) = (sK0 ◇ (X0 ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro X0 X1 sK0
+    conv => enter [1]; rw [l3 X0 X1 sK0]
+    conv => enter [1]; rw [← h4512 sK0 X0 (sK0 ◇ (sK0 ◇ sK0))]
+  have l5 : ∀ X0 X1 sK0 : G, (X0 ◇ (X0 ◇ X1)) = ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro X0 X1 sK0
+    conv => enter [1]; rw [l4 X0 X1 sK0]
+    conv => enter [1]; rw [← l2 sK0 X0]
+  have l6 : ∀ X0 X1 sK0 : G, (X0 ◇ (X0 ◇ X1)) = (sK0 ◇ (sK0 ◇ sK0)) := by
+    intro X0 X1 sK0
+    conv => enter [1]; rw [l5 X0 X1 sK0]
+    conv => enter [1]; rw [← h4301 sK0 sK0 (sK0 ◇ sK0)]
+  have l7 : ∀ X2 X0 sK0 : G, (X2 ◇ (X0 ◇ X2)) = (sK0 ◇ (sK0 ◇ sK0)) := by
+    intro X2 X0 sK0
+    conv => enter [1]; rw [← h4301 X0 X2 X2]
+    conv => enter [1]; rw [l6 X0 X2 sK0]
+  intro x y z
+  conv => enter [1]; rw [← l7 y z x]
+
+theorem Equation4301_4512_implies_Equation4277 (G : Type*) [Magma G] (h4301 : Equation4301 G) (h4512 : Equation4512 G) : Equation4277 G := by
+  have l0 : ∀ sK0 X0 X1 : G, (sK0 ◇ (sK0 ◇ X0)) = ((sK0 ◇ X1) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0 X1
+    conv => enter [1]; rw [h4301 sK0 X0 (sK0 ◇ X1)]
+    conv => enter [1, 2]; rw [h4301 sK0 X1 sK0]
+  have l1 : ∀ sK0 X0 X1 : G, (sK0 ◇ (sK0 ◇ X0)) = (sK0 ◇ (X1 ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK0 X0 X1
+    conv => enter [1]; rw [l0 sK0 X0 X1]
+    conv => enter [1]; rw [← h4512 sK0 X1 (sK0 ◇ (sK0 ◇ sK0))]
+  have l2 : ∀ sK0 X1 : G, ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))) = (sK0 ◇ (X1 ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK0 X1
+    conv => enter [1]; rw [← h4301 sK0 sK0 (sK0 ◇ sK0)]
+    conv => enter [1]; rw [l1 sK0 sK0 X1]
+  have l3 : ∀ sK1 sK2 sK0 : G, (sK1 ◇ (sK1 ◇ sK2)) = ((sK0 ◇ sK1) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK1 sK2 sK0
+    conv => enter [1]; rw [h4301 sK1 sK2 (sK0 ◇ sK1)]
+    conv => enter [1, 2]; rw [← h4301 sK0 sK0 sK1]
+  have l4 : ∀ sK1 sK2 sK0 : G, (sK1 ◇ (sK1 ◇ sK2)) = (sK0 ◇ (sK1 ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK1 sK2 sK0
+    conv => enter [1]; rw [l3 sK1 sK2 sK0]
+    conv => enter [1]; rw [← h4512 sK0 sK1 (sK0 ◇ (sK0 ◇ sK0))]
+  have l5 : ∀ sK1 sK2 sK0 : G, (sK1 ◇ (sK1 ◇ sK2)) = ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK1 sK2 sK0
+    conv => enter [1]; rw [l4 sK1 sK2 sK0]
+    conv => enter [1]; rw [← l2 sK0 sK1]
+  have l6 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK1 ◇ (sK1 ◇ sK2)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [h4301 sK0 sK0 (sK0 ◇ sK0)]
+    conv => enter [1]; rw [← l5 sK1 sK2 sK0]
+  intro x y z
+  conv => enter [1]; rw [l6 x y z]
+
+@[equational_result]
+theorem Equation4331_implies_Equation4325 (G : Type*) [Magma G] (h4331 : Equation4331 G) : Equation4325 G := by
+  have l0 : ∀ X0 sK2 X1 : G, (X0 ◇ (sK2 ◇ sK2)) = (X1 ◇ (sK2 ◇ sK2)) := by
+    intro X0 sK2 X1
+    conv => enter [1]; rw [← h4331 sK2 sK2 X0]
+    conv => enter [1]; rw [h4331 sK2 sK2 X1]
+  have l1 : ∀ sK0 sK1 X0 : G, (sK0 ◇ (sK1 ◇ sK0)) = (X0 ◇ (sK1 ◇ X0)) := by
+    intro sK0 sK1 X0
+    conv => enter [1]; rw [h4331 sK0 sK1 sK0]
+    conv => enter [1]; rw [← h4331 X0 sK1 sK0]
+  have l2 : ∀ X2 X1 sK2 X0 : G, (X2 ◇ (X1 ◇ X1)) = ((sK2 ◇ sK2) ◇ (X0 ◇ (sK2 ◇ sK2))) := by
+    intro X2 X1 sK2 X0
+    conv => enter [1]; rw [← h4331 (sK2 ◇ sK2) X1 X2]
+    conv => enter [1, 2]; rw [l0 X1 sK2 X0]
+  have l3 : ∀ X2 X1 sK2 sK1 : G, (X2 ◇ (X1 ◇ X1)) = ((sK2 ◇ sK2) ◇ (sK1 ◇ (sK2 ◇ sK2))) := by
+    intro X2 X1 sK2 sK1
+    conv => enter [1]; rw [l2 X2 X1 sK2 X2]
+    conv => enter [1, 2]; rw [l0 X2 sK2 sK1]
+  have l4 : ∀ X0 sK2 sK1 sK0 : G, (X0 ◇ ((sK2 ◇ sK2) ◇ (sK2 ◇ sK2))) = ((sK1 ◇ (sK2 ◇ sK2)) ◇ (sK0 ◇ (sK1 ◇ sK0))) := by
+    intro X0 sK2 sK1 sK0
+    conv => enter [1]; rw [← h4331 (sK1 ◇ (sK2 ◇ sK2)) (sK2 ◇ sK2) X0]
+    conv => enter [1, 2]; rw [l1 (sK2 ◇ sK2) sK1 sK0]
+  have l5 : ∀ sK2 sK1 sK0 : G, ((sK2 ◇ sK2) ◇ (sK1 ◇ (sK2 ◇ sK2))) = ((sK1 ◇ (sK2 ◇ sK2)) ◇ (sK0 ◇ (sK1 ◇ sK0))) := by
+    intro sK2 sK1 sK0
+    conv => enter [1]; rw [← l3 sK2 (sK2 ◇ sK2) sK2 sK1]
+    conv => enter [1]; rw [l4 sK2 sK2 sK1 sK0]
+  have l6 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK1 ◇ sK0)) = ((sK1 ◇ (sK2 ◇ sK2)) ◇ (sK0 ◇ (sK1 ◇ sK0))) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l1 sK0 sK1 (sK2 ◇ sK2)]
+    conv => enter [1]; rw [l5 sK2 sK1 sK0]
+  have l7 : ∀ X0 sK1 sK2 sK0 : G, (X0 ◇ ((sK1 ◇ (sK2 ◇ sK2)) ◇ (sK1 ◇ (sK2 ◇ sK2)))) = ((sK0 ◇ (sK1 ◇ sK0)) ◇ (sK0 ◇ (sK1 ◇ sK0))) := by
+    intro X0 sK1 sK2 sK0
+    conv => enter [1]; rw [← h4331 (sK0 ◇ (sK1 ◇ sK0)) (sK1 ◇ (sK2 ◇ sK2)) X0]
+    conv => enter [1, 2]; rw [← l6 sK0 sK1 sK2]
+  have l8 : ∀ sK2 sK1 sK0 : G, ((sK2 ◇ sK2) ◇ (sK1 ◇ (sK2 ◇ sK2))) = ((sK0 ◇ (sK1 ◇ sK0)) ◇ (sK0 ◇ (sK1 ◇ sK0))) := by
+    intro sK2 sK1 sK0
+    conv => enter [1]; rw [← l3 sK2 (sK1 ◇ (sK2 ◇ sK2)) sK2 sK1]
+    conv => enter [1]; rw [l7 sK2 sK1 sK2 sK0]
+  have l9 : ∀ sK0 sK1 : G, (sK0 ◇ (sK1 ◇ sK0)) = ((sK0 ◇ (sK1 ◇ sK0)) ◇ (sK0 ◇ (sK1 ◇ sK0))) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [l1 sK0 sK1 (sK0 ◇ sK0)]
+    conv => enter [1]; rw [l8 sK0 sK1 sK0]
+  have l10 : ∀ X0 sK0 sK1 : G, (X0 ◇ (sK0 ◇ (sK1 ◇ sK0))) = ((sK0 ◇ (sK1 ◇ sK0)) ◇ (sK0 ◇ (sK1 ◇ sK0))) := by
+    intro X0 sK0 sK1
+    conv => enter [1, 2]; rw [l9 sK0 sK1]
+    conv => enter [1]; rw [← h4331 (sK0 ◇ (sK1 ◇ sK0)) (sK0 ◇ (sK1 ◇ sK0)) X0]
+    conv => enter [1, 2]; rw [← l9 sK0 sK1]
+  have l11 : ∀ sK0 sK1 X0 : G, (sK0 ◇ (sK1 ◇ sK0)) = (X0 ◇ (sK0 ◇ (sK1 ◇ sK0))) := by
+    intro sK0 sK1 X0
+    conv => enter [1]; rw [l9 sK0 sK1]
+    conv => enter [1]; rw [← l10 X0 sK0 sK1]
+  have l12 : ∀ X1 X0 sK0 sK1 : G, (X1 ◇ (X0 ◇ X0)) = ((sK0 ◇ (sK1 ◇ sK0)) ◇ (sK0 ◇ (sK1 ◇ sK0))) := by
+    intro X1 X0 sK0 sK1
+    conv => enter [1]; rw [← h4331 (sK0 ◇ (sK1 ◇ sK0)) X0 X1]
+    conv => enter [1, 2]; rw [← l11 sK0 sK1 X0]
+  have l13 : ∀ sK0 sK1 X1 X0 : G, (sK0 ◇ (sK1 ◇ sK0)) = (X1 ◇ (X0 ◇ X0)) := by
+    intro sK0 sK1 X1 X0
+    conv => enter [1]; rw [l11 sK0 sK1 (sK0 ◇ (sK1 ◇ sK0))]
+    conv => enter [1]; rw [← l12 X1 X0 sK0 sK1]
+  intro x y z
+  conv => enter [1]; rw [l13 x y y z]
+
+@[equational_result]
+theorem Equation4331_implies_Equation4318 (G : Type*) [Magma G] (h4331 : Equation4331 G) : Equation4318 G := by
+  have l0 : ∀ X0 sK2 X1 : G, (X0 ◇ (sK2 ◇ sK2)) = (X1 ◇ (sK2 ◇ sK2)) := by
+    intro X0 sK2 X1
+    conv => enter [1]; rw [← h4331 sK2 sK2 X0]
+    conv => enter [1]; rw [h4331 sK2 sK2 X1]
+  have l1 : ∀ sK0 sK1 X0 : G, (sK0 ◇ (sK1 ◇ sK0)) = (X0 ◇ (sK1 ◇ X0)) := by
+    intro sK0 sK1 X0
+    conv => enter [1]; rw [h4331 sK0 sK1 sK0]
+    conv => enter [1]; rw [← h4331 X0 sK1 sK0]
+  have l2 : ∀ X2 X1 sK2 X0 : G, (X2 ◇ (X1 ◇ X1)) = ((sK2 ◇ sK2) ◇ (X0 ◇ (sK2 ◇ sK2))) := by
+    intro X2 X1 sK2 X0
+    conv => enter [1]; rw [← h4331 (sK2 ◇ sK2) X1 X2]
+    conv => enter [1, 2]; rw [l0 X1 sK2 X0]
+  have l3 : ∀ X2 X1 sK2 sK0 : G, (X2 ◇ (X1 ◇ X1)) = ((sK2 ◇ sK2) ◇ (sK0 ◇ (sK2 ◇ sK2))) := by
+    intro X2 X1 sK2 sK0
+    conv => enter [1]; rw [l2 X2 X1 sK2 X2]
+    conv => enter [1, 2]; rw [l0 X2 sK2 sK0]
+  have l4 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK1 ◇ sK0)) = ((sK2 ◇ sK2) ◇ (sK0 ◇ (sK2 ◇ sK2))) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l1 sK0 sK1 (sK2 ◇ sK2)]
+    conv => enter [1, 2]; rw [l0 sK1 sK2 sK0]
+  have l5 : ∀ X0 sK2 sK0 sK1 : G, (X0 ◇ ((sK2 ◇ sK2) ◇ (sK2 ◇ sK2))) = ((sK0 ◇ (sK2 ◇ sK2)) ◇ (sK0 ◇ (sK1 ◇ sK0))) := by
+    intro X0 sK2 sK0 sK1
+    conv => enter [1]; rw [← h4331 (sK0 ◇ (sK2 ◇ sK2)) (sK2 ◇ sK2) X0]
+    conv => enter [1, 2]; rw [← l4 sK0 sK1 sK2]
+  have l6 : ∀ sK2 sK0 sK1 : G, ((sK2 ◇ sK2) ◇ (sK0 ◇ (sK2 ◇ sK2))) = ((sK0 ◇ (sK2 ◇ sK2)) ◇ (sK0 ◇ (sK1 ◇ sK0))) := by
+    intro sK2 sK0 sK1
+    conv => enter [1]; rw [← l3 sK2 (sK2 ◇ sK2) sK2 sK0]
+    conv => enter [1]; rw [l5 sK2 sK2 sK0 sK1]
+  have l7 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK1 ◇ sK0)) = ((sK0 ◇ (sK2 ◇ sK2)) ◇ (sK0 ◇ (sK1 ◇ sK0))) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l4 sK0 sK1 sK2]
+    conv => enter [1]; rw [l6 sK2 sK0 sK1]
+  have l8 : ∀ X0 sK0 sK2 sK1 : G, (X0 ◇ ((sK0 ◇ (sK2 ◇ sK2)) ◇ (sK0 ◇ (sK2 ◇ sK2)))) = ((sK0 ◇ (sK1 ◇ sK0)) ◇ (sK0 ◇ (sK1 ◇ sK0))) := by
+    intro X0 sK0 sK2 sK1
+    conv => enter [1]; rw [← h4331 (sK0 ◇ (sK1 ◇ sK0)) (sK0 ◇ (sK2 ◇ sK2)) X0]
+    conv => enter [1, 2]; rw [← l7 sK0 sK1 sK2]
+  have l9 : ∀ sK2 sK0 sK1 : G, ((sK2 ◇ sK2) ◇ (sK0 ◇ (sK2 ◇ sK2))) = ((sK0 ◇ (sK1 ◇ sK0)) ◇ (sK0 ◇ (sK1 ◇ sK0))) := by
+    intro sK2 sK0 sK1
+    conv => enter [1]; rw [← l3 sK2 (sK0 ◇ (sK2 ◇ sK2)) sK2 sK0]
+    conv => enter [1]; rw [l8 sK2 sK0 sK2 sK1]
+  have l10 : ∀ sK0 sK1 : G, (sK0 ◇ (sK1 ◇ sK0)) = ((sK0 ◇ (sK1 ◇ sK0)) ◇ (sK0 ◇ (sK1 ◇ sK0))) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [l4 sK0 sK1 sK0]
+    conv => enter [1]; rw [l9 sK0 sK0 sK1]
+  have l11 : ∀ X0 sK0 sK1 : G, (X0 ◇ (sK0 ◇ (sK1 ◇ sK0))) = ((sK0 ◇ (sK1 ◇ sK0)) ◇ (sK0 ◇ (sK1 ◇ sK0))) := by
+    intro X0 sK0 sK1
+    conv => enter [1, 2]; rw [l10 sK0 sK1]
+    conv => enter [1]; rw [← h4331 (sK0 ◇ (sK1 ◇ sK0)) (sK0 ◇ (sK1 ◇ sK0)) X0]
+    conv => enter [1, 2]; rw [← l10 sK0 sK1]
+  have l12 : ∀ sK0 sK1 X0 : G, (sK0 ◇ (sK1 ◇ sK0)) = (X0 ◇ (sK0 ◇ (sK1 ◇ sK0))) := by
+    intro sK0 sK1 X0
+    conv => enter [1]; rw [l10 sK0 sK1]
+    conv => enter [1]; rw [← l11 X0 sK0 sK1]
+  have l13 : ∀ X1 X0 sK0 sK1 : G, (X1 ◇ (X0 ◇ X0)) = ((sK0 ◇ (sK1 ◇ sK0)) ◇ (sK0 ◇ (sK1 ◇ sK0))) := by
+    intro X1 X0 sK0 sK1
+    conv => enter [1]; rw [← h4331 (sK0 ◇ (sK1 ◇ sK0)) X0 X1]
+    conv => enter [1, 2]; rw [← l12 sK0 sK1 X0]
+  have l14 : ∀ sK0 sK1 X1 X0 : G, (sK0 ◇ (sK1 ◇ sK0)) = (X1 ◇ (X0 ◇ X0)) := by
+    intro sK0 sK1 X1 X0
+    conv => enter [1]; rw [l12 sK0 sK1 (sK0 ◇ (sK1 ◇ sK0))]
+    conv => enter [1]; rw [← l13 X1 X0 sK0 sK1]
+  intro x y z
+  conv => enter [1]; rw [l14 x y x z]
+
+@[equational_result]
+theorem Equation4331_implies_Equation4327 (G : Type*) [Magma G] (h4331 : Equation4331 G) : Equation4327 G := by
+  have l0 : ∀ X1 X0 sK0 : G, (X1 ◇ (X0 ◇ X0)) = ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro X1 X0 sK0
+    conv => enter [1]; rw [← h4331 (sK0 ◇ sK0) X0 X1]
+    conv => enter [1, 2]; rw [← h4331 sK0 sK0 X0]
+  have l1 : ∀ sK0 sK2 X1 X0 : G, ((sK0 ◇ sK0) ◇ (sK2 ◇ (sK0 ◇ sK0))) = (X1 ◇ (X0 ◇ X0)) := by
+    intro sK0 sK2 X1 X0
+    conv => enter [1, 2]; rw [← h4331 sK0 sK0 sK2]
+    conv => enter [1]; rw [← l0 X1 X0 sK0]
+  have l2 : ∀ sK2 sK0 X0 : G, (sK2 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK0 ◇ sK0)) := by
+    intro sK2 sK0 X0
+    conv => enter [1]; rw [← h4331 sK0 sK0 sK2]
+    conv => enter [1]; rw [h4331 sK0 sK0 X0]
+  have l3 : ∀ sK0 sK1 X0 : G, (sK0 ◇ (sK1 ◇ sK0)) = (X0 ◇ (sK1 ◇ X0)) := by
+    intro sK0 sK1 X0
+    conv => enter [1]; rw [h4331 sK0 sK1 sK0]
+    conv => enter [1]; rw [← h4331 X0 sK1 sK0]
+  have l4 : ∀ X1 sK1 sK0 X0 : G, (X1 ◇ ((sK1 ◇ sK0) ◇ (sK1 ◇ sK0))) = ((sK0 ◇ (sK1 ◇ sK0)) ◇ (X0 ◇ (sK0 ◇ sK0))) := by
+    intro X1 sK1 sK0 X0
+    conv => enter [1]; rw [← h4331 (sK0 ◇ (sK1 ◇ sK0)) (sK1 ◇ sK0) X1]
+    conv => enter [1, 2]; rw [h4331 (sK1 ◇ sK0) sK0 X0]
+  have l5 : ∀ X1 sK1 sK0 sK2 : G, (X1 ◇ ((sK1 ◇ sK0) ◇ (sK1 ◇ sK0))) = ((sK0 ◇ (sK1 ◇ sK0)) ◇ (sK2 ◇ (sK0 ◇ sK0))) := by
+    intro X1 sK1 sK0 sK2
+    conv => enter [1]; rw [l4 X1 sK1 sK0 X1]
+    conv => enter [1, 2]; rw [l2 X1 sK0 sK2]
+  have l6 : ∀ sK0 sK2 sK1 : G, ((sK0 ◇ sK0) ◇ (sK2 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ (sK1 ◇ sK0)) ◇ (sK2 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 sK2 sK1
+    conv => enter [1]; rw [l1 sK0 sK2 sK0 (sK1 ◇ sK0)]
+    conv => enter [1]; rw [l5 sK0 sK1 sK0 sK2]
+  have l7 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK1 ◇ sK0)) = ((sK0 ◇ sK0) ◇ (sK2 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l3 sK0 sK1 (sK0 ◇ sK0)]
+    conv => enter [1, 2]; rw [l2 sK1 sK0 sK2]
+  have l8 : ∀ X0 sK0 sK2 sK1 : G, (X0 ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ sK0))) = ((sK2 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK1 ◇ sK0))) := by
+    intro X0 sK0 sK2 sK1
+    conv => enter [1]; rw [← h4331 (sK2 ◇ (sK0 ◇ sK0)) (sK0 ◇ sK0) X0]
+    conv => enter [1, 2]; rw [← l7 sK0 sK1 sK2]
+  have l9 : ∀ sK0 sK2 sK1 : G, ((sK0 ◇ sK0) ◇ (sK2 ◇ (sK0 ◇ sK0))) = ((sK2 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK1 ◇ sK0))) := by
+    intro sK0 sK2 sK1
+    conv => enter [1]; rw [l1 sK0 sK2 sK0 (sK0 ◇ sK0)]
+    conv => enter [1]; rw [l8 sK0 sK0 sK2 sK1]
+  have l10 : ∀ sK0 sK1 sK2 : G, ((sK0 ◇ (sK1 ◇ sK0)) ◇ (sK2 ◇ (sK0 ◇ sK0))) = ((sK2 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK1 ◇ sK0))) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [← l6 sK0 sK2 sK1]
+    conv => enter [1]; rw [l9 sK0 sK2 sK1]
+  have l11 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK1 ◇ sK0)) = ((sK0 ◇ (sK1 ◇ sK0)) ◇ (sK2 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l7 sK0 sK1 sK2]
+    conv => enter [1]; rw [l6 sK0 sK2 sK1]
+  have l12 : ∀ X0 sK2 sK0 sK1 : G, (X0 ◇ ((sK2 ◇ (sK0 ◇ sK0)) ◇ (sK2 ◇ (sK0 ◇ sK0)))) = ((sK0 ◇ (sK1 ◇ sK0)) ◇ ((sK0 ◇ (sK1 ◇ sK0)) ◇ (sK2 ◇ (sK0 ◇ sK0)))) := by
+    intro X0 sK2 sK0 sK1
+    conv => enter [1]; rw [← h4331 (sK0 ◇ (sK1 ◇ sK0)) (sK2 ◇ (sK0 ◇ sK0)) X0]
+    conv => enter [1, 2]; rw [← l10 sK0 sK1 sK2]
+  have l13 : ∀ sK0 sK1 X0 sK2 : G, ((sK0 ◇ (sK1 ◇ sK0)) ◇ (sK0 ◇ (sK1 ◇ sK0))) = (X0 ◇ ((sK2 ◇ (sK0 ◇ sK0)) ◇ (sK2 ◇ (sK0 ◇ sK0)))) := by
+    intro sK0 sK1 X0 sK2
+    conv => enter [1, 2]; rw [l11 sK0 sK1 sK2]
+    conv => enter [1]; rw [← l12 X0 sK2 sK0 sK1]
+  have l14 : ∀ sK0 sK2 sK1 : G, ((sK0 ◇ sK0) ◇ (sK2 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ (sK1 ◇ sK0)) ◇ (sK0 ◇ (sK1 ◇ sK0))) := by
+    intro sK0 sK2 sK1
+    conv => enter [1]; rw [l1 sK0 sK2 sK0 (sK2 ◇ (sK0 ◇ sK0))]
+    conv => enter [1]; rw [← l13 sK0 sK1 sK0 sK2]
+  have l15 : ∀ sK0 sK1 : G, (sK0 ◇ (sK1 ◇ sK0)) = ((sK0 ◇ (sK1 ◇ sK0)) ◇ (sK0 ◇ (sK1 ◇ sK0))) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [l7 sK0 sK1 sK0]
+    conv => enter [1]; rw [l14 sK0 sK0 sK1]
+  have l16 : ∀ X0 sK0 sK1 : G, (X0 ◇ (sK0 ◇ (sK1 ◇ sK0))) = ((sK0 ◇ (sK1 ◇ sK0)) ◇ (sK0 ◇ (sK1 ◇ sK0))) := by
+    intro X0 sK0 sK1
+    conv => enter [1, 2]; rw [l15 sK0 sK1]
+    conv => enter [1]; rw [← h4331 (sK0 ◇ (sK1 ◇ sK0)) (sK0 ◇ (sK1 ◇ sK0)) X0]
+    conv => enter [1, 2]; rw [← l15 sK0 sK1]
+  have l17 : ∀ sK0 sK1 X0 : G, (sK0 ◇ (sK1 ◇ sK0)) = (X0 ◇ (sK0 ◇ (sK1 ◇ sK0))) := by
+    intro sK0 sK1 X0
+    conv => enter [1]; rw [l15 sK0 sK1]
+    conv => enter [1]; rw [← l16 X0 sK0 sK1]
+  have l18 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK1 ◇ sK0)) = (sK2 ◇ (sK0 ◇ sK0)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l17 sK0 sK1 (sK1 ◇ sK0)]
+    conv => enter [1]; rw [h4331 (sK1 ◇ sK0) sK0 sK2]
+  intro x y z
+  conv => enter [1]; rw [l18 x y z]
+
+@[equational_result]
+theorem Equation4331_implies_Equation4279 (G : Type*) [Magma G] (h4331 : Equation4331 G) : Equation4279 G := by
+  have l0 : ∀ sK0 X1 X0 : G, ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))) = (X1 ◇ (X0 ◇ X0)) := by
+    intro sK0 X1 X0
+    conv => enter [1, 2]; rw [h4331 sK0 sK0 X0]
+    conv => enter [1]; rw [h4331 (sK0 ◇ sK0) X0 X1]
+  have l1 : ∀ sK1 sK2 X0 : G, (sK1 ◇ (sK2 ◇ sK1)) = (X0 ◇ (sK2 ◇ X0)) := by
+    intro sK1 sK2 X0
+    conv => enter [1]; rw [h4331 sK1 sK2 sK1]
+    conv => enter [1]; rw [← h4331 X0 sK2 sK1]
+  have l2 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [← h4331 (sK0 ◇ sK0) sK0 sK0]
+  have l3 : ∀ X1 sK0 X0 : G, (X1 ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ sK0))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (X0 ◇ (sK0 ◇ sK0))) := by
+    intro X1 sK0 X0
+    conv => enter [1]; rw [← h4331 (sK0 ◇ (sK0 ◇ sK0)) (sK0 ◇ sK0) X1]
+    conv => enter [1, 2]; rw [h4331 (sK0 ◇ sK0) sK0 X0]
+  have l4 : ∀ X1 sK0 : G, (X1 ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ sK0))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro X1 sK0
+    conv => enter [1]; rw [l3 X1 sK0 X1]
+    conv => enter [1, 2]; rw [← h4331 sK0 sK0 X1]
+  have l5 : ∀ sK0 : G, ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [l0 sK0 sK0 (sK0 ◇ sK0)]
+    conv => enter [1]; rw [l4 sK0 sK0]
+  have l6 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [l2 sK0]
+    conv => enter [1]; rw [l5 sK0]
+  have l7 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) = (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1, 2]; rw [l6 sK0]
+    conv => enter [1]; rw [h4331 (sK0 ◇ (sK0 ◇ sK0)) (sK0 ◇ (sK0 ◇ sK0)) X0]
+    conv => enter [1, 2]; rw [← l6 sK0]
+  have l8 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l6 sK0]
+    conv => enter [1]; rw [l7 sK0 X0]
+  have l9 : ∀ sK1 sK2 sK0 : G, (sK1 ◇ (sK2 ◇ sK1)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK1 sK2 sK0
+    conv => enter [1]; rw [l1 sK1 sK2 (sK0 ◇ (sK0 ◇ sK0))]
+    conv => enter [1, 2]; rw [← l8 sK0 sK2]
+  have l10 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK1 ◇ (sK2 ◇ sK1)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l8 sK0 (sK0 ◇ (sK0 ◇ sK0))]
+    conv => enter [1]; rw [← l9 sK1 sK2 sK0]
+  intro x y z
+  conv => enter [1]; rw [l10 x y z]
+
+@[equational_result]
+theorem Equation4331_implies_Equation4280 (G : Type*) [Magma G] (h4331 : Equation4331 G) : Equation4280 G := by
+  have l0 : ∀ sK0 X1 X0 : G, ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))) = (X1 ◇ (X0 ◇ X0)) := by
+    intro sK0 X1 X0
+    conv => enter [1, 2]; rw [h4331 sK0 sK0 X0]
+    conv => enter [1]; rw [h4331 (sK0 ◇ sK0) X0 X1]
+  have l1 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [← h4331 (sK0 ◇ sK0) sK0 sK0]
+  have l2 : ∀ X1 sK0 X0 : G, (X1 ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ sK0))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (X0 ◇ (sK0 ◇ sK0))) := by
+    intro X1 sK0 X0
+    conv => enter [1]; rw [← h4331 (sK0 ◇ (sK0 ◇ sK0)) (sK0 ◇ sK0) X1]
+    conv => enter [1, 2]; rw [h4331 (sK0 ◇ sK0) sK0 X0]
+  have l3 : ∀ X1 sK0 : G, (X1 ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ sK0))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro X1 sK0
+    conv => enter [1]; rw [l2 X1 sK0 X1]
+    conv => enter [1, 2]; rw [← h4331 sK0 sK0 X1]
+  have l4 : ∀ sK0 : G, ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [l0 sK0 sK0 (sK0 ◇ sK0)]
+    conv => enter [1]; rw [l3 sK0 sK0]
+  have l5 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [l1 sK0]
+    conv => enter [1]; rw [l4 sK0]
+  have l6 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) = (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1, 2]; rw [l5 sK0]
+    conv => enter [1]; rw [h4331 (sK0 ◇ (sK0 ◇ sK0)) (sK0 ◇ (sK0 ◇ sK0)) X0]
+    conv => enter [1, 2]; rw [← l5 sK0]
+  have l7 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l5 sK0]
+    conv => enter [1]; rw [l6 sK0 X0]
+  have l8 : ∀ X1 X0 sK0 : G, (X1 ◇ (X0 ◇ X0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro X1 X0 sK0
+    conv => enter [1]; rw [← h4331 (sK0 ◇ (sK0 ◇ sK0)) X0 X1]
+    conv => enter [1, 2]; rw [← l7 sK0 X0]
+  have l9 : ∀ sK0 X1 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X1 ◇ (X0 ◇ X0)) := by
+    intro sK0 X1 X0
+    conv => enter [1]; rw [l7 sK0 (sK0 ◇ (sK0 ◇ sK0))]
+    conv => enter [1]; rw [← l8 X1 X0 sK0]
+  have l10 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK1 ◇ (sK2 ◇ sK2)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l9 sK0 sK2 sK2]
+    conv => enter [1]; rw [h4331 sK2 sK2 sK1]
+  intro x y z
+  conv => enter [1]; rw [l10 x y z]
+
+@[equational_result]
+theorem Equation4303_implies_Equation4300 (G : Type*) [Magma G] (h4303 : Equation4303 G) : Equation4300 G := by
+  have l0 : ∀ sK0 sK1 X0 : G, (sK0 ◇ (sK0 ◇ sK1)) = (X0 ◇ (sK0 ◇ sK1)) := by
+    intro sK0 sK1 X0
+    conv => enter [1]; rw [h4303 sK0 sK1 sK1]
+    conv => enter [1]; rw [h4303 sK1 sK0 X0]
+  intro x y z
+  conv => enter [1]; rw [l0 x y z]
+
+@[equational_result]
+theorem Equation4303_implies_Equation4358 (G : Type*) [Magma G] (h4303 : Equation4303 G) : Equation4358 G := by
+  have l0 : ∀ sK1 sK2 X0 : G, (sK1 ◇ (sK1 ◇ sK2)) = (X0 ◇ (sK1 ◇ sK2)) := by
+    intro sK1 sK2 X0
+    conv => enter [1]; rw [h4303 sK1 sK2 sK2]
+    conv => enter [1]; rw [h4303 sK2 sK1 X0]
+  have l1 : ∀ X0 sK2 sK1 X1 : G, (X0 ◇ (sK2 ◇ sK1)) = (X1 ◇ (sK2 ◇ sK1)) := by
+    intro X0 sK2 sK1 X1
+    conv => enter [1]; rw [← h4303 sK1 sK2 X0]
+    conv => enter [1]; rw [h4303 sK1 sK2 X1]
+  have l2 : ∀ sK0 sK2 sK1 : G, (sK0 ◇ (sK2 ◇ sK1)) = (sK1 ◇ (sK1 ◇ sK2)) := by
+    intro sK0 sK2 sK1
+    conv => enter [1]; rw [← h4303 sK1 sK2 sK0]
+  have l3 : ∀ sK0 sK2 sK1 X0 : G, (sK0 ◇ (sK2 ◇ sK1)) = (X0 ◇ (sK1 ◇ sK2)) := by
+    intro sK0 sK2 sK1 X0
+    conv => enter [1]; rw [l2 sK0 sK2 sK1]
+    conv => enter [1]; rw [l0 sK1 sK2 X0]
+  intro x y z
+  conv => enter [1]; rw [l3 x y z x]
+
+@[equational_result]
+theorem Equation4303_implies_Equation4283 (G : Type*) [Magma G] (h4303 : Equation4303 G) : Equation4283 G := by
+  intro x y
+  conv => enter [1]; rw [h4303 x y x]
+
+@[equational_result]
+theorem Equation4303_implies_Equation4293 (G : Type*) [Magma G] (h4303 : Equation4303 G) : Equation4293 G := by
+  intro x y
+  conv => enter [1]; rw [h4303 x y y]
+
+@[equational_result]
+theorem Equation4303_implies_Equation4321 (G : Type*) [Magma G] (h4303 : Equation4303 G) : Equation4321 G := by
+  have l0 : ∀ sK0 sK1 X0 : G, (sK0 ◇ (sK0 ◇ sK1)) = (X0 ◇ (sK0 ◇ sK1)) := by
+    intro sK0 sK1 X0
+    conv => enter [1]; rw [h4303 sK0 sK1 sK1]
+    conv => enter [1]; rw [h4303 sK1 sK0 X0]
+  have l1 : ∀ sK1 sK0 X0 : G, (sK1 ◇ (sK0 ◇ sK1)) = (X0 ◇ (sK1 ◇ sK0)) := by
+    intro sK1 sK0 X0
+    conv => enter [1]; rw [← l0 sK0 sK1 sK1]
+    conv => enter [1]; rw [h4303 sK0 sK1 X0]
+  intro x y
+  conv => enter [1]; rw [l1 x y y]
+
+theorem Equation4344_4512_implies_Equation4315 (G : Type*) [Magma G] (h4344 : Equation4344 G) (h4512 : Equation4512 G) : Equation4315 G := by
+  have l0 : ∀ X0 sK1 sK2 X1 : G, ((X0 ◇ X0) ◇ (sK1 ◇ sK2)) = (sK1 ◇ (X0 ◇ ((X0 ◇ X0) ◇ X1))) := by
+    intro X0 sK1 sK2 X1
+    conv => enter [1]; rw [← h4344 sK1 (X0 ◇ X0) sK2]
+    conv => enter [1, 2]; rw [h4344 (X0 ◇ X0) X0 X1]
+  have l1 : ∀ X0 sK1 sK2 : G, (X0 ◇ (sK1 ◇ sK2)) = (X0 ◇ (sK1 ◇ sK1)) := by
+    intro X0 sK1 sK2
+    conv => enter [1]; rw [← h4344 sK1 X0 sK2]
+    conv => enter [1]; rw [h4344 sK1 X0 sK1]
+  have l2 : ∀ sK1 X1 X0 sK2 : G, (sK1 ◇ (X1 ◇ X1)) = (X1 ◇ (X0 ◇ (sK1 ◇ sK2))) := by
+    intro sK1 X1 X0 sK2
+    conv => enter [1]; rw [h4344 sK1 X1 (X0 ◇ X0)]
+    conv => enter [1, 2]; rw [h4344 sK1 X0 sK2]
+  have l3 : ∀ X1 X0 sK1 sK2 sK0 : G, (X1 ◇ (X0 ◇ (sK1 ◇ sK2))) = (X1 ◇ (sK1 ◇ sK0)) := by
+    intro X1 X0 sK1 sK2 sK0
+    conv => enter [1]; rw [← l2 sK1 X1 X0 sK2]
+    conv => enter [1]; rw [h4344 sK1 X1 sK0]
+  have l4 : ∀ X0 sK1 sK2 : G, ((X0 ◇ X0) ◇ (sK1 ◇ sK2)) = (X0 ◇ (sK1 ◇ sK1)) := by
+    intro X0 sK1 sK2
+    conv => enter [1]; rw [l0 X0 sK1 sK2 X0]
+    conv => enter [1]; rw [← h4344 X0 sK1 ((X0 ◇ X0) ◇ X0)]
+  have l5 : ∀ X0 sK1 sK2 : G, (X0 ◇ (sK1 ◇ sK2)) = ((X0 ◇ X0) ◇ (sK1 ◇ sK2)) := by
+    intro X0 sK1 sK2
+    conv => enter [1]; rw [l1 X0 sK1 sK2]
+    conv => enter [1]; rw [← l4 X0 sK1 sK2]
+  have l6 : ∀ X0 sK1 sK2 : G, (X0 ◇ (sK1 ◇ sK2)) = (X0 ◇ (X0 ◇ (sK1 ◇ sK2))) := by
+    intro X0 sK1 sK2
+    conv => enter [1]; rw [l5 X0 sK1 sK2]
+    conv => enter [1]; rw [← h4512 X0 X0 (sK1 ◇ sK2)]
+  have l7 : ∀ X0 sK1 sK2 sK0 : G, (X0 ◇ (sK1 ◇ sK2)) = (X0 ◇ (sK1 ◇ sK0)) := by
+    intro X0 sK1 sK2 sK0
+    conv => enter [1]; rw [l6 X0 sK1 sK2]
+    conv => enter [1]; rw [l3 X0 X0 sK1 sK2 sK0]
+  intro x y z
+  conv => enter [1]; rw [l7 x y x z]
+
+@[equational_result]
+theorem Equation4344_implies_Equation4339 (G : Type*) [Magma G] (h4344 : Equation4344 G) : Equation4339 G := by
+  have l0 : ∀ X0 X1 X2 : G, (X0 ◇ (X1 ◇ X1)) = (X0 ◇ (X1 ◇ X2)) := by
+    intro X0 X1 X2
+    conv => enter [1]; rw [h4344 X0 X1 X0]
+    conv => enter [1]; rw [h4344 X1 X0 X2]
+  have l1 : ∀ sK1 X0 : G, (sK1 ◇ (sK1 ◇ sK1)) = (sK1 ◇ (X0 ◇ (sK1 ◇ sK1))) := by
+    intro sK1 X0
+    conv => enter [1]; rw [h4344 sK1 sK1 (X0 ◇ sK1)]
+    conv => enter [1, 2]; rw [← h4344 X0 sK1 sK1]
+  have l2 : ∀ X1 sK1 X0 : G, (X1 ◇ (sK1 ◇ sK1)) = (sK1 ◇ (X0 ◇ (X1 ◇ X1))) := by
+    intro X1 sK1 X0
+    conv => enter [1]; rw [h4344 X1 sK1 (X0 ◇ X1)]
+    conv => enter [1, 2]; rw [← h4344 X0 X1 X1]
+  have l3 : ∀ sK1 X1 X0 : G, (sK1 ◇ (X1 ◇ X1)) = (X1 ◇ (X0 ◇ (sK1 ◇ sK1))) := by
+    intro sK1 X1 X0
+    conv => enter [1]; rw [h4344 sK1 X1 (X0 ◇ sK1)]
+    conv => enter [1, 2]; rw [← h4344 X0 sK1 sK1]
+  have l4 : ∀ X1 X0 sK1 sK2 : G, (X1 ◇ (X0 ◇ (sK1 ◇ sK1))) = (X1 ◇ (sK1 ◇ sK2)) := by
+    intro X1 X0 sK1 sK2
+    conv => enter [1]; rw [← l3 sK1 X1 X0]
+    conv => enter [1]; rw [h4344 sK1 X1 sK2]
+  have l5 : ∀ X0 sK1 X1 : G, (X0 ◇ (sK1 ◇ sK1)) = (X1 ◇ (sK1 ◇ sK1)) := by
+    intro X0 sK1 X1
+    conv => enter [1]; rw [h4344 X0 sK1 (X1 ◇ X1)]
+    conv => enter [1]; rw [← l2 X1 sK1 X0]
+  have l6 : ∀ X0 sK1 : G, (X0 ◇ (sK1 ◇ sK1)) = (sK1 ◇ (sK1 ◇ sK1)) := by
+    intro X0 sK1
+    conv => enter [1]; rw [h4344 X0 sK1 (sK1 ◇ sK1)]
+    conv => enter [1]; rw [← l1 sK1 X0]
+  have l7 : ∀ sK1 sK0 : G, (sK1 ◇ (sK1 ◇ sK1)) = (sK1 ◇ (sK0 ◇ (sK1 ◇ sK1))) := by
+    intro sK1 sK0
+    conv => enter [1]; rw [h4344 sK1 sK1 (sK0 ◇ (sK1 ◇ sK1))]
+    conv => enter [1, 2]; rw [← h4344 sK0 sK1 (sK1 ◇ sK1)]
+  have l8 : ∀ sK0 sK1 : G, (sK0 ◇ (sK1 ◇ sK1)) = (sK1 ◇ (sK1 ◇ sK1)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [h4344 sK0 sK1 (sK1 ◇ sK1)]
+    conv => enter [1]; rw [← l7 sK1 sK0]
+  have l9 : ∀ X0 X1 sK1 : G, (X0 ◇ (X1 ◇ X1)) = (X1 ◇ (sK1 ◇ (sK1 ◇ sK1))) := by
+    intro X0 X1 sK1
+    conv => enter [1]; rw [h4344 X0 X1 (sK1 ◇ sK1)]
+    conv => enter [1, 2]; rw [l6 X0 sK1]
+  have l10 : ∀ sK0 sK1 X0 : G, (sK0 ◇ (sK1 ◇ sK1)) = (X0 ◇ (sK1 ◇ sK1)) := by
+    intro sK0 sK1 X0
+    conv => enter [1]; rw [l8 sK0 sK1]
+    conv => enter [1]; rw [← l6 X0 sK1]
+  have l11 : ∀ X0 X1 sK1 : G, (X0 ◇ (X1 ◇ X1)) = (X1 ◇ (sK1 ◇ sK1)) := by
+    intro X0 X1 sK1
+    conv => enter [1]; rw [l9 X0 X1 sK1]
+    conv => enter [1]; rw [← l0 X1 sK1 (sK1 ◇ sK1)]
+  have l12 : ∀ X0 X1 sK0 sK1 : G, (X0 ◇ (X1 ◇ X1)) = (sK0 ◇ (sK1 ◇ sK1)) := by
+    intro X0 X1 sK0 sK1
+    conv => enter [1]; rw [l11 X0 X1 sK1]
+    conv => enter [1]; rw [l10 X1 sK1 sK0]
+  have l13 : ∀ X1 X2 X0 sK1 : G, (X1 ◇ (X2 ◇ X2)) = (X2 ◇ (X0 ◇ (sK1 ◇ sK1))) := by
+    intro X1 X2 X0 sK1
+    conv => enter [1]; rw [h4344 X1 X2 (sK1 ◇ sK1)]
+    conv => enter [1, 2]; rw [l5 X1 sK1 X0]
+  have l14 : ∀ X1 X2 sK1 sK2 : G, (X1 ◇ (X2 ◇ X2)) = (X2 ◇ (sK1 ◇ sK2)) := by
+    intro X1 X2 sK1 sK2
+    conv => enter [1]; rw [l13 X1 X2 X1 sK1]
+    conv => enter [1]; rw [l4 X2 X1 sK1 sK2]
+  have l15 : ∀ sK0 sK1 X2 sK2 : G, (sK0 ◇ (sK1 ◇ sK1)) = (X2 ◇ (sK1 ◇ sK2)) := by
+    intro sK0 sK1 X2 sK2
+    conv => enter [1]; rw [l12 sK0 sK1 sK0 X2]
+    conv => enter [1]; rw [l14 sK0 X2 sK1 sK2]
+  intro x y z
+  conv => enter [1]; rw [l15 x y x z]
+
+theorem Equation4344_4512_implies_Equation4362 (G : Type*) [Magma G] (h4344 : Equation4344 G) (h4512 : Equation4512 G) : Equation4362 G := by
+  have l0 : ∀ X0 sK0 sK2 X1 : G, ((X0 ◇ X0) ◇ (sK0 ◇ sK2)) = (sK0 ◇ (X0 ◇ ((X0 ◇ X0) ◇ X1))) := by
+    intro X0 sK0 sK2 X1
+    conv => enter [1]; rw [← h4344 sK0 (X0 ◇ X0) sK2]
+    conv => enter [1, 2]; rw [h4344 (X0 ◇ X0) X0 X1]
+  have l1 : ∀ X0 sK0 sK2 : G, (X0 ◇ (sK0 ◇ sK2)) = (X0 ◇ (sK0 ◇ sK0)) := by
+    intro X0 sK0 sK2
+    conv => enter [1]; rw [← h4344 sK0 X0 sK2]
+    conv => enter [1]; rw [h4344 sK0 X0 sK0]
+  have l2 : ∀ sK0 X1 X0 sK2 : G, (sK0 ◇ (X1 ◇ X1)) = (X1 ◇ (X0 ◇ (sK0 ◇ sK2))) := by
+    intro sK0 X1 X0 sK2
+    conv => enter [1]; rw [h4344 sK0 X1 (X0 ◇ X0)]
+    conv => enter [1, 2]; rw [h4344 sK0 X0 sK2]
+  have l3 : ∀ X1 X0 sK0 sK2 sK1 : G, (X1 ◇ (X0 ◇ (sK0 ◇ sK2))) = (X1 ◇ (sK0 ◇ (sK1 ◇ sK2))) := by
+    intro X1 X0 sK0 sK2 sK1
+    conv => enter [1]; rw [← l2 sK0 X1 X0 sK2]
+    conv => enter [1]; rw [h4344 sK0 X1 (sK1 ◇ sK2)]
+  have l4 : ∀ X0 sK0 sK2 : G, ((X0 ◇ X0) ◇ (sK0 ◇ sK2)) = (X0 ◇ (sK0 ◇ sK0)) := by
+    intro X0 sK0 sK2
+    conv => enter [1]; rw [l0 X0 sK0 sK2 X0]
+    conv => enter [1]; rw [← h4344 X0 sK0 ((X0 ◇ X0) ◇ X0)]
+  have l5 : ∀ X0 sK0 sK2 : G, (X0 ◇ (sK0 ◇ sK2)) = ((X0 ◇ X0) ◇ (sK0 ◇ sK2)) := by
+    intro X0 sK0 sK2
+    conv => enter [1]; rw [l1 X0 sK0 sK2]
+    conv => enter [1]; rw [← l4 X0 sK0 sK2]
+  have l6 : ∀ X0 sK0 sK2 : G, (X0 ◇ (sK0 ◇ sK2)) = (X0 ◇ (X0 ◇ (sK0 ◇ sK2))) := by
+    intro X0 sK0 sK2
+    conv => enter [1]; rw [l5 X0 sK0 sK2]
+    conv => enter [1]; rw [← h4512 X0 X0 (sK0 ◇ sK2)]
+  have l7 : ∀ X0 sK0 sK2 sK1 : G, (X0 ◇ (sK0 ◇ sK2)) = (X0 ◇ (sK0 ◇ (sK1 ◇ sK2))) := by
+    intro X0 sK0 sK2 sK1
+    conv => enter [1]; rw [l6 X0 sK0 sK2]
+    conv => enter [1]; rw [l3 X0 X0 sK0 sK2 sK1]
+  have l8 : ∀ sK0 sK1 sK2 X0 X1 : G, ((sK0 ◇ (sK1 ◇ sK2)) ◇ (X0 ◇ X1)) = (X0 ◇ ((sK0 ◇ (sK1 ◇ sK2)) ◇ (sK0 ◇ sK2))) := by
+    intro sK0 sK1 sK2 X0 X1
+    conv => enter [1]; rw [← h4344 X0 (sK0 ◇ (sK1 ◇ sK2)) X1]
+    conv => enter [1, 2]; rw [← l7 (sK0 ◇ (sK1 ◇ sK2)) sK0 sK2 sK1]
+  have l9 : ∀ X0 sK0 sK1 sK2 X1 : G, (X0 ◇ (sK0 ◇ (sK1 ◇ sK2))) = ((sK0 ◇ (sK1 ◇ sK2)) ◇ (X0 ◇ X1)) := by
+    intro X0 sK0 sK1 sK2 X1
+    conv => enter [1]; rw [← l3 X0 (sK0 ◇ (sK1 ◇ sK2)) sK0 sK2 sK1]
+    conv => enter [1]; rw [← l8 sK0 sK1 sK2 X0 X1]
+  have l10 : ∀ X0 sK0 sK2 sK1 X1 : G, (X0 ◇ (sK0 ◇ sK2)) = ((sK0 ◇ (sK1 ◇ sK2)) ◇ (X0 ◇ X1)) := by
+    intro X0 sK0 sK2 sK1 X1
+    conv => enter [1]; rw [l7 X0 sK0 sK2 sK1]
+    conv => enter [1]; rw [l9 X0 sK0 sK1 sK2 X1]
+  have l11 : ∀ X0 sK1 sK0 sK2 X1 : G, ((X0 ◇ X0) ◇ (sK1 ◇ (sK0 ◇ sK2))) = (sK1 ◇ (X0 ◇ ((X0 ◇ X0) ◇ X1))) := by
+    intro X0 sK1 sK0 sK2 X1
+    conv => enter [1]; rw [← h4344 sK1 (X0 ◇ X0) (sK0 ◇ sK2)]
+    conv => enter [1, 2]; rw [h4344 (X0 ◇ X0) X0 X1]
+  have l12 : ∀ sK0 sK1 sK2 : G, ((sK0 ◇ (sK1 ◇ sK2)) ◇ (sK1 ◇ (sK0 ◇ sK2))) = (sK1 ◇ ((sK0 ◇ (sK1 ◇ sK2)) ◇ (sK0 ◇ sK2))) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [← h4344 sK1 (sK0 ◇ (sK1 ◇ sK2)) (sK0 ◇ sK2)]
+    conv => enter [1, 2]; rw [← l7 (sK0 ◇ (sK1 ◇ sK2)) sK0 sK2 sK1]
+  have l13 : ∀ X0 sK1 sK0 sK2 : G, (X0 ◇ (sK1 ◇ (sK0 ◇ sK2))) = (X0 ◇ (sK1 ◇ sK1)) := by
+    intro X0 sK1 sK0 sK2
+    conv => enter [1]; rw [← h4344 sK1 X0 (sK0 ◇ sK2)]
+    conv => enter [1]; rw [h4344 sK1 X0 sK1]
+  have l14 : ∀ sK1 X1 X0 sK0 sK2 : G, (sK1 ◇ (X1 ◇ X1)) = (X1 ◇ (X0 ◇ (sK1 ◇ (sK0 ◇ sK2)))) := by
+    intro sK1 X1 X0 sK0 sK2
+    conv => enter [1]; rw [h4344 sK1 X1 (X0 ◇ X0)]
+    conv => enter [1, 2]; rw [h4344 sK1 X0 (sK0 ◇ sK2)]
+  have l15 : ∀ X1 X0 sK1 sK0 sK2 : G, (X1 ◇ (X0 ◇ (sK1 ◇ (sK0 ◇ sK2)))) = (X1 ◇ (sK1 ◇ sK2)) := by
+    intro X1 X0 sK1 sK0 sK2
+    conv => enter [1]; rw [← l14 sK1 X1 X0 sK0 sK2]
+    conv => enter [1]; rw [h4344 sK1 X1 sK2]
+  have l16 : ∀ sK0 sK1 sK2 : G, ((sK0 ◇ (sK1 ◇ sK2)) ◇ (sK1 ◇ (sK0 ◇ sK2))) = (sK1 ◇ (sK0 ◇ (sK1 ◇ sK2))) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l12 sK0 sK1 sK2]
+    conv => enter [1]; rw [l3 sK1 (sK0 ◇ (sK1 ◇ sK2)) sK0 sK2 sK1]
+  have l17 : ∀ X0 sK1 sK0 sK2 : G, ((X0 ◇ X0) ◇ (sK1 ◇ (sK0 ◇ sK2))) = (X0 ◇ (sK1 ◇ sK1)) := by
+    intro X0 sK1 sK0 sK2
+    conv => enter [1]; rw [l11 X0 sK1 sK0 sK2 X0]
+    conv => enter [1]; rw [← h4344 X0 sK1 ((X0 ◇ X0) ◇ X0)]
+  have l18 : ∀ sK1 sK0 sK2 : G, (sK1 ◇ (sK0 ◇ sK2)) = ((sK0 ◇ (sK1 ◇ sK2)) ◇ (sK1 ◇ (sK0 ◇ sK2))) := by
+    intro sK1 sK0 sK2
+    conv => enter [1]; rw [l7 sK1 sK0 sK2 sK1]
+    conv => enter [1]; rw [← l16 sK0 sK1 sK2]
+  have l19 : ∀ X0 sK1 sK0 sK2 : G, (X0 ◇ (sK1 ◇ (sK0 ◇ sK2))) = ((X0 ◇ X0) ◇ (sK1 ◇ (sK0 ◇ sK2))) := by
+    intro X0 sK1 sK0 sK2
+    conv => enter [1]; rw [l13 X0 sK1 sK0 sK2]
+    conv => enter [1]; rw [← l17 X0 sK1 sK0 sK2]
+  have l20 : ∀ X0 sK1 sK0 sK2 : G, (X0 ◇ (sK1 ◇ (sK0 ◇ sK2))) = (X0 ◇ (X0 ◇ (sK1 ◇ (sK0 ◇ sK2)))) := by
+    intro X0 sK1 sK0 sK2
+    conv => enter [1]; rw [l19 X0 sK1 sK0 sK2]
+    conv => enter [1]; rw [← h4512 X0 X0 (sK1 ◇ (sK0 ◇ sK2))]
+  have l21 : ∀ X0 sK1 sK0 sK2 : G, (X0 ◇ (sK1 ◇ (sK0 ◇ sK2))) = (X0 ◇ (sK1 ◇ sK2)) := by
+    intro X0 sK1 sK0 sK2
+    conv => enter [1]; rw [l20 X0 sK1 sK0 sK2]
+    conv => enter [1]; rw [l15 X0 X0 sK1 sK0 sK2]
+  have l22 : ∀ X0 sK1 sK0 sK2 : G, (X0 ◇ (sK1 ◇ (sK0 ◇ sK2))) = ((sK0 ◇ (sK1 ◇ sK2)) ◇ (X0 ◇ X0)) := by
+    intro X0 sK1 sK0 sK2
+    conv => enter [1, 2]; rw [l18 sK1 sK0 sK2]
+    conv => enter [1]; rw [← h4344 (sK0 ◇ (sK1 ◇ sK2)) X0 (sK1 ◇ (sK0 ◇ sK2))]
+  have l23 : ∀ X0 sK0 sK2 sK1 : G, (X0 ◇ (sK0 ◇ sK2)) = (X0 ◇ (sK1 ◇ (sK0 ◇ sK2))) := by
+    intro X0 sK0 sK2 sK1
+    conv => enter [1]; rw [l10 X0 sK0 sK2 sK1 X0]
+    conv => enter [1]; rw [← l22 X0 sK1 sK0 sK2]
+  have l24 : ∀ sK1 sK2 sK0 : G, ((sK1 ◇ sK2) ◇ (sK1 ◇ (sK0 ◇ sK2))) = (sK1 ◇ ((sK1 ◇ sK2) ◇ (sK1 ◇ (sK0 ◇ sK2)))) := by
+    intro sK1 sK2 sK0
+    conv => enter [1]; rw [← h4344 sK1 (sK1 ◇ sK2) (sK0 ◇ sK2)]
+    conv => enter [1, 2]; rw [← l21 (sK1 ◇ sK2) sK1 sK0 sK2]
+  have l25 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ ((sK1 ◇ sK2) ◇ (sK1 ◇ (sK0 ◇ sK2)))) = ((sK1 ◇ sK2) ◇ (sK0 ◇ sK2)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1, 2]; rw [l21 (sK1 ◇ sK2) sK1 sK0 sK2]
+    conv => enter [1]; rw [h4344 sK0 (sK1 ◇ sK2) sK2]
+  have l26 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK1 ◇ sK2)) = (sK0 ◇ (sK0 ◇ sK2)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [← l21 sK0 sK1 sK0 sK2]
+    conv => enter [1]; rw [← l23 sK0 sK0 sK2 sK1]
+  have l27 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK1 ◇ sK2)) = ((sK1 ◇ sK2) ◇ (sK0 ◇ sK2)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [← l15 sK0 (sK1 ◇ sK2) sK1 sK0 sK2]
+    conv => enter [1]; rw [l25 sK0 sK1 sK2]
+  have l28 : ∀ sK1 sK2 sK0 : G, ((sK1 ◇ sK2) ◇ (sK1 ◇ (sK0 ◇ sK2))) = (sK1 ◇ (sK1 ◇ sK2)) := by
+    intro sK1 sK2 sK0
+    conv => enter [1]; rw [l24 sK1 sK2 sK0]
+    conv => enter [1]; rw [l15 sK1 (sK1 ◇ sK2) sK1 sK0 sK2]
+  have l29 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK1 ◇ (sK0 ◇ sK2))) = ((sK1 ◇ sK2) ◇ (sK0 ◇ sK2)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l21 sK0 sK1 sK0 sK2]
+    conv => enter [1]; rw [l27 sK0 sK1 sK2]
+  have l30 : ∀ sK1 sK2 sK0 : G, ((sK1 ◇ sK2) ◇ (sK1 ◇ (sK0 ◇ sK2))) = (sK1 ◇ (sK1 ◇ (sK0 ◇ sK2))) := by
+    intro sK1 sK2 sK0
+    conv => enter [1]; rw [l28 sK1 sK2 sK0]
+    conv => enter [1]; rw [← l21 sK1 sK1 sK0 sK2]
+  have l31 : ∀ sK0 sK2 sK1 : G, (sK0 ◇ (sK0 ◇ sK2)) = ((sK1 ◇ sK2) ◇ (sK0 ◇ sK2)) := by
+    intro sK0 sK2 sK1
+    conv => enter [1]; rw [l23 sK0 sK0 sK2 sK1]
+    conv => enter [1]; rw [l29 sK0 sK1 sK2]
+  have l32 : ∀ sK1 sK0 sK2 : G, (sK1 ◇ (sK0 ◇ sK2)) = ((sK1 ◇ sK2) ◇ (sK1 ◇ (sK0 ◇ sK2))) := by
+    intro sK1 sK0 sK2
+    conv => enter [1]; rw [l23 sK1 sK0 sK2 sK1]
+    conv => enter [1]; rw [← l30 sK1 sK2 sK0]
+  have l33 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK1 ◇ sK2)) = ((sK1 ◇ sK2) ◇ (sK0 ◇ sK2)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l26 sK0 sK1 sK2]
+    conv => enter [1]; rw [l31 sK0 sK2 sK1]
+  have l34 : ∀ sK1 sK0 sK2 : G, (sK1 ◇ (sK0 ◇ sK2)) = ((sK1 ◇ sK2) ◇ (sK0 ◇ sK2)) := by
+    intro sK1 sK0 sK2
+    conv => enter [1]; rw [l32 sK1 sK0 sK2]
+    conv => enter [1]; rw [← l23 (sK1 ◇ sK2) sK0 sK2 sK1]
+  have l35 : ∀ sK1 sK0 sK2 : G, (sK1 ◇ (sK0 ◇ sK2)) = (sK0 ◇ (sK1 ◇ sK2)) := by
+    intro sK1 sK0 sK2
+    conv => enter [1]; rw [l34 sK1 sK0 sK2]
+    conv => enter [1]; rw [← l33 sK0 sK1 sK2]
+  intro x y z
+  conv => enter [1]; rw [l35 x y z]
+
+@[equational_result]
+theorem Equation4344_implies_Equation4320 (G : Type*) [Magma G] (h4344 : Equation4344 G) : Equation4320 G := by
+  intro x y
+  conv => enter [1]; rw [← h4344 y x x]
+
+theorem Equation4344_4512_implies_Equation4321 (G : Type*) [Magma G] (h4344 : Equation4344 G) (h4512 : Equation4512 G) : Equation4321 G := by
+  have l0 : ∀ X0 sK1 sK0 X1 : G, ((X0 ◇ X0) ◇ (sK1 ◇ sK0)) = (sK1 ◇ (X0 ◇ ((X0 ◇ X0) ◇ X1))) := by
+    intro X0 sK1 sK0 X1
+    conv => enter [1]; rw [← h4344 sK1 (X0 ◇ X0) sK0]
+    conv => enter [1, 2]; rw [h4344 (X0 ◇ X0) X0 X1]
+  have l1 : ∀ X0 sK1 sK0 : G, (X0 ◇ (sK1 ◇ sK0)) = (X0 ◇ (sK1 ◇ sK1)) := by
+    intro X0 sK1 sK0
+    conv => enter [1]; rw [← h4344 sK1 X0 sK0]
+    conv => enter [1]; rw [h4344 sK1 X0 sK1]
+  have l2 : ∀ sK1 X1 X0 sK0 : G, (sK1 ◇ (X1 ◇ X1)) = (X1 ◇ (X0 ◇ (sK1 ◇ sK0))) := by
+    intro sK1 X1 X0 sK0
+    conv => enter [1]; rw [h4344 sK1 X1 (X0 ◇ X0)]
+    conv => enter [1, 2]; rw [h4344 sK1 X0 sK0]
+  have l3 : ∀ X1 X0 sK1 sK0 : G, (X1 ◇ (X0 ◇ (sK1 ◇ sK0))) = (X1 ◇ (sK1 ◇ (sK0 ◇ sK1))) := by
+    intro X1 X0 sK1 sK0
+    conv => enter [1]; rw [← l2 sK1 X1 X0 sK0]
+    conv => enter [1]; rw [h4344 sK1 X1 (sK0 ◇ sK1)]
+  have l4 : ∀ X0 sK1 sK0 : G, ((X0 ◇ X0) ◇ (sK1 ◇ sK0)) = (X0 ◇ (sK1 ◇ sK1)) := by
+    intro X0 sK1 sK0
+    conv => enter [1]; rw [l0 X0 sK1 sK0 X0]
+    conv => enter [1]; rw [← h4344 X0 sK1 ((X0 ◇ X0) ◇ X0)]
+  have l5 : ∀ X0 sK1 sK0 : G, (X0 ◇ (sK1 ◇ sK0)) = ((X0 ◇ X0) ◇ (sK1 ◇ sK0)) := by
+    intro X0 sK1 sK0
+    conv => enter [1]; rw [l1 X0 sK1 sK0]
+    conv => enter [1]; rw [← l4 X0 sK1 sK0]
+  have l6 : ∀ X0 sK1 sK0 : G, (X0 ◇ (sK1 ◇ sK0)) = (X0 ◇ (X0 ◇ (sK1 ◇ sK0))) := by
+    intro X0 sK1 sK0
+    conv => enter [1]; rw [l5 X0 sK1 sK0]
+    conv => enter [1]; rw [← h4512 X0 X0 (sK1 ◇ sK0)]
+  have l7 : ∀ X0 sK1 sK0 : G, (X0 ◇ (sK1 ◇ sK0)) = (X0 ◇ (sK1 ◇ (sK0 ◇ sK1))) := by
+    intro X0 sK1 sK0
+    conv => enter [1]; rw [l6 X0 sK1 sK0]
+    conv => enter [1]; rw [l3 X0 X0 sK1 sK0]
+  have l8 : ∀ sK1 sK0 X0 X1 : G, ((sK1 ◇ (sK0 ◇ sK1)) ◇ (X0 ◇ X1)) = (X0 ◇ ((sK1 ◇ (sK0 ◇ sK1)) ◇ (sK1 ◇ sK0))) := by
+    intro sK1 sK0 X0 X1
+    conv => enter [1]; rw [← h4344 X0 (sK1 ◇ (sK0 ◇ sK1)) X1]
+    conv => enter [1, 2]; rw [← l7 (sK1 ◇ (sK0 ◇ sK1)) sK1 sK0]
+  have l9 : ∀ X0 sK1 sK0 X1 : G, (X0 ◇ (sK1 ◇ (sK0 ◇ sK1))) = ((sK1 ◇ (sK0 ◇ sK1)) ◇ (X0 ◇ X1)) := by
+    intro X0 sK1 sK0 X1
+    conv => enter [1]; rw [← l3 X0 (sK1 ◇ (sK0 ◇ sK1)) sK1 sK0]
+    conv => enter [1]; rw [← l8 sK1 sK0 X0 X1]
+  have l10 : ∀ X0 sK1 sK0 X1 : G, (X0 ◇ (sK1 ◇ sK0)) = ((sK1 ◇ (sK0 ◇ sK1)) ◇ (X0 ◇ X1)) := by
+    intro X0 sK1 sK0 X1
+    conv => enter [1]; rw [l7 X0 sK1 sK0]
+    conv => enter [1]; rw [l9 X0 sK1 sK0 X1]
+  have l11 : ∀ X0 sK0 sK1 X1 : G, ((X0 ◇ X0) ◇ (sK0 ◇ (sK1 ◇ sK0))) = (sK0 ◇ (X0 ◇ ((X0 ◇ X0) ◇ X1))) := by
+    intro X0 sK0 sK1 X1
+    conv => enter [1]; rw [← h4344 sK0 (X0 ◇ X0) (sK1 ◇ sK0)]
+    conv => enter [1, 2]; rw [h4344 (X0 ◇ X0) X0 X1]
+  have l12 : ∀ sK1 sK0 : G, ((sK1 ◇ (sK0 ◇ sK1)) ◇ (sK0 ◇ (sK1 ◇ sK0))) = (sK0 ◇ ((sK1 ◇ (sK0 ◇ sK1)) ◇ (sK1 ◇ sK0))) := by
+    intro sK1 sK0
+    conv => enter [1]; rw [← h4344 sK0 (sK1 ◇ (sK0 ◇ sK1)) (sK1 ◇ sK0)]
+    conv => enter [1, 2]; rw [← l7 (sK1 ◇ (sK0 ◇ sK1)) sK1 sK0]
+  have l13 : ∀ X0 sK0 sK1 : G, (X0 ◇ (sK0 ◇ (sK1 ◇ sK0))) = (X0 ◇ (sK0 ◇ sK0)) := by
+    intro X0 sK0 sK1
+    conv => enter [1]; rw [← h4344 sK0 X0 (sK1 ◇ sK0)]
+    conv => enter [1]; rw [h4344 sK0 X0 sK0]
+  have l14 : ∀ sK0 X1 X0 sK1 : G, (sK0 ◇ (X1 ◇ X1)) = (X1 ◇ (X0 ◇ (sK0 ◇ (sK1 ◇ sK0)))) := by
+    intro sK0 X1 X0 sK1
+    conv => enter [1]; rw [h4344 sK0 X1 (X0 ◇ X0)]
+    conv => enter [1, 2]; rw [h4344 sK0 X0 (sK1 ◇ sK0)]
+  have l15 : ∀ X1 X0 sK0 sK1 : G, (X1 ◇ (X0 ◇ (sK0 ◇ (sK1 ◇ sK0)))) = (X1 ◇ (sK0 ◇ sK1)) := by
+    intro X1 X0 sK0 sK1
+    conv => enter [1]; rw [← l14 sK0 X1 X0 sK1]
+    conv => enter [1]; rw [h4344 sK0 X1 sK1]
+  have l16 : ∀ sK1 sK0 : G, ((sK1 ◇ (sK0 ◇ sK1)) ◇ (sK0 ◇ (sK1 ◇ sK0))) = (sK0 ◇ (sK1 ◇ (sK0 ◇ sK1))) := by
+    intro sK1 sK0
+    conv => enter [1]; rw [l12 sK1 sK0]
+    conv => enter [1]; rw [l3 sK0 (sK1 ◇ (sK0 ◇ sK1)) sK1 sK0]
+  have l17 : ∀ X0 sK0 sK1 : G, ((X0 ◇ X0) ◇ (sK0 ◇ (sK1 ◇ sK0))) = (X0 ◇ (sK0 ◇ sK0)) := by
+    intro X0 sK0 sK1
+    conv => enter [1]; rw [l11 X0 sK0 sK1 X0]
+    conv => enter [1]; rw [← h4344 X0 sK0 ((X0 ◇ X0) ◇ X0)]
+  have l18 : ∀ sK0 sK1 : G, (sK0 ◇ (sK1 ◇ sK0)) = ((sK1 ◇ (sK0 ◇ sK1)) ◇ (sK0 ◇ (sK1 ◇ sK0))) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [l7 sK0 sK1 sK0]
+    conv => enter [1]; rw [← l16 sK1 sK0]
+  have l19 : ∀ X0 sK0 sK1 : G, (X0 ◇ (sK0 ◇ (sK1 ◇ sK0))) = ((X0 ◇ X0) ◇ (sK0 ◇ (sK1 ◇ sK0))) := by
+    intro X0 sK0 sK1
+    conv => enter [1]; rw [l13 X0 sK0 sK1]
+    conv => enter [1]; rw [← l17 X0 sK0 sK1]
+  have l20 : ∀ X0 sK0 sK1 : G, (X0 ◇ (sK0 ◇ (sK1 ◇ sK0))) = (X0 ◇ (X0 ◇ (sK0 ◇ (sK1 ◇ sK0)))) := by
+    intro X0 sK0 sK1
+    conv => enter [1]; rw [l19 X0 sK0 sK1]
+    conv => enter [1]; rw [← h4512 X0 X0 (sK0 ◇ (sK1 ◇ sK0))]
+  have l21 : ∀ X0 sK0 sK1 : G, (X0 ◇ (sK0 ◇ (sK1 ◇ sK0))) = (X0 ◇ (sK0 ◇ sK1)) := by
+    intro X0 sK0 sK1
+    conv => enter [1]; rw [l20 X0 sK0 sK1]
+    conv => enter [1]; rw [l15 X0 X0 sK0 sK1]
+  have l22 : ∀ X0 sK0 sK1 : G, (X0 ◇ (sK0 ◇ (sK1 ◇ sK0))) = ((sK1 ◇ (sK0 ◇ sK1)) ◇ (X0 ◇ X0)) := by
+    intro X0 sK0 sK1
+    conv => enter [1, 2]; rw [l18 sK0 sK1]
+    conv => enter [1]; rw [← h4344 (sK1 ◇ (sK0 ◇ sK1)) X0 (sK0 ◇ (sK1 ◇ sK0))]
+  have l23 : ∀ X0 sK1 sK0 : G, (X0 ◇ (sK1 ◇ sK0)) = (X0 ◇ (sK0 ◇ (sK1 ◇ sK0))) := by
+    intro X0 sK1 sK0
+    conv => enter [1]; rw [l10 X0 sK1 sK0 X0]
+    conv => enter [1]; rw [← l22 X0 sK0 sK1]
+  have l24 : ∀ sK0 sK1 : G, ((sK0 ◇ sK1) ◇ (sK0 ◇ (sK1 ◇ sK0))) = (sK0 ◇ ((sK0 ◇ sK1) ◇ (sK0 ◇ (sK1 ◇ sK0)))) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [← h4344 sK0 (sK0 ◇ sK1) (sK1 ◇ sK0)]
+    conv => enter [1, 2]; rw [← l21 (sK0 ◇ sK1) sK0 sK1]
+  have l25 : ∀ sK1 sK0 : G, (sK1 ◇ ((sK0 ◇ sK1) ◇ (sK0 ◇ (sK1 ◇ sK0)))) = ((sK0 ◇ sK1) ◇ (sK1 ◇ sK0)) := by
+    intro sK1 sK0
+    conv => enter [1, 2]; rw [l21 (sK0 ◇ sK1) sK0 sK1]
+    conv => enter [1]; rw [h4344 sK1 (sK0 ◇ sK1) sK0]
+  have l26 : ∀ sK1 sK0 : G, (sK1 ◇ (sK0 ◇ sK1)) = (sK1 ◇ (sK1 ◇ sK0)) := by
+    intro sK1 sK0
+    conv => enter [1]; rw [← l21 sK1 sK0 sK1]
+    conv => enter [1]; rw [← l23 sK1 sK1 sK0]
+  have l27 : ∀ sK1 sK0 : G, (sK1 ◇ (sK0 ◇ sK1)) = ((sK0 ◇ sK1) ◇ (sK1 ◇ sK0)) := by
+    intro sK1 sK0
+    conv => enter [1]; rw [← l15 sK1 (sK0 ◇ sK1) sK0 sK1]
+    conv => enter [1]; rw [l25 sK1 sK0]
+  have l28 : ∀ sK0 sK1 : G, ((sK0 ◇ sK1) ◇ (sK0 ◇ (sK1 ◇ sK0))) = (sK0 ◇ (sK0 ◇ sK1)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [l24 sK0 sK1]
+    conv => enter [1]; rw [l15 sK0 (sK0 ◇ sK1) sK0 sK1]
+  have l29 : ∀ sK1 sK0 : G, (sK1 ◇ (sK0 ◇ (sK1 ◇ sK0))) = ((sK0 ◇ sK1) ◇ (sK1 ◇ sK0)) := by
+    intro sK1 sK0
+    conv => enter [1]; rw [l21 sK1 sK0 sK1]
+    conv => enter [1]; rw [l27 sK1 sK0]
+  have l30 : ∀ sK0 sK1 : G, ((sK0 ◇ sK1) ◇ (sK0 ◇ (sK1 ◇ sK0))) = (sK0 ◇ (sK0 ◇ (sK1 ◇ sK0))) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [l28 sK0 sK1]
+    conv => enter [1]; rw [← l21 sK0 sK0 sK1]
+  have l31 : ∀ sK1 sK0 : G, (sK1 ◇ (sK1 ◇ sK0)) = ((sK0 ◇ sK1) ◇ (sK1 ◇ sK0)) := by
+    intro sK1 sK0
+    conv => enter [1]; rw [l23 sK1 sK1 sK0]
+    conv => enter [1]; rw [l29 sK1 sK0]
+  have l32 : ∀ sK0 sK1 : G, (sK0 ◇ (sK1 ◇ sK0)) = ((sK0 ◇ sK1) ◇ (sK0 ◇ (sK1 ◇ sK0))) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [l23 sK0 sK1 sK0]
+    conv => enter [1]; rw [← l30 sK0 sK1]
+  have l33 : ∀ sK1 sK0 : G, (sK1 ◇ (sK0 ◇ sK1)) = ((sK0 ◇ sK1) ◇ (sK1 ◇ sK0)) := by
+    intro sK1 sK0
+    conv => enter [1]; rw [l26 sK1 sK0]
+    conv => enter [1]; rw [l31 sK1 sK0]
+  have l34 : ∀ sK0 sK1 : G, (sK0 ◇ (sK1 ◇ sK0)) = ((sK0 ◇ sK1) ◇ (sK1 ◇ sK0)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [l32 sK0 sK1]
+    conv => enter [1]; rw [← l23 (sK0 ◇ sK1) sK1 sK0]
+  have l35 : ∀ sK0 sK1 : G, (sK0 ◇ (sK1 ◇ sK0)) = (sK1 ◇ (sK0 ◇ sK1)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [l34 sK0 sK1]
+    conv => enter [1]; rw [← l33 sK1 sK0]
+  intro x y
+  conv => enter [1]; rw [l35 x y]
+
+@[equational_result]
+theorem Equation4344_implies_Equation4343 (G : Type*) [Magma G] (h4344 : Equation4344 G) : Equation4343 G := by
+  intro x y
+  conv => enter [1]; rw [h4344 x y x]
+
+@[equational_result]
+theorem Equation4305_implies_Equation4273 (G : Type*) [Magma G] (h4305 : Equation4305 G) : Equation4273 G := by
+  have l0 : ∀ sK1 sK0 X1 : G, (sK1 ◇ (sK0 ◇ sK1)) = (X1 ◇ (sK0 ◇ X1)) := by
+    intro sK1 sK0 X1
+    conv => enter [1]; rw [← h4305 sK1 sK0 sK1]
+    conv => enter [1]; rw [h4305 sK1 sK0 X1]
+  have l1 : ∀ sK0 sK1 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK1 ◇ (sK0 ◇ sK1)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [l0 sK0 sK0 sK1]
+  intro x y
+  conv => enter [1]; rw [l1 x y]
+
+@[equational_result]
+theorem Equation4305_implies_Equation4275 (G : Type*) [Magma G] (h4305 : Equation4305 G) : Equation4275 G := by
+  intro x y
+  conv => enter [1]; rw [← h4305 y x x]
+
+@[equational_result]
+theorem Equation4305_implies_Equation4283 (G : Type*) [Magma G] (h4305 : Equation4305 G) : Equation4283 G := by
+  have l0 : ∀ sK0 sK1 X1 : G, (sK0 ◇ (sK1 ◇ sK0)) = (X1 ◇ (sK1 ◇ X1)) := by
+    intro sK0 sK1 X1
+    conv => enter [1]; rw [← h4305 sK0 sK1 sK0]
+    conv => enter [1]; rw [h4305 sK0 sK1 X1]
+  have l1 : ∀ sK0 sK1 : G, (sK0 ◇ (sK0 ◇ sK1)) = (sK0 ◇ (sK1 ◇ sK0)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [h4305 sK0 sK1 sK0]
+  intro x y
+  conv => enter [1]; rw [l1 x y]
+
+@[equational_result]
+theorem Equation4325_implies_Equation4273 (G : Type*) [Magma G] (h4325 : Equation4325 G) : Equation4273 G := by
+  intro x y
+  conv => enter [1]; rw [← h4325 y x x]
+
+@[equational_result]
+theorem Equation4325_implies_Equation4270 (G : Type*) [Magma G] (h4325 : Equation4325 G) : Equation4270 G := by
+  intro x y
+  conv => enter [1]; rw [h4325 x x y]
+
+@[equational_result]
+theorem Equation4325_implies_Equation4320 (G : Type*) [Magma G] (h4325 : Equation4325 G) : Equation4320 G := by
+  intro x y
+  conv => enter [1]; rw [h4325 x y x]
+
+@[equational_result]
+theorem Equation4315_implies_Equation4339 (G : Type*) [Magma G] (h4315 : Equation4315 G) : Equation4339 G := by
+  have l0 : ∀ X0 sK1 sK2 : G, (X0 ◇ (sK1 ◇ sK2)) = (X0 ◇ (sK1 ◇ sK1)) := by
+    intro X0 sK1 sK2
+    conv => enter [1]; rw [← h4315 X0 sK1 sK2]
+    conv => enter [1]; rw [h4315 X0 sK1 sK1]
+  intro x y z
+  conv => enter [1]; rw [← l0 x y z]
+
+@[equational_result]
+theorem Equation4330_implies_Equation4300 (G : Type*) [Magma G] (h4330 : Equation4330 G) : Equation4300 G := by
+  have l0 : ∀ sK2 sK0 sK1 X0 : G, (sK2 ◇ (sK0 ◇ sK1)) = (X0 ◇ (sK0 ◇ sK1)) := by
+    intro sK2 sK0 sK1 X0
+    conv => enter [1]; rw [← h4330 sK1 sK0 sK2]
+    conv => enter [1]; rw [h4330 sK1 sK0 X0]
+  intro x y z
+  conv => enter [1]; rw [l0 x x y z]
+
+@[equational_result]
+theorem Equation4344_implies_Equation4274 (G : Type*) [Magma G] (h4344 : Equation4344 G) : Equation4274 G := by
+  have l0 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK0 ◇ (X0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [h4344 sK0 sK0 (X0 ◇ sK0)]
+    conv => enter [1, 2]; rw [← h4344 X0 sK0 sK0]
+  have l1 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK0 ◇ sK0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l0 sK0 X0]
+    conv => enter [1]; rw [← h4344 X0 sK0 (sK0 ◇ sK0)]
+  have l2 : ∀ X0 sK0 sK2 : G, (X0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK0 ◇ sK2)) := by
+    intro X0 sK0 sK2
+    conv => enter [1]; rw [h4344 X0 sK0 X0]
+    conv => enter [1]; rw [h4344 sK0 X0 sK2]
+  have l3 : ∀ sK0 X0 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK0 ◇ sK2)) := by
+    intro sK0 X0 sK2
+    conv => enter [1]; rw [l1 sK0 X0]
+    conv => enter [1]; rw [l2 X0 sK0 sK2]
+  intro x y z
+  conv => enter [1]; rw [l3 x y z]
+
+theorem Equation4303_4512_implies_Equation4274 (G : Type*) [Magma G] (h4303 : Equation4303 G) (h4512 : Equation4512 G) : Equation4274 G := by
+  have l0 : ∀ sK0 sK2 X0 : G, (sK0 ◇ (sK0 ◇ sK2)) = (X0 ◇ (sK0 ◇ sK2)) := by
+    intro sK0 sK2 X0
+    conv => enter [1]; rw [h4303 sK0 sK2 sK2]
+    conv => enter [1]; rw [h4303 sK2 sK0 X0]
+  have l1 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) = (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [h4303 sK0 (sK0 ◇ sK0) (sK0 ◇ sK0)]
+    conv => enter [1]; rw [h4303 (sK0 ◇ sK0) sK0 X0]
+  have l2 : ∀ X0 sK0 X1 : G, (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) = (X1 ◇ ((sK0 ◇ sK0) ◇ X0)) := by
+    intro X0 sK0 X1
+    conv => enter [1, 2]; rw [h4303 sK0 sK0 X0]
+    conv => enter [1]; rw [h4303 X0 (sK0 ◇ sK0) X1]
+  have l3 : ∀ sK0 sK2 X1 X0 : G, ((sK0 ◇ sK2) ◇ ((sK0 ◇ sK2) ◇ sK0)) = (X1 ◇ (X0 ◇ (sK0 ◇ sK2))) := by
+    intro sK0 sK2 X1 X0
+    conv => enter [1]; rw [h4303 (sK0 ◇ sK2) sK0 X1]
+    conv => enter [1, 2]; rw [l0 sK0 sK2 X0]
+  have l4 : ∀ X1 X0 sK0 sK2 : G, (X1 ◇ (X0 ◇ (sK0 ◇ sK2))) = (sK0 ◇ (sK0 ◇ (sK0 ◇ sK2))) := by
+    intro X1 X0 sK0 sK2
+    conv => enter [1]; rw [← l3 sK0 sK2 X1 X0]
+    conv => enter [1]; rw [h4303 (sK0 ◇ sK2) sK0 sK0]
+  have l5 : ∀ X1 X0 sK0 sK2 sK1 : G, (X1 ◇ (X0 ◇ (sK0 ◇ sK2))) = (sK0 ◇ (sK1 ◇ (sK0 ◇ sK2))) := by
+    intro X1 X0 sK0 sK2 sK1
+    conv => enter [1]; rw [l4 X1 X0 sK0 sK2]
+    conv => enter [1, 2]; rw [l0 sK0 sK2 sK1]
+  have l6 : ∀ sK1 sK0 sK2 X0 : G, (sK1 ◇ (sK0 ◇ sK2)) = (X0 ◇ (sK0 ◇ sK2)) := by
+    intro sK1 sK0 sK2 X0
+    conv => enter [1]; rw [← l0 sK0 sK2 sK1]
+    conv => enter [1]; rw [l0 sK0 sK2 X0]
+  have l7 : ∀ X0 sK1 sK0 sK2 : G, (X0 ◇ (sK1 ◇ (sK0 ◇ sK2))) = ((sK0 ◇ sK2) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro X0 sK1 sK0 sK2
+    conv => enter [1, 2]; rw [l6 sK1 sK0 sK2 (sK0 ◇ sK0)]
+    conv => enter [1]; rw [← l2 (sK0 ◇ sK2) sK0 X0]
+  have l8 : ∀ sK0 X0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) = (X0 ◇ (sK1 ◇ (sK0 ◇ sK2))) := by
+    intro sK0 X0 sK1 sK2
+    conv => enter [1]; rw [l1 sK0 (sK0 ◇ sK2)]
+    conv => enter [1]; rw [← l7 X0 sK1 sK0 sK2]
+  have l9 : ∀ sK0 sK2 X0 X1 : G, (sK0 ◇ (sK0 ◇ sK2)) = (X0 ◇ (X1 ◇ (sK2 ◇ sK0))) := by
+    intro sK0 sK2 X0 X1
+    conv => enter [1]; rw [h4303 sK0 sK2 (X0 ◇ X1)]
+    conv => enter [1]; rw [← h4512 X0 X1 (sK2 ◇ sK0)]
+  have l10 : ∀ sK0 X0 X1 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (X1 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0 X1
+    conv => enter [1]; rw [h4303 sK0 sK0 (X0 ◇ X1)]
+    conv => enter [1]; rw [← h4512 X0 X1 (sK0 ◇ sK0)]
+  have l11 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l10 sK0 X0 sK0]
+  have l12 : ∀ sK0 sK2 X0 : G, (sK0 ◇ (sK0 ◇ sK2)) = (X0 ◇ (sK0 ◇ (sK0 ◇ sK2))) := by
+    intro sK0 sK2 X0
+    conv => enter [1]; rw [l9 sK0 sK2 X0 sK0]
+    conv => enter [1, 2]; rw [← h4303 sK0 sK2 sK0]
+  have l13 : ∀ sK0 sK2 sK1 : G, (sK0 ◇ (sK0 ◇ sK2)) = (sK0 ◇ (sK1 ◇ (sK0 ◇ sK2))) := by
+    intro sK0 sK2 sK1
+    conv => enter [1]; rw [l12 sK0 sK2 sK0]
+    conv => enter [1]; rw [l5 sK0 sK0 sK0 sK2 sK1]
+  have l14 : ∀ sK0 sK2 : G, (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) = (sK0 ◇ (sK0 ◇ sK2)) := by
+    intro sK0 sK2
+    conv => enter [1]; rw [l8 sK0 sK0 sK0 sK2]
+    conv => enter [1]; rw [← l13 sK0 sK2 sK0]
+  have l15 : ∀ sK1 sK0 sK2 : G, (sK1 ◇ (sK0 ◇ sK2)) = (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK1 sK0 sK2
+    conv => enter [1]; rw [l6 sK1 sK0 sK2 sK0]
+    conv => enter [1]; rw [← l14 sK0 sK2]
+  have l16 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK1 ◇ (sK0 ◇ sK2)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l11 sK0 sK0]
+    conv => enter [1]; rw [← l15 sK1 sK0 sK2]
+  intro x y z
+  conv => enter [1]; rw [l16 x y z]
+
+@[equational_result]
+theorem Equation4358_implies_Equation4283 (G : Type*) [Magma G] (h4358 : Equation4358 G) : Equation4283 G := by
+  intro x y
+  conv => enter [1]; rw [h4358 x x y]
+
+@[equational_result]
+theorem Equation4362_implies_Equation4320 (G : Type*) [Magma G] (h4362 : Equation4362 G) : Equation4320 G := by
+  intro x y
+  conv => enter [1]; rw [h4362 x y x]
+
+@[equational_result]
+theorem Equation4364_implies_Equation4283 (G : Type*) [Magma G] (h4364 : Equation4364 G) : Equation4283 G := by
+  intro x y
+  conv => enter [1]; rw [h4364 x x y]
+
+@[equational_result]
+theorem Equation4364_implies_Equation4320 (G : Type*) [Magma G] (h4364 : Equation4364 G) : Equation4320 G := by
+  have l0 : ∀ sK0 sK1 : G, (sK0 ◇ (sK1 ◇ sK0)) = (sK1 ◇ (sK0 ◇ sK0)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [← h4364 sK0 sK0 sK1]
+    conv => enter [1]; rw [← h4364 sK1 sK0 sK0]
+  intro x y
+  conv => enter [1]; rw [l0 x y]
+
+@[equational_result]
+theorem Equation4364_implies_Equation4290 (G : Type*) [Magma G] (h4364 : Equation4364 G) : Equation4290 G := by
+  intro x y
+  conv => enter [1]; rw [← h4364 y x x]
+
+@[equational_result]
+theorem Equation4369_implies_Equation4290 (G : Type*) [Magma G] (h4369 : Equation4369 G) : Equation4290 G := by
+  intro x y
+  conv => enter [1]; rw [h4369 x x y]
+
+theorem Equation4320_4343_implies_Equation4314 (G : Type*) [Magma G] (h4320 : Equation4320 G) (h4343 : Equation4343 G) : Equation4314 G := by
+  have l0 : ∀ X0 sK1 : G, (X0 ◇ (sK1 ◇ sK1)) = (X0 ◇ (sK1 ◇ X0)) := by
+    intro X0 sK1
+    conv => enter [1]; rw [h4343 X0 sK1]
+    conv => enter [1]; rw [← h4320 X0 sK1]
+  intro x y
+  conv => enter [1]; rw [← l0 x y]
+
+theorem Equation4320_4343_4512_implies_Equation4321 (G : Type*) [Magma G] (h4320 : Equation4320 G) (h4343 : Equation4343 G) (h4512 : Equation4512 G) : Equation4321 G := by
+  have l0 : ∀ sK0 sK1 : G, (sK0 ◇ (sK1 ◇ sK1)) = ((sK1 ◇ sK0) ◇ sK0) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [h4343 sK0 sK1]
+    conv => enter [1]; rw [h4512 sK1 sK0 sK0]
+  have l1 : ∀ sK0 sK1 : G, (sK0 ◇ (sK1 ◇ sK0)) = ((sK1 ◇ sK0) ◇ sK0) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [h4320 sK0 sK1]
+    conv => enter [1]; rw [h4512 sK1 sK0 sK0]
+  have l2 : ∀ sK1 sK0 : G, ((sK1 ◇ sK0) ◇ sK0) = ((sK0 ◇ sK1) ◇ sK0) := by
+    intro sK1 sK0
+    conv => enter [1]; rw [← l1 sK0 sK1]
+    conv => enter [1]; rw [h4512 sK0 sK1 sK0]
+  have l3 : ∀ sK1 sK0 : G, (sK1 ◇ (sK0 ◇ sK1)) = ((sK1 ◇ sK0) ◇ sK0) := by
+    intro sK1 sK0
+    conv => enter [1]; rw [h4320 sK1 sK0]
+    conv => enter [1]; rw [l0 sK0 sK1]
+  have l4 : ∀ sK0 sK1 : G, (sK0 ◇ (sK1 ◇ sK0)) = ((sK1 ◇ sK0) ◇ sK0) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [h4512 sK0 sK1 sK0]
+    conv => enter [1]; rw [← l2 sK1 sK0]
+  have l5 : ∀ sK0 sK1 : G, (sK0 ◇ (sK1 ◇ sK0)) = (sK1 ◇ (sK0 ◇ sK1)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [l4 sK0 sK1]
+    conv => enter [1]; rw [← l3 sK1 sK0]
+  intro x y
+  conv => enter [1]; rw [l5 x y]
+
+theorem Equation4283_4293_implies_Equation4291 (G : Type*) [Magma G] (h4283 : Equation4283 G) (h4293 : Equation4293 G) : Equation4291 G := by
+  have l0 : ∀ X0 X1 : G, (X0 ◇ (X0 ◇ X1)) = (X1 ◇ (X0 ◇ X1)) := by
+    intro X0 X1
+    conv => enter [1]; rw [h4293 X0 X1]
+    conv => enter [1]; rw [h4283 X1 X0]
+  intro x y
+  conv => enter [1]; rw [l0 x y]
+
+theorem Equation4283_4293_implies_Equation4321 (G : Type*) [Magma G] (h4283 : Equation4283 G) (h4293 : Equation4293 G) : Equation4321 G := by
+  have l0 : ∀ sK0 sK1 : G, (sK0 ◇ (sK1 ◇ sK0)) = (sK1 ◇ (sK1 ◇ sK0)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [← h4283 sK0 sK1]
+    conv => enter [1]; rw [h4293 sK0 sK1]
+  have l1 : ∀ sK0 sK1 : G, (sK0 ◇ (sK1 ◇ sK0)) = (sK1 ◇ (sK0 ◇ sK1)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [l0 sK0 sK1]
+    conv => enter [1]; rw [h4283 sK1 sK0]
+  intro x y
+  conv => enter [1]; rw [l1 x y]
+
+theorem Equation4320_4321_implies_Equation4314 (G : Type*) [Magma G] (h4320 : Equation4320 G) (h4321 : Equation4321 G) : Equation4314 G := by
+  have l0 : ∀ X0 sK1 : G, (X0 ◇ (sK1 ◇ sK1)) = (X0 ◇ (sK1 ◇ X0)) := by
+    intro X0 sK1
+    conv => enter [1]; rw [← h4320 sK1 X0]
+    conv => enter [1]; rw [h4321 sK1 X0]
+  intro x y
+  conv => enter [1]; rw [← l0 x y]
+
+theorem Equation4320_4321_implies_Equation4343 (G : Type*) [Magma G] (h4320 : Equation4320 G) (h4321 : Equation4321 G) : Equation4343 G := by
+  have l0 : ∀ X0 sK0 : G, (X0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK0 ◇ X0)) := by
+    intro X0 sK0
+    conv => enter [1]; rw [← h4320 sK0 X0]
+    conv => enter [1]; rw [h4321 sK0 X0]
+  have l1 : ∀ sK1 sK0 : G, (sK1 ◇ (sK0 ◇ sK0)) = (sK0 ◇ (sK1 ◇ sK1)) := by
+    intro sK1 sK0
+    conv => enter [1]; rw [l0 sK1 sK0]
+    conv => enter [1]; rw [h4320 sK1 sK0]
+  intro x y
+  conv => enter [1]; rw [l1 x y]
+
+theorem Equation4283_4321_implies_Equation4291 (G : Type*) [Magma G] (h4283 : Equation4283 G) (h4321 : Equation4321 G) : Equation4291 G := by
+  have l0 : ∀ sK0 sK1 : G, (sK0 ◇ (sK0 ◇ sK1)) = (sK1 ◇ (sK0 ◇ sK1)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [h4283 sK0 sK1]
+    conv => enter [1]; rw [h4321 sK0 sK1]
+  intro x y
+  conv => enter [1]; rw [l0 x y]
+
+theorem Equation4283_4321_implies_Equation4293 (G : Type*) [Magma G] (h4283 : Equation4283 G) (h4321 : Equation4321 G) : Equation4293 G := by
+  have l0 : ∀ sK1 sK0 : G, (sK1 ◇ (sK1 ◇ sK0)) = (sK0 ◇ (sK1 ◇ sK0)) := by
+    intro sK1 sK0
+    conv => enter [1]; rw [h4283 sK1 sK0]
+    conv => enter [1]; rw [h4321 sK1 sK0]
+  have l1 : ∀ sK0 sK1 : G, (sK0 ◇ (sK0 ◇ sK1)) = (sK1 ◇ (sK1 ◇ sK0)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [h4283 sK0 sK1]
+    conv => enter [1]; rw [← l0 sK1 sK0]
+  intro x y
+  conv => enter [1]; rw [l1 x y]
+
+theorem Equation4314_4343_implies_Equation4320 (G : Type*) [Magma G] (h4314 : Equation4314 G) (h4343 : Equation4343 G) : Equation4320 G := by
+  have l0 : ∀ X0 sK0 : G, (X0 ◇ (sK0 ◇ sK0)) = (sK0 ◇ (X0 ◇ sK0)) := by
+    intro X0 sK0
+    conv => enter [1]; rw [h4343 X0 sK0]
+    conv => enter [1]; rw [← h4314 sK0 X0]
+  intro x y
+  conv => enter [1]; rw [← l0 y x]
+
+theorem Equation4291_4293_implies_Equation4283 (G : Type*) [Magma G] (h4291 : Equation4291 G) (h4293 : Equation4293 G) : Equation4283 G := by
+  have l0 : ∀ sK0 sK1 : G, (sK0 ◇ (sK0 ◇ sK1)) = (sK0 ◇ (sK1 ◇ sK0)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [h4293 sK0 sK1]
+    conv => enter [1]; rw [h4291 sK1 sK0]
+  intro x y
+  conv => enter [1]; rw [l0 x y]
+
+theorem Equation4314_4321_implies_Equation4320 (G : Type*) [Magma G] (h4314 : Equation4314 G) (h4321 : Equation4321 G) : Equation4320 G := by
+  have l0 : ∀ X0 sK0 : G, (X0 ◇ (sK0 ◇ sK0)) = (sK0 ◇ (X0 ◇ sK0)) := by
+    intro X0 sK0
+    conv => enter [1]; rw [← h4314 X0 sK0]
+    conv => enter [1]; rw [h4321 X0 sK0]
+  intro x y
+  conv => enter [1]; rw [← l0 y x]
+
+theorem Equation4291_4321_4512_implies_Equation4283 (G : Type*) [Magma G] (h4291 : Equation4291 G) (h4321 : Equation4321 G) (h4512 : Equation4512 G) : Equation4283 G := by
+  have l0 : ∀ sK0 sK1 : G, (sK0 ◇ (sK1 ◇ sK0)) = ((sK1 ◇ sK0) ◇ sK1) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [h4321 sK0 sK1]
+    conv => enter [1]; rw [h4512 sK1 sK0 sK1]
+  have l1 : ∀ sK0 sK1 : G, ((sK0 ◇ sK1) ◇ sK0) = ((sK1 ◇ sK0) ◇ sK1) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [← h4512 sK0 sK1 sK0]
+    conv => enter [1]; rw [l0 sK0 sK1]
+  have l2 : ∀ sK0 sK1 : G, (sK0 ◇ (sK0 ◇ sK1)) = ((sK1 ◇ sK0) ◇ sK1) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [h4291 sK0 sK1]
+    conv => enter [1]; rw [h4512 sK1 sK0 sK1]
+  have l3 : ∀ sK0 sK1 : G, (sK0 ◇ (sK1 ◇ sK0)) = ((sK1 ◇ sK0) ◇ sK1) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [h4512 sK0 sK1 sK0]
+    conv => enter [1]; rw [l1 sK0 sK1]
+  have l4 : ∀ sK0 sK1 : G, (sK0 ◇ (sK0 ◇ sK1)) = (sK0 ◇ (sK1 ◇ sK0)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [l2 sK0 sK1]
+    conv => enter [1]; rw [← l3 sK0 sK1]
+  intro x y
+  conv => enter [1]; rw [l4 x y]
+
+theorem Equation4314_4320_implies_Equation4321 (G : Type*) [Magma G] (h4314 : Equation4314 G) (h4320 : Equation4320 G) : Equation4321 G := by
+  have l0 : ∀ sK0 sK1 : G, (sK0 ◇ (sK1 ◇ sK0)) = (sK1 ◇ (sK0 ◇ sK1)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [h4320 sK0 sK1]
+    conv => enter [1]; rw [← h4314 sK1 sK0]
+  intro x y
+  conv => enter [1]; rw [l0 x y]
+
+theorem Equation4283_4291_implies_Equation4293 (G : Type*) [Magma G] (h4283 : Equation4283 G) (h4291 : Equation4291 G) : Equation4293 G := by
+  have l0 : ∀ sK0 sK1 : G, (sK0 ◇ (sK0 ◇ sK1)) = (sK1 ◇ (sK1 ◇ sK0)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [h4291 sK0 sK1]
+    conv => enter [1]; rw [← h4283 sK1 sK0]
+  intro x y
+  conv => enter [1]; rw [l0 x y]
+
+theorem Equation4291_4320_implies_Equation4284 (G : Type*) [Magma G] (h4291 : Equation4291 G) (h4320 : Equation4320 G) : Equation4284 G := by
+  have l0 : ∀ sK0 sK1 : G, (sK0 ◇ (sK0 ◇ sK1)) = (sK0 ◇ (sK1 ◇ sK1)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [h4291 sK0 sK1]
+    conv => enter [1]; rw [h4320 sK1 sK0]
+  intro x y
+  conv => enter [1]; rw [l0 x y]
+
+theorem Equation4283_4314_implies_Equation4284 (G : Type*) [Magma G] (h4283 : Equation4283 G) (h4314 : Equation4314 G) : Equation4284 G := by
+  have l0 : ∀ X0 sK1 : G, (X0 ◇ (sK1 ◇ sK1)) = (X0 ◇ (X0 ◇ sK1)) := by
+    intro X0 sK1
+    conv => enter [1]; rw [← h4314 X0 sK1]
+    conv => enter [1]; rw [← h4283 X0 sK1]
+  intro x y
+  conv => enter [1]; rw [← l0 x y]
+
+theorem Equation4291_4314_implies_Equation4290 (G : Type*) [Magma G] (h4291 : Equation4291 G) (h4314 : Equation4314 G) : Equation4290 G := by
+  have l0 : ∀ sK0 sK1 : G, (sK0 ◇ (sK0 ◇ sK1)) = (sK1 ◇ (sK0 ◇ sK0)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [h4291 sK0 sK1]
+    conv => enter [1]; rw [h4314 sK1 sK0]
+  intro x y
+  conv => enter [1]; rw [l0 x y]
+
+theorem Equation4290_4343_implies_Equation4284 (G : Type*) [Magma G] (h4290 : Equation4290 G) (h4343 : Equation4343 G) : Equation4284 G := by
+  have l0 : ∀ X0 sK1 : G, (X0 ◇ (sK1 ◇ sK1)) = (X0 ◇ (X0 ◇ sK1)) := by
+    intro X0 sK1
+    conv => enter [1]; rw [h4343 X0 sK1]
+    conv => enter [1]; rw [← h4290 X0 sK1]
+  intro x y
+  conv => enter [1]; rw [← l0 x y]
+
+theorem Equation4290_4343_implies_Equation4293 (G : Type*) [Magma G] (h4290 : Equation4290 G) (h4343 : Equation4343 G) : Equation4293 G := by
+  have l0 : ∀ X0 X1 : G, (X0 ◇ (X0 ◇ X1)) = (X0 ◇ (X1 ◇ X1)) := by
+    intro X0 X1
+    conv => enter [1]; rw [h4290 X0 X1]
+    conv => enter [1]; rw [h4343 X1 X0]
+  have l1 : ∀ sK0 sK1 : G, (sK0 ◇ (sK0 ◇ sK1)) = (sK1 ◇ (sK1 ◇ sK0)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [l0 sK0 sK1]
+    conv => enter [1]; rw [← h4290 sK1 sK0]
+  intro x y
+  conv => enter [1]; rw [l1 x y]
+
+theorem Equation4290_4293_implies_Equation4284 (G : Type*) [Magma G] (h4290 : Equation4290 G) (h4293 : Equation4293 G) : Equation4284 G := by
+  have l0 : ∀ X0 sK1 : G, (X0 ◇ (sK1 ◇ sK1)) = (X0 ◇ (X0 ◇ sK1)) := by
+    intro X0 sK1
+    conv => enter [1]; rw [← h4290 sK1 X0]
+    conv => enter [1]; rw [h4293 sK1 X0]
+  intro x y
+  conv => enter [1]; rw [← l0 x y]
+
+theorem Equation4290_4293_implies_Equation4343 (G : Type*) [Magma G] (h4290 : Equation4290 G) (h4293 : Equation4293 G) : Equation4343 G := by
+  have l0 : ∀ X0 sK0 : G, (X0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (X0 ◇ sK0)) := by
+    intro X0 sK0
+    conv => enter [1]; rw [← h4290 sK0 X0]
+    conv => enter [1]; rw [h4293 sK0 X0]
+  have l1 : ∀ sK1 sK0 : G, (sK1 ◇ (sK0 ◇ sK0)) = (sK0 ◇ (sK1 ◇ sK1)) := by
+    intro sK1 sK0
+    conv => enter [1]; rw [l0 sK1 sK0]
+    conv => enter [1]; rw [h4290 sK1 sK0]
+  intro x y
+  conv => enter [1]; rw [l1 x y]
+
+theorem Equation4290_4320_4512_implies_Equation4283 (G : Type*) [Magma G] (h4290 : Equation4290 G) (h4320 : Equation4320 G) (h4512 : Equation4512 G) : Equation4283 G := by
+  have l0 : ∀ sK0 sK1 : G, (sK0 ◇ (sK1 ◇ sK0)) = ((sK1 ◇ sK0) ◇ sK0) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [h4320 sK0 sK1]
+    conv => enter [1]; rw [h4512 sK1 sK0 sK0]
+  have l1 : ∀ sK0 sK1 : G, (sK0 ◇ (sK0 ◇ sK1)) = ((sK1 ◇ sK0) ◇ sK0) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [h4290 sK0 sK1]
+    conv => enter [1]; rw [h4512 sK1 sK0 sK0]
+  have l2 : ∀ sK0 sK1 : G, ((sK0 ◇ sK1) ◇ sK0) = ((sK1 ◇ sK0) ◇ sK0) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [← h4512 sK0 sK1 sK0]
+    conv => enter [1]; rw [l0 sK0 sK1]
+  have l3 : ∀ sK0 sK1 : G, (sK0 ◇ (sK1 ◇ sK0)) = ((sK1 ◇ sK0) ◇ sK0) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [h4512 sK0 sK1 sK0]
+    conv => enter [1]; rw [l2 sK0 sK1]
+  have l4 : ∀ sK0 sK1 : G, (sK0 ◇ (sK0 ◇ sK1)) = (sK0 ◇ (sK1 ◇ sK0)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [l1 sK0 sK1]
+    conv => enter [1]; rw [← l3 sK0 sK1]
+  intro x y
+  conv => enter [1]; rw [l4 x y]
+
+theorem Equation4283_4290_implies_Equation4320 (G : Type*) [Magma G] (h4283 : Equation4283 G) (h4290 : Equation4290 G) : Equation4320 G := by
+  have l0 : ∀ sK0 sK1 : G, (sK0 ◇ (sK1 ◇ sK0)) = (sK1 ◇ (sK0 ◇ sK0)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [← h4283 sK0 sK1]
+    conv => enter [1]; rw [h4290 sK0 sK1]
+  intro x y
+  conv => enter [1]; rw [l0 x y]
+
+theorem Equation4290_4314_implies_Equation4291 (G : Type*) [Magma G] (h4290 : Equation4290 G) (h4314 : Equation4314 G) : Equation4291 G := by
+  have l0 : ∀ sK0 sK1 : G, (sK0 ◇ (sK0 ◇ sK1)) = (sK1 ◇ (sK0 ◇ sK1)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [h4290 sK0 sK1]
+    conv => enter [1]; rw [← h4314 sK1 sK0]
+  intro x y
+  conv => enter [1]; rw [l0 x y]
+
+theorem Equation4290_4291_implies_Equation4314 (G : Type*) [Magma G] (h4290 : Equation4290 G) (h4291 : Equation4291 G) : Equation4314 G := by
+  have l0 : ∀ sK0 sK1 : G, (sK0 ◇ (sK1 ◇ sK0)) = (sK0 ◇ (sK1 ◇ sK1)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [← h4291 sK1 sK0]
+    conv => enter [1]; rw [h4290 sK1 sK0]
+  intro x y
+  conv => enter [1]; rw [l0 x y]
+
+theorem Equation4284_4343_implies_Equation4293 (G : Type*) [Magma G] (h4284 : Equation4284 G) (h4343 : Equation4343 G) : Equation4293 G := by
+  have l0 : ∀ sK1 sK0 : G, (sK1 ◇ (sK1 ◇ sK0)) = (sK0 ◇ (sK1 ◇ sK1)) := by
+    intro sK1 sK0
+    conv => enter [1]; rw [h4284 sK1 sK0]
+    conv => enter [1]; rw [h4343 sK1 sK0]
+  have l1 : ∀ sK0 sK1 : G, (sK0 ◇ (sK0 ◇ sK1)) = (sK1 ◇ (sK1 ◇ sK0)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [h4284 sK0 sK1]
+    conv => enter [1]; rw [← l0 sK1 sK0]
+  intro x y
+  conv => enter [1]; rw [l1 x y]
+
+theorem Equation4284_4343_implies_Equation4290 (G : Type*) [Magma G] (h4284 : Equation4284 G) (h4343 : Equation4343 G) : Equation4290 G := by
+  have l0 : ∀ X0 sK0 : G, (X0 ◇ (sK0 ◇ sK0)) = (sK0 ◇ (sK0 ◇ X0)) := by
+    intro X0 sK0
+    conv => enter [1]; rw [h4343 X0 sK0]
+    conv => enter [1]; rw [← h4284 sK0 X0]
+  intro x y
+  conv => enter [1]; rw [← l0 y x]
+
+theorem Equation4284_4293_implies_Equation4343 (G : Type*) [Magma G] (h4284 : Equation4284 G) (h4293 : Equation4293 G) : Equation4343 G := by
+  have l0 : ∀ X0 sK1 : G, (X0 ◇ (sK1 ◇ sK1)) = (sK1 ◇ (sK1 ◇ X0)) := by
+    intro X0 sK1
+    conv => enter [1]; rw [← h4284 X0 sK1]
+    conv => enter [1]; rw [h4293 X0 sK1]
+  have l1 : ∀ sK0 sK1 : G, (sK0 ◇ (sK1 ◇ sK1)) = (sK1 ◇ (sK0 ◇ sK0)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [l0 sK0 sK1]
+    conv => enter [1]; rw [h4284 sK1 sK0]
+  intro x y
+  conv => enter [1]; rw [l1 x y]
+
+theorem Equation4284_4320_implies_Equation4291 (G : Type*) [Magma G] (h4284 : Equation4284 G) (h4320 : Equation4320 G) : Equation4291 G := by
+  have l0 : ∀ sK0 sK1 : G, (sK0 ◇ (sK0 ◇ sK1)) = (sK1 ◇ (sK0 ◇ sK1)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [h4284 sK0 sK1]
+    conv => enter [1]; rw [← h4320 sK1 sK0]
+  intro x y
+  conv => enter [1]; rw [l0 x y]
+
+theorem Equation4283_4284_implies_Equation4314 (G : Type*) [Magma G] (h4283 : Equation4283 G) (h4284 : Equation4284 G) : Equation4314 G := by
+  have l0 : ∀ sK0 sK1 : G, (sK0 ◇ (sK1 ◇ sK0)) = (sK0 ◇ (sK1 ◇ sK1)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [← h4283 sK0 sK1]
+    conv => enter [1]; rw [h4284 sK0 sK1]
+  intro x y
+  conv => enter [1]; rw [l0 x y]
+
+theorem Equation4284_4314_4512_implies_Equation4283 (G : Type*) [Magma G] (h4284 : Equation4284 G) (h4314 : Equation4314 G) (h4512 : Equation4512 G) : Equation4283 G := by
+  have l0 : ∀ X0 X1 : G, (X0 ◇ (X0 ◇ X1)) = (X0 ◇ (X1 ◇ X0)) := by
+    intro X0 X1
+    conv => enter [1]; rw [h4284 X0 X1]
+    conv => enter [1]; rw [← h4314 X0 X1]
+  have l1 : ∀ sK0 sK1 : G, (sK0 ◇ (sK0 ◇ sK1)) = ((sK0 ◇ sK1) ◇ sK0) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [l0 sK0 sK1]
+    conv => enter [1]; rw [h4512 sK0 sK1 sK0]
+  have l2 : ∀ sK0 sK1 : G, (sK0 ◇ (sK0 ◇ sK1)) = (sK0 ◇ (sK1 ◇ sK0)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [l1 sK0 sK1]
+    conv => enter [1]; rw [← h4512 sK0 sK1 sK0]
+  intro x y
+  conv => enter [1]; rw [l2 x y]
+
+theorem Equation4284_4291_implies_Equation4320 (G : Type*) [Magma G] (h4284 : Equation4284 G) (h4291 : Equation4291 G) : Equation4320 G := by
+  have l0 : ∀ sK0 sK1 : G, (sK0 ◇ (sK1 ◇ sK0)) = (sK1 ◇ (sK0 ◇ sK0)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [← h4291 sK1 sK0]
+    conv => enter [1]; rw [h4284 sK1 sK0]
+  intro x y
+  conv => enter [1]; rw [l0 x y]
+
+theorem Equation4284_4290_implies_Equation4293 (G : Type*) [Magma G] (h4284 : Equation4284 G) (h4290 : Equation4290 G) : Equation4293 G := by
+  have l0 : ∀ sK0 sK1 : G, (sK0 ◇ (sK0 ◇ sK1)) = (sK1 ◇ (sK1 ◇ sK0)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [h4290 sK0 sK1]
+    conv => enter [1]; rw [← h4284 sK1 sK0]
+  intro x y
+  conv => enter [1]; rw [l0 x y]
+
+theorem Equation4283_4320_implies_Equation4290 (G : Type*) [Magma G] (h4283 : Equation4283 G) (h4320 : Equation4320 G) : Equation4290 G := by
+  have l0 : ∀ X0 sK0 : G, (X0 ◇ (sK0 ◇ sK0)) = (sK0 ◇ (sK0 ◇ X0)) := by
+    intro X0 sK0
+    conv => enter [1]; rw [← h4320 sK0 X0]
+    conv => enter [1]; rw [← h4283 sK0 X0]
+  intro x y
+  conv => enter [1]; rw [← l0 y x]
+
+theorem Equation4364_4369_implies_Equation4358 (G : Type*) [Magma G] (h4364 : Equation4364 G) (h4369 : Equation4369 G) : Equation4358 G := by
+  have l0 : ∀ X0 sK1 sK2 : G, (X0 ◇ (sK1 ◇ sK2)) = (sK1 ◇ (X0 ◇ sK2)) := by
+    intro X0 sK1 sK2
+    conv => enter [1]; rw [← h4364 sK2 X0 sK1]
+    conv => enter [1]; rw [h4369 sK2 X0 sK1]
+  have l1 : ∀ X0 sK1 sK2 : G, (X0 ◇ (sK1 ◇ sK2)) = (X0 ◇ (sK2 ◇ sK1)) := by
+    intro X0 sK1 sK2
+    conv => enter [1]; rw [l0 X0 sK1 sK2]
+    conv => enter [1]; rw [h4364 sK1 X0 sK2]
+  intro x y z
+  conv => enter [1]; rw [l1 x y z]
+
+theorem Equation4364_4369_implies_Equation4362 (G : Type*) [Magma G] (h4364 : Equation4364 G) (h4369 : Equation4369 G) : Equation4362 G := by
+  have l0 : ∀ X0 sK0 sK2 : G, (X0 ◇ (sK0 ◇ sK2)) = (sK0 ◇ (X0 ◇ sK2)) := by
+    intro X0 sK0 sK2
+    conv => enter [1]; rw [← h4364 sK2 X0 sK0]
+    conv => enter [1]; rw [h4369 sK2 X0 sK0]
+  intro x y z
+  conv => enter [1]; rw [l0 x y z]
+
+theorem Equation4362_4369_implies_Equation4364 (G : Type*) [Magma G] (h4362 : Equation4362 G) (h4369 : Equation4369 G) : Equation4364 G := by
+  have l0 : ∀ X0 sK2 sK0 : G, (X0 ◇ (sK2 ◇ sK0)) = (sK0 ◇ (X0 ◇ sK2)) := by
+    intro X0 sK2 sK0
+    conv => enter [1]; rw [h4362 X0 sK2 sK0]
+    conv => enter [1]; rw [h4369 sK2 X0 sK0]
+  intro x y z
+  conv => enter [1]; rw [← l0 y z x]
+
+theorem Equation4358_4369_implies_Equation4364 (G : Type*) [Magma G] (h4358 : Equation4358 G) (h4369 : Equation4369 G) : Equation4364 G := by
+  have l0 : ∀ X0 X1 X2 : G, (X0 ◇ (X1 ◇ X2)) = (X2 ◇ (X0 ◇ X1)) := by
+    intro X0 X1 X2
+    conv => enter [1]; rw [h4369 X0 X1 X2]
+    conv => enter [1]; rw [h4358 X2 X1 X0]
+  have l1 : ∀ X0 sK1 sK2 : G, (X0 ◇ (sK1 ◇ sK2)) = (sK1 ◇ (X0 ◇ sK2)) := by
+    intro X0 sK1 sK2
+    conv => enter [1]; rw [h4369 X0 sK1 sK2]
+    conv => enter [1]; rw [← l0 sK1 X0 sK2]
+  have l2 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK1 ◇ sK2)) = (sK1 ◇ (sK2 ◇ sK0)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l1 sK0 sK1 sK2]
+    conv => enter [1]; rw [h4358 sK1 sK0 sK2]
+  intro x y z
+  conv => enter [1]; rw [l2 x y z]
+
+theorem Equation4362_4364_implies_Equation4369 (G : Type*) [Magma G] (h4362 : Equation4362 G) (h4364 : Equation4364 G) : Equation4369 G := by
+  have l0 : ∀ X0 sK1 sK0 : G, (X0 ◇ (sK1 ◇ sK0)) = (sK0 ◇ (sK1 ◇ X0)) := by
+    intro X0 sK1 sK0
+    conv => enter [1]; rw [h4362 X0 sK1 sK0]
+    conv => enter [1]; rw [← h4364 sK0 sK1 X0]
+  intro x y z
+  conv => enter [1]; rw [l0 x y z]
+
+theorem Equation4358_4364_implies_Equation4369 (G : Type*) [Magma G] (h4358 : Equation4358 G) (h4364 : Equation4364 G) : Equation4369 G := by
+  have l0 : ∀ X0 sK1 sK0 : G, (X0 ◇ (sK1 ◇ sK0)) = (sK0 ◇ (sK1 ◇ X0)) := by
+    intro X0 sK1 sK0
+    conv => enter [1]; rw [h4358 X0 sK1 sK0]
+    conv => enter [1]; rw [h4364 X0 sK0 sK1]
+  intro x y z
+  conv => enter [1]; rw [l0 x y z]
+
+theorem Equation4358_4362_implies_Equation4364 (G : Type*) [Magma G] (h4358 : Equation4358 G) (h4362 : Equation4362 G) : Equation4364 G := by
+  have l0 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK1 ◇ sK2)) = (sK1 ◇ (sK2 ◇ sK0)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [h4362 sK0 sK1 sK2]
+    conv => enter [1]; rw [h4358 sK1 sK0 sK2]
+  intro x y z
+  conv => enter [1]; rw [l0 x y z]
+
+theorem Equation4275_4343_4512_implies_Equation4277 (G : Type*) [Magma G] (h4275 : Equation4275 G) (h4343 : Equation4343 G) (h4512 : Equation4512 G) : Equation4277 G := by
+  have l0 : ∀ X0 X1 X2 : G, (X0 ◇ (X0 ◇ X1)) = (X2 ◇ (X2 ◇ X1)) := by
+    intro X0 X1 X2
+    conv => enter [1]; rw [← h4275 X1 X0]
+    conv => enter [1]; rw [h4275 X1 X2]
+  have l1 : ∀ sK0 X0 X1 : G, (sK0 ◇ ((X0 ◇ X0) ◇ X1)) = ((X0 ◇ (sK0 ◇ sK0)) ◇ X1) := by
+    intro sK0 X0 X1
+    conv => enter [1]; rw [h4512 sK0 (X0 ◇ X0) X1]
+    conv => enter [1, 1]; rw [h4343 sK0 X0]
+  have l2 : ∀ sK0 X0 X1 : G, (sK0 ◇ ((X0 ◇ X0) ◇ X1)) = (X0 ◇ ((sK0 ◇ sK0) ◇ X1)) := by
+    intro sK0 X0 X1
+    conv => enter [1]; rw [l1 sK0 X0 X1]
+    conv => enter [1]; rw [← h4512 X0 (sK0 ◇ sK0) X1]
+  have l3 : ∀ X0 sK0 X1 : G, (X0 ◇ ((sK0 ◇ sK0) ◇ X1)) = (sK0 ◇ (X0 ◇ (X0 ◇ X1))) := by
+    intro X0 sK0 X1
+    conv => enter [1]; rw [l2 X0 sK0 X1]
+    conv => enter [1, 2]; rw [← h4512 X0 X0 X1]
+  have l4 : ∀ sK0 X0 : G, ((sK0 ◇ sK0) ◇ (sK0 ◇ sK0)) = (sK0 ◇ (X0 ◇ (X0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [← h4512 sK0 sK0 (sK0 ◇ sK0)]
+    conv => enter [1, 2]; rw [h4275 sK0 X0]
+  have l5 : ∀ X0 sK0 : G, (X0 ◇ (X0 ◇ X0)) = ((sK0 ◇ sK0) ◇ X0) := by
+    intro X0 sK0
+    conv => enter [1]; rw [h4275 X0 sK0]
+    conv => enter [1]; rw [h4512 sK0 sK0 X0]
+  have l6 : ∀ sK0 X0 : G, ((sK0 ◇ sK0) ◇ (sK0 ◇ sK0)) = (X0 ◇ ((sK0 ◇ sK0) ◇ sK0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l4 sK0 X0]
+    conv => enter [1]; rw [← l3 X0 sK0 sK0]
+  have l7 : ∀ sK0 X0 : G, ((sK0 ◇ sK0) ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l6 sK0 X0]
+    conv => enter [1, 2]; rw [← h4512 sK0 sK0 sK0]
+  have l8 : ∀ sK0 X0 : G, (sK0 ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ sK0))) = (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [h4343 sK0 (sK0 ◇ sK0)]
+    conv => enter [1]; rw [l7 sK0 X0]
+  have l9 : ∀ sK0 X0 : G, ((sK0 ◇ sK0) ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [h4343 (sK0 ◇ sK0) sK0]
+    conv => enter [1]; rw [l8 sK0 X0]
+  have l10 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [h4275 sK0 (sK0 ◇ sK0)]
+    conv => enter [1, 2]; rw [← h4512 sK0 sK0 sK0]
+  have l11 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [h4275 sK0 (sK0 ◇ sK0)]
+    conv => enter [1, 2]; rw [← h4512 sK0 sK0 sK0]
+  have l12 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ sK0) ◇ (sK0 ◇ sK0)) := by
+    intro sK0
+    conv => enter [1]; rw [l11 sK0]
+    conv => enter [1]; rw [← l9 sK0 (sK0 ◇ sK0)]
+  have l13 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ sK0) ◇ (sK0 ◇ sK0)) := by
+    intro sK0
+    conv => enter [1]; rw [l10 sK0]
+    conv => enter [1]; rw [← l9 sK0 (sK0 ◇ sK0)]
+  have l14 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [l12 sK0]
+    conv => enter [1]; rw [← h4512 sK0 sK0 (sK0 ◇ sK0)]
+  have l15 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) = ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1, 1]; rw [l13 sK0]
+    conv => enter [1]; rw [← h4512 (sK0 ◇ sK0) (sK0 ◇ sK0) X0]
+  have l16 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l13 sK0]
+    conv => enter [1]; rw [l9 sK0 X0]
+  have l17 : ∀ X0 sK0 : G, (X0 ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ sK0))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (X0 ◇ X0)) := by
+    intro X0 sK0
+    conv => enter [1, 2]; rw [l9 sK0 (sK0 ◇ (sK0 ◇ sK0))]
+    conv => enter [1]; rw [h4343 X0 (sK0 ◇ (sK0 ◇ sK0))]
+  have l18 : ∀ X0 sK0 : G, (X0 ◇ (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0)))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (X0 ◇ X0)) := by
+    intro X0 sK0
+    conv => enter [1, 2]; rw [h4512 sK0 sK0 (sK0 ◇ sK0)]
+    conv => enter [1]; rw [l17 X0 sK0]
+  have l19 : ∀ X0 sK0 : G, (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (X0 ◇ X0)) := by
+    intro X0 sK0
+    conv => enter [1, 2]; rw [l16 sK0 sK0]
+    conv => enter [1]; rw [l18 X0 sK0]
+  have l20 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (X0 ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l16 sK0 X0]
+    conv => enter [1]; rw [l19 X0 sK0]
+  have l21 : ∀ X1 X0 sK0 : G, (X1 ◇ (X1 ◇ X0)) = ((sK0 ◇ sK0) ◇ X0) := by
+    intro X1 X0 sK0
+    conv => enter [1]; rw [← h4275 X0 X1]
+    conv => enter [1]; rw [l5 X0 sK0]
+  have l22 : ∀ X0 X1 sK0 : G, (X0 ◇ (X1 ◇ ((X0 ◇ X1) ◇ (X0 ◇ X1)))) = ((sK0 ◇ sK0) ◇ (X0 ◇ X1)) := by
+    intro X0 X1 sK0
+    conv => enter [1]; rw [h4512 X0 X1 ((X0 ◇ X1) ◇ (X0 ◇ X1))]
+    conv => enter [1]; rw [l5 (X0 ◇ X1) sK0]
+  have l23 : ∀ X0 X1 sK0 : G, (X0 ◇ ((X0 ◇ X1) ◇ (X1 ◇ X1))) = ((sK0 ◇ sK0) ◇ (X0 ◇ X1)) := by
+    intro X0 X1 sK0
+    conv => enter [1, 2]; rw [h4343 (X0 ◇ X1) X1]
+    conv => enter [1]; rw [l22 X0 X1 sK0]
+  have l24 : ∀ X0 X1 sK0 : G, (X0 ◇ (X0 ◇ (X1 ◇ (X1 ◇ X1)))) = ((sK0 ◇ sK0) ◇ (X0 ◇ X1)) := by
+    intro X0 X1 sK0
+    conv => enter [1, 2]; rw [h4512 X0 X1 (X1 ◇ X1)]
+    conv => enter [1]; rw [l23 X0 X1 sK0]
+  have l25 : ∀ sK0 X0 X1 : G, ((sK0 ◇ sK0) ◇ (X0 ◇ X1)) = ((sK0 ◇ sK0) ◇ (X1 ◇ (X1 ◇ X1))) := by
+    intro sK0 X0 X1
+    conv => enter [1]; rw [← l24 X0 X1 sK0]
+    conv => enter [1]; rw [l21 X0 (X1 ◇ (X1 ◇ X1)) sK0]
+  have l26 : ∀ sK0 X0 X1 : G, ((sK0 ◇ sK0) ◇ (X0 ◇ X1)) = ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ X1)) := by
+    intro sK0 X0 X1
+    conv => enter [1]; rw [l25 sK0 X0 X1]
+    conv => enter [1, 2]; rw [l21 X1 X1 sK0]
+  have l27 : ∀ sK0 X1 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X1) = ((sK0 ◇ sK0) ◇ (X0 ◇ X1)) := by
+    intro sK0 X1 X0
+    conv => enter [1]; rw [l15 sK0 X1]
+    conv => enter [1]; rw [← l26 sK0 X0 X1]
+  have l28 : ∀ sK0 X0 X1 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) = (X0 ◇ (X0 ◇ (X1 ◇ X1))) := by
+    intro sK0 X0 X1
+    conv => enter [1, 2]; rw [l20 sK0 X1]
+    conv => enter [1]; rw [l0 (sK0 ◇ (sK0 ◇ sK0)) (X1 ◇ X1) X0]
+  have l29 : ∀ sK0 X1 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ sK0) ◇ (X1 ◇ X1)) := by
+    intro sK0 X1
+    conv => enter [1]; rw [l28 sK0 sK0 X1]
+    conv => enter [1]; rw [l21 sK0 (X1 ◇ X1) sK0]
+  have l30 : ∀ sK1 sK2 sK0 : G, (sK1 ◇ (sK1 ◇ sK2)) = ((sK0 ◇ sK0) ◇ sK2) := by
+    intro sK1 sK2 sK0
+    conv => enter [1]; rw [l21 sK1 sK2 sK0]
+  have l31 : ∀ sK0 X1 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X1) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X1
+    conv => enter [1]; rw [l27 sK0 X1 X1]
+    conv => enter [1]; rw [← l29 sK0 X1]
+  have l32 : ∀ sK0 X1 : G, ((sK0 ◇ sK0) ◇ (sK0 ◇ sK0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ X1) := by
+    intro sK0 X1
+    conv => enter [1]; rw [l9 sK0 (sK0 ◇ (sK0 ◇ sK0))]
+    conv => enter [1]; rw [← l31 sK0 X1]
+  have l33 : ∀ sK0 X1 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X1) = (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X1
+    conv => enter [1]; rw [← l32 sK0 X1]
+    conv => enter [1]; rw [← h4512 sK0 sK0 (sK0 ◇ sK0)]
+  have l34 : ∀ sK0 X1 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ X1) := by
+    intro sK0 X1
+    conv => enter [1]; rw [l14 sK0]
+    conv => enter [1]; rw [← l33 sK0 X1]
+  have l35 : ∀ sK0 sK2 sK1 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ sK2) = (sK0 ◇ (sK1 ◇ (sK1 ◇ sK2))) := by
+    intro sK0 sK2 sK1
+    conv => enter [1]; rw [← h4512 sK0 (sK0 ◇ sK0) sK2]
+    conv => enter [1, 2]; rw [← l30 sK1 sK2 sK0]
+  have l36 : ∀ X0 sK2 sK0 sK1 : G, (X0 ◇ (X0 ◇ sK2)) = ((sK0 ◇ sK0) ◇ (sK1 ◇ (sK1 ◇ sK2))) := by
+    intro X0 sK2 sK0 sK1
+    conv => enter [1]; rw [l0 X0 sK2 (sK0 ◇ sK0)]
+    conv => enter [1, 2]; rw [← l30 sK1 sK2 sK0]
+  have l37 : ∀ sK0 sK2 sK1 : G, ((sK0 ◇ sK0) ◇ sK2) = ((sK0 ◇ sK0) ◇ (sK1 ◇ (sK1 ◇ sK2))) := by
+    intro sK0 sK2 sK1
+    conv => enter [1]; rw [← l21 sK0 sK2 sK0]
+    conv => enter [1]; rw [l36 sK0 sK2 sK0 sK1]
+  have l38 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK0 ◇ (sK1 ◇ (sK1 ◇ sK2))) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l34 sK0 sK2]
+    conv => enter [1]; rw [l35 sK0 sK2 sK1]
+  have l39 : ∀ sK1 sK2 sK0 : G, (sK1 ◇ (sK1 ◇ sK2)) = ((sK0 ◇ sK0) ◇ (sK1 ◇ (sK1 ◇ sK2))) := by
+    intro sK1 sK2 sK0
+    conv => enter [1]; rw [l30 sK1 sK2 sK0]
+    conv => enter [1]; rw [l37 sK0 sK2 sK1]
+  have l40 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ sK0) ◇ (sK1 ◇ (sK1 ◇ sK2))) := by
+    intro sK0 sK1 sK2
+    conv => enter [1, 2]; rw [l38 sK0 sK1 sK2]
+    conv => enter [1]; rw [h4512 sK0 sK0 (sK1 ◇ (sK1 ◇ sK2))]
+  have l41 : ∀ sK1 sK2 sK0 : G, (sK1 ◇ (sK1 ◇ sK2)) = (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK1 sK2 sK0
+    conv => enter [1]; rw [l39 sK1 sK2 sK0]
+    conv => enter [1]; rw [← l40 sK0 sK1 sK2]
+  have l42 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK1 ◇ (sK1 ◇ sK2)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l14 sK0]
+    conv => enter [1]; rw [← l41 sK1 sK2 sK0]
+  intro x y z
+  conv => enter [1]; rw [l42 x y z]
+
+theorem Equation4270_4293_4512_implies_Equation4280 (G : Type*) [Magma G] (h4270 : Equation4270 G) (h4293 : Equation4293 G) (h4512 : Equation4512 G) : Equation4280 G := by
+  have l0 : ∀ X0 X1 sK0 : G, (X0 ◇ (X1 ◇ X1)) = (X0 ◇ (sK0 ◇ sK0)) := by
+    intro X0 X1 sK0
+    conv => enter [1]; rw [← h4270 X0 X1]
+    conv => enter [1]; rw [h4270 X0 sK0]
+  have l1 : ∀ X0 sK0 sK2 : G, (X0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK2 ◇ sK2)) := by
+    intro X0 sK0 sK2
+    conv => enter [1]; rw [← h4270 X0 sK0]
+    conv => enter [1]; rw [h4270 X0 sK2]
+  have l2 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK0 ◇ ((X0 ◇ X0) ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [h4270 sK0 (X0 ◇ X0)]
+    conv => enter [1, 2]; rw [l0 (X0 ◇ X0) X0 sK0]
+  have l3 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK0 ◇ (X0 ◇ (X0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l2 sK0 X0]
+    conv => enter [1, 2]; rw [← h4512 X0 X0 (sK0 ◇ sK0)]
+  have l4 : ∀ sK1 sK2 sK0 : G, (sK1 ◇ (sK1 ◇ (sK2 ◇ sK2))) = ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ sK1)) := by
+    intro sK1 sK2 sK0
+    conv => enter [1, 2]; rw [l1 sK1 sK2 sK0]
+    conv => enter [1]; rw [h4293 sK1 (sK0 ◇ sK0)]
+  have l5 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK0 ◇ ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ X0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l3 sK0 X0]
+    conv => enter [1, 2]; rw [h4293 X0 (sK0 ◇ sK0)]
+  have l6 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK0 ◇ ((sK0 ◇ sK0) ◇ (sK1 ◇ (sK1 ◇ (sK2 ◇ sK2))))) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l5 sK0 ((sK0 ◇ sK0) ◇ sK1)]
+    conv => enter [1, 2, 2]; rw [← l4 sK1 sK2 sK0]
+  have l7 : ∀ X0 X1 X2 sK0 : G, (X0 ◇ ((X1 ◇ X1) ◇ X2)) = ((X0 ◇ (sK0 ◇ sK0)) ◇ X2) := by
+    intro X0 X1 X2 sK0
+    conv => enter [1]; rw [h4512 X0 (X1 ◇ X1) X2]
+    conv => enter [1, 1]; rw [l0 X0 X1 sK0]
+  have l8 : ∀ sK1 sK2 X0 sK0 : G, ((sK1 ◇ (sK1 ◇ (sK2 ◇ sK2))) ◇ X0) = ((sK0 ◇ sK0) ◇ (((sK0 ◇ sK0) ◇ sK1) ◇ X0)) := by
+    intro sK1 sK2 X0 sK0
+    conv => enter [1, 1]; rw [l4 sK1 sK2 sK0]
+    conv => enter [1]; rw [← h4512 (sK0 ◇ sK0) ((sK0 ◇ sK0) ◇ sK1) X0]
+  have l9 : ∀ sK1 sK2 X0 sK0 : G, ((sK1 ◇ (sK1 ◇ (sK2 ◇ sK2))) ◇ X0) = ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ (sK1 ◇ X0))) := by
+    intro sK1 sK2 X0 sK0
+    conv => enter [1]; rw [l8 sK1 sK2 X0 sK0]
+    conv => enter [1, 2]; rw [← h4512 (sK0 ◇ sK0) sK1 X0]
+  have l10 : ∀ X0 X1 X2 sK0 : G, (X0 ◇ ((X1 ◇ X1) ◇ X2)) = (X0 ◇ ((sK0 ◇ sK0) ◇ X2)) := by
+    intro X0 X1 X2 sK0
+    conv => enter [1]; rw [l7 X0 X1 X2 sK0]
+    conv => enter [1]; rw [← h4512 X0 (sK0 ◇ sK0) X2]
+  have l11 : ∀ sK0 sK1 X0 sK2 : G, ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ (sK1 ◇ X0))) = (sK1 ◇ ((sK1 ◇ (sK2 ◇ sK2)) ◇ X0)) := by
+    intro sK0 sK1 X0 sK2
+    conv => enter [1]; rw [← l9 sK1 sK2 X0 sK0]
+    conv => enter [1]; rw [← h4512 sK1 (sK1 ◇ (sK2 ◇ sK2)) X0]
+  have l12 : ∀ X0 X1 X2 sK0 : G, (X0 ◇ (X1 ◇ (X1 ◇ X2))) = (X0 ◇ ((sK0 ◇ sK0) ◇ X2)) := by
+    intro X0 X1 X2 sK0
+    conv => enter [1, 2]; rw [h4512 X1 X1 X2]
+    conv => enter [1]; rw [l10 X0 X1 X2 sK0]
+  have l13 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ X0))) := by
+    intro sK0 X0
+    conv => enter [1, 2]; rw [l5 sK0 X0]
+    conv => enter [1]; rw [h4512 sK0 sK0 ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ X0))]
+  have l14 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ (sK1 ◇ (sK1 ◇ (sK2 ◇ sK2))))) := by
+    intro sK0 sK1 sK2
+    conv => enter [1, 2]; rw [l6 sK0 sK1 sK2]
+    conv => enter [1]; rw [h4512 sK0 sK0 ((sK0 ◇ sK0) ◇ (sK1 ◇ (sK1 ◇ (sK2 ◇ sK2))))]
+  have l15 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [l3 sK0 sK0]
+    conv => enter [1]; rw [h4512 sK0 sK0 (sK0 ◇ (sK0 ◇ sK0))]
+  have l16 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) = (sK1 ◇ ((sK1 ◇ (sK2 ◇ sK2)) ◇ (sK1 ◇ (sK2 ◇ sK2)))) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l14 sK0 sK1 sK2]
+    conv => enter [1]; rw [l11 sK0 sK1 (sK1 ◇ (sK2 ◇ sK2)) sK2]
+  have l17 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l13 sK0 X0]
+    conv => enter [1]; rw [l12 (sK0 ◇ sK0) (sK0 ◇ sK0) X0 sK0]
+  have l18 : ∀ sK1 sK0 : G, (sK1 ◇ (sK0 ◇ sK0)) = (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK1 sK0
+    conv => enter [1]; rw [l0 sK1 sK0 (sK1 ◇ (sK1 ◇ sK1))]
+    conv => enter [1]; rw [← l16 sK0 sK1 sK1]
+  have l19 : ∀ sK1 sK2 sK0 : G, (sK1 ◇ (sK2 ◇ sK2)) = (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK1 sK2 sK0
+    conv => enter [1]; rw [l1 sK1 sK2 sK0]
+    conv => enter [1]; rw [l18 sK1 sK0]
+  have l20 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK0 ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK0
+    conv => enter [1]; rw [l5 sK0 sK0]
+    conv => enter [1, 2, 2]; rw [← h4512 sK0 sK0 sK0]
+  have l21 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [h4293 sK0 (sK0 ◇ sK0)]
+    conv => enter [1, 2]; rw [← h4512 sK0 sK0 sK0]
+  have l22 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [l15 sK0]
+    conv => enter [1]; rw [← l21 sK0]
+  have l23 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [l20 sK0]
+    conv => enter [1]; rw [h4512 sK0 (sK0 ◇ sK0) (sK0 ◇ (sK0 ◇ sK0))]
+  have l24 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ sK0) ◇ (sK0 ◇ sK0)) := by
+    intro sK0
+    conv => enter [1]; rw [l22 sK0]
+    conv => enter [1]; rw [h4512 sK0 sK0 (sK0 ◇ sK0)]
+  have l25 : ∀ sK0 X0 : G, ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ X0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) := by
+    intro sK0 X0
+    conv => enter [1]; rw [h4512 (sK0 ◇ sK0) (sK0 ◇ sK0) X0]
+    conv => enter [1, 1]; rw [← l24 sK0]
+  have l26 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l17 sK0 X0]
+    conv => enter [1]; rw [l25 sK0 X0]
+  have l27 : ∀ sK1 sK2 sK0 X0 : G, (sK1 ◇ (sK2 ◇ sK2)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) := by
+    intro sK1 sK2 sK0 X0
+    conv => enter [1]; rw [l19 sK1 sK2 sK0]
+    conv => enter [1]; rw [l26 sK0 X0]
+  have l28 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK1 ◇ (sK2 ◇ sK2)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l23 sK0]
+    conv => enter [1]; rw [← l27 sK1 sK2 sK0 (sK0 ◇ (sK0 ◇ sK0))]
+  intro x y z
+  conv => enter [1]; rw [l28 x y z]
+
+theorem Equation4275_4321_4512_implies_Equation4277 (G : Type*) [Magma G] (h4275 : Equation4275 G) (h4321 : Equation4321 G) (h4512 : Equation4512 G) : Equation4277 G := by
+  have l0 : ∀ sK0 : G, (sK0 ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0)))) = ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ sK0)) := by
+    intro sK0
+    conv => enter [1, 2]; rw [h4321 (sK0 ◇ sK0) sK0]
+    conv => enter [1]; rw [h4512 sK0 sK0 ((sK0 ◇ sK0) ◇ sK0)]
+  have l1 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK0 ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK0
+    conv => enter [1]; rw [h4275 sK0 (sK0 ◇ sK0)]
+    conv => enter [1]; rw [← l0 sK0]
+  have l2 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [l1 sK0]
+    conv => enter [1]; rw [h4512 sK0 (sK0 ◇ sK0) (sK0 ◇ (sK0 ◇ sK0))]
+  have l3 : ∀ sK0 : G, ((sK0 ◇ sK0) ◇ sK0) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [← h4512 sK0 sK0 sK0]
+    conv => enter [1]; rw [l2 sK0]
+  have l4 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [h4512 sK0 sK0 sK0]
+    conv => enter [1]; rw [l3 sK0]
+  have l5 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) = (X0 ◇ (X0 ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK0 X0
+    conv => enter [1, 2]; rw [l4 sK0]
+    conv => enter [1]; rw [h4275 (sK0 ◇ (sK0 ◇ sK0)) X0]
+  have l6 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1, 1]; rw [l4 sK0]
+    conv => enter [1]; rw [← h4512 (sK0 ◇ (sK0 ◇ sK0)) (sK0 ◇ (sK0 ◇ sK0)) X0]
+  have l7 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (X0 ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l4 sK0]
+    conv => enter [1]; rw [l5 sK0 X0]
+  have l8 : ∀ sK0 X1 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X1) = (X0 ◇ ((X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) ◇ X1)) := by
+    intro sK0 X1 X0
+    conv => enter [1, 1]; rw [l7 sK0 X0]
+    conv => enter [1]; rw [← h4512 X0 (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) X1]
+  have l9 : ∀ X0 sK0 : G, (X0 ◇ ((X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) ◇ X0)) = ((X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro X0 sK0
+    conv => enter [1]; rw [h4321 X0 (X0 ◇ (sK0 ◇ (sK0 ◇ sK0)))]
+    conv => enter [1, 2]; rw [← l7 sK0 X0]
+  have l10 : ∀ X0 sK0 : G, (X0 ◇ ((X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) ◇ X0)) = (X0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro X0 sK0
+    conv => enter [1]; rw [l9 X0 sK0]
+    conv => enter [1]; rw [← h4512 X0 (sK0 ◇ (sK0 ◇ sK0)) (sK0 ◇ (sK0 ◇ sK0))]
+  have l11 : ∀ sK0 X1 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X1) = (X0 ◇ (X0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X1))) := by
+    intro sK0 X1 X0
+    conv => enter [1]; rw [l8 sK0 X1 X0]
+    conv => enter [1, 2]; rw [← h4512 X0 (sK0 ◇ (sK0 ◇ sK0)) X1]
+  have l12 : ∀ X0 sK0 : G, (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) = (X0 ◇ ((X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) ◇ X0)) := by
+    intro X0 sK0
+    conv => enter [1, 2]; rw [l4 sK0]
+    conv => enter [1]; rw [← l10 X0 sK0]
+  have l13 : ∀ X0 sK0 : G, (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) = (X0 ◇ (X0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0))) := by
+    intro X0 sK0
+    conv => enter [1]; rw [l12 X0 sK0]
+    conv => enter [1, 2]; rw [← h4512 X0 (sK0 ◇ (sK0 ◇ sK0)) X0]
+  have l14 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) = (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l11 sK0 X0 X0]
+    conv => enter [1]; rw [← l13 X0 sK0]
+  have l15 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l7 sK0 X0]
+    conv => enter [1, 2]; rw [← l14 sK0 X0]
+  have l16 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0)) = (X0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1, 2]; rw [l14 sK0 X0]
+    conv => enter [1]; rw [h4321 (sK0 ◇ (sK0 ◇ sK0)) X0]
+  have l17 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) = (X0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l6 sK0 X0]
+    conv => enter [1]; rw [l16 sK0 X0]
+  have l18 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l15 sK0 X0]
+    conv => enter [1]; rw [← l17 sK0 X0]
+  have l19 : ∀ X0 sK0 : G, (X0 ◇ (X0 ◇ X0)) = (sK0 ◇ (sK0 ◇ sK0)) := by
+    intro X0 sK0
+    conv => enter [1]; rw [h4275 X0 (sK0 ◇ (sK0 ◇ sK0))]
+    conv => enter [1]; rw [← l18 sK0 ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0)]
+  have l20 : ∀ X1 X0 sK0 : G, (X1 ◇ (X1 ◇ X0)) = (sK0 ◇ (sK0 ◇ sK0)) := by
+    intro X1 X0 sK0
+    conv => enter [1]; rw [← h4275 X0 X1]
+    conv => enter [1]; rw [l19 X0 sK0]
+  intro x y z
+  conv => enter [1]; rw [← l20 y z x]
+
+theorem Equation4270_4321_4512_implies_Equation4280 (G : Type*) [Magma G] (h4270 : Equation4270 G) (h4321 : Equation4321 G) (h4512 : Equation4512 G) : Equation4280 G := by
+  have l0 : ∀ X0 X1 sK0 : G, (X0 ◇ (X1 ◇ X1)) = (X0 ◇ (sK0 ◇ sK0)) := by
+    intro X0 X1 sK0
+    conv => enter [1]; rw [← h4270 X0 X1]
+    conv => enter [1]; rw [h4270 X0 sK0]
+  have l1 : ∀ X0 sK0 sK2 : G, (X0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK2 ◇ sK2)) := by
+    intro X0 sK0 sK2
+    conv => enter [1]; rw [← h4270 X0 sK0]
+    conv => enter [1]; rw [h4270 X0 sK2]
+  have l2 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK0 ◇ ((X0 ◇ X0) ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [h4270 sK0 (X0 ◇ X0)]
+    conv => enter [1, 2]; rw [l0 (X0 ◇ X0) X0 sK0]
+  have l3 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK0 ◇ (X0 ◇ (X0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l2 sK0 X0]
+    conv => enter [1, 2]; rw [← h4512 X0 X0 (sK0 ◇ sK0)]
+  have l4 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK0 ◇ (sK1 ◇ (sK1 ◇ (sK2 ◇ sK2)))) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l3 sK0 sK1]
+    conv => enter [1, 2, 2]; rw [l1 sK1 sK0 sK2]
+  have l5 : ∀ sK0 X0 : G, (sK0 ◇ ((X0 ◇ X0) ◇ sK0)) = ((X0 ◇ X0) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [h4321 sK0 (X0 ◇ X0)]
+    conv => enter [1, 2]; rw [← h4270 sK0 X0]
+  have l6 : ∀ sK0 : G, (sK0 ◇ ((sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) ◇ sK0)) = ((sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [h4321 sK0 (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0)))]
+    conv => enter [1, 2]; rw [← l3 sK0 sK0]
+  have l7 : ∀ sK0 : G, (sK0 ◇ ((sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) ◇ sK0)) = (sK0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK0
+    conv => enter [1]; rw [l6 sK0]
+    conv => enter [1]; rw [← h4512 sK0 (sK0 ◇ (sK0 ◇ sK0)) (sK0 ◇ (sK0 ◇ sK0))]
+  have l8 : ∀ sK0 X0 : G, (sK0 ◇ ((X0 ◇ X0) ◇ sK0)) = (X0 ◇ (X0 ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l5 sK0 X0]
+    conv => enter [1]; rw [← h4512 X0 X0 (sK0 ◇ (sK0 ◇ sK0))]
+  have l9 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK0 ◇ ((sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) ◇ sK0)) := by
+    intro sK0
+    conv => enter [1]; rw [h4270 sK0 (sK0 ◇ (sK0 ◇ sK0))]
+    conv => enter [1]; rw [← l7 sK0]
+  have l10 : ∀ X0 sK0 : G, (X0 ◇ (X0 ◇ (sK0 ◇ (sK0 ◇ sK0)))) = (sK0 ◇ (X0 ◇ (X0 ◇ sK0))) := by
+    intro X0 sK0
+    conv => enter [1]; rw [← l8 sK0 X0]
+    conv => enter [1, 2]; rw [← h4512 X0 X0 sK0]
+  have l11 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK0 ◇ (sK0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [l9 sK0]
+    conv => enter [1, 2]; rw [← h4512 sK0 (sK0 ◇ (sK0 ◇ sK0)) sK0]
+  have l12 : ∀ sK0 : G, (sK0 ◇ (((sK0 ◇ sK0) ◇ sK0) ◇ sK0)) = (((sK0 ◇ sK0) ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK0
+    conv => enter [1]; rw [h4321 sK0 ((sK0 ◇ sK0) ◇ sK0)]
+    conv => enter [1, 2]; rw [h4321 sK0 (sK0 ◇ sK0)]
+  have l13 : ∀ sK0 : G, (sK0 ◇ (((sK0 ◇ sK0) ◇ sK0) ◇ sK0)) = ((sK0 ◇ sK0) ◇ (sK0 ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))))) := by
+    intro sK0
+    conv => enter [1]; rw [l12 sK0]
+    conv => enter [1]; rw [← h4512 (sK0 ◇ sK0) sK0 ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0)))]
+  have l14 : ∀ sK0 : G, ((sK0 ◇ sK0) ◇ (sK0 ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))))) = (sK0 ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [← l13 sK0]
+    conv => enter [1, 2]; rw [← h4512 (sK0 ◇ sK0) sK0 sK0]
+  have l15 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ sK0) ◇ (sK0 ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))))) := by
+    intro sK0
+    conv => enter [1]; rw [h4270 sK0 (sK0 ◇ sK0)]
+    conv => enter [1]; rw [← l14 sK0]
+  have l16 : ∀ sK0 : G, (sK0 ◇ ((sK0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ sK0)) ◇ sK0)) = ((sK0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [h4321 sK0 (sK0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ sK0))]
+    conv => enter [1, 2]; rw [← l11 sK0]
+  have l17 : ∀ sK0 : G, (sK0 ◇ ((sK0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ sK0)) ◇ sK0)) = (sK0 ◇ (((sK0 ◇ (sK0 ◇ sK0)) ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK0
+    conv => enter [1]; rw [l16 sK0]
+    conv => enter [1]; rw [← h4512 sK0 ((sK0 ◇ (sK0 ◇ sK0)) ◇ sK0) (sK0 ◇ (sK0 ◇ sK0))]
+  have l18 : ∀ sK0 : G, (sK0 ◇ ((sK0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ sK0)) ◇ sK0)) = (sK0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))))) := by
+    intro sK0
+    conv => enter [1]; rw [l17 sK0]
+    conv => enter [1, 2]; rw [← h4512 (sK0 ◇ (sK0 ◇ sK0)) sK0 (sK0 ◇ (sK0 ◇ sK0))]
+  have l19 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ sK0))) = (sK0 ◇ ((sK0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ sK0)) ◇ sK0)) := by
+    intro sK0
+    conv => enter [1, 2]; rw [h4321 sK0 (sK0 ◇ (sK0 ◇ sK0))]
+    conv => enter [1]; rw [← l18 sK0]
+  have l20 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ sK0))) = (sK0 ◇ (sK0 ◇ (((sK0 ◇ (sK0 ◇ sK0)) ◇ sK0) ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [l19 sK0]
+    conv => enter [1, 2]; rw [← h4512 sK0 ((sK0 ◇ (sK0 ◇ sK0)) ◇ sK0) sK0]
+  have l21 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ sK0))) = (sK0 ◇ (sK0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ sK0)))) := by
+    intro sK0
+    conv => enter [1]; rw [l20 sK0]
+    conv => enter [1, 2, 2]; rw [← h4512 (sK0 ◇ (sK0 ◇ sK0)) sK0 sK0]
+  have l22 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK0 ◇ (sK0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ sK0)))) := by
+    intro sK0
+    conv => enter [1]; rw [l11 sK0]
+    conv => enter [1]; rw [l21 sK0]
+  have l23 : ∀ X0 X1 X2 sK0 : G, (X0 ◇ ((X1 ◇ X1) ◇ X2)) = ((X0 ◇ (sK0 ◇ sK0)) ◇ X2) := by
+    intro X0 X1 X2 sK0
+    conv => enter [1]; rw [h4512 X0 (X1 ◇ X1) X2]
+    conv => enter [1, 1]; rw [l0 X0 X1 sK0]
+  have l24 : ∀ sK0 X0 : G, (sK0 ◇ ((sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) ◇ X0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) := by
+    intro sK0 X0
+    conv => enter [1]; rw [h4512 sK0 (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) X0]
+    conv => enter [1, 1]; rw [← l3 sK0 sK0]
+  have l25 : ∀ sK0 X0 : G, (sK0 ◇ (((sK0 ◇ sK0) ◇ sK0) ◇ X0)) = (((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))) ◇ X0) := by
+    intro sK0 X0
+    conv => enter [1]; rw [h4512 sK0 ((sK0 ◇ sK0) ◇ sK0) X0]
+    conv => enter [1, 1]; rw [h4321 sK0 (sK0 ◇ sK0)]
+  have l26 : ∀ sK1 sK2 X0 sK0 : G, ((sK1 ◇ (sK2 ◇ sK2)) ◇ X0) = (sK1 ◇ ((sK0 ◇ sK0) ◇ X0)) := by
+    intro sK1 sK2 X0 sK0
+    conv => enter [1, 1]; rw [l1 sK1 sK2 sK0]
+    conv => enter [1]; rw [← h4512 sK1 (sK0 ◇ sK0) X0]
+  have l27 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) = ((sK0 ◇ sK0) ◇ ((sK0 ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0)))) ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1, 1]; rw [l15 sK0]
+    conv => enter [1]; rw [← h4512 (sK0 ◇ sK0) (sK0 ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0)))) X0]
+  have l28 : ∀ X0 X1 X2 : G, ((X0 ◇ X1) ◇ ((X0 ◇ X1) ◇ (X0 ◇ X1))) = (X0 ◇ (X1 ◇ (X2 ◇ X2))) := by
+    intro X0 X1 X2
+    conv => enter [1]; rw [h4270 (X0 ◇ X1) X2]
+    conv => enter [1]; rw [← h4512 X0 X1 (X2 ◇ X2)]
+  have l29 : ∀ X0 X1 sK0 : G, (X0 ◇ (X1 ◇ (sK0 ◇ sK0))) = ((X0 ◇ X1) ◇ ((X0 ◇ X1) ◇ (X0 ◇ X1))) := by
+    intro X0 X1 sK0
+    conv => enter [1, 2]; rw [l0 X1 sK0 X0]
+    conv => enter [1]; rw [← l28 X0 X1 X0]
+  have l30 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) = ((sK0 ◇ sK0) ◇ (sK0 ◇ (((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))) ◇ X0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l27 sK0 X0]
+    conv => enter [1, 2]; rw [← h4512 sK0 ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))) X0]
+  have l31 : ∀ sK0 X0 : G, (sK0 ◇ (((sK0 ◇ sK0) ◇ sK0) ◇ X0)) = ((sK0 ◇ sK0) ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l25 sK0 X0]
+    conv => enter [1]; rw [← h4512 (sK0 ◇ sK0) (sK0 ◇ (sK0 ◇ sK0)) X0]
+  have l32 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) = (sK0 ◇ (sK0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [← l24 sK0 X0]
+    conv => enter [1, 2]; rw [← h4512 sK0 (sK0 ◇ (sK0 ◇ sK0)) X0]
+  have l33 : ∀ X0 X1 X2 sK0 : G, (X0 ◇ ((X1 ◇ X1) ◇ X2)) = (X0 ◇ ((sK0 ◇ sK0) ◇ X2)) := by
+    intro X0 X1 X2 sK0
+    conv => enter [1]; rw [l23 X0 X1 X2 sK0]
+    conv => enter [1]; rw [← h4512 X0 (sK0 ◇ sK0) X2]
+  have l34 : ∀ X0 X1 sK0 : G, (X0 ◇ (X1 ◇ (sK0 ◇ sK0))) = (X0 ◇ (X1 ◇ ((X0 ◇ X1) ◇ (X0 ◇ X1)))) := by
+    intro X0 X1 sK0
+    conv => enter [1]; rw [l29 X0 X1 sK0]
+    conv => enter [1]; rw [← h4512 X0 X1 ((X0 ◇ X1) ◇ (X0 ◇ X1))]
+  have l35 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) = ((sK0 ◇ sK0) ◇ (sK0 ◇ ((sK0 ◇ sK0) ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0)))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l30 sK0 X0]
+    conv => enter [1, 2, 2]; rw [← h4512 (sK0 ◇ sK0) (sK0 ◇ (sK0 ◇ sK0)) X0]
+  have l36 : ∀ sK0 X0 : G, ((sK0 ◇ sK0) ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0)) = (sK0 ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ X0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [← l31 sK0 X0]
+    conv => enter [1, 2]; rw [← h4512 (sK0 ◇ sK0) sK0 X0]
+  have l37 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) = ((sK0 ◇ sK0) ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l32 sK0 X0]
+    conv => enter [1]; rw [h4512 sK0 sK0 ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0)]
+  have l38 : ∀ X0 X1 X2 sK0 : G, (X0 ◇ (X1 ◇ (X1 ◇ X2))) = (X0 ◇ ((sK0 ◇ sK0) ◇ X2)) := by
+    intro X0 X1 X2 sK0
+    conv => enter [1, 2]; rw [h4512 X1 X1 X2]
+    conv => enter [1]; rw [l33 X0 X1 X2 sK0]
+  have l39 : ∀ X0 X1 sK0 : G, (X0 ◇ (X1 ◇ (sK0 ◇ sK0))) = (X0 ◇ (X1 ◇ (X1 ◇ X1))) := by
+    intro X0 X1 sK0
+    conv => enter [1]; rw [l34 X0 X1 sK0]
+    conv => enter [1, 2]; rw [← h4270 X1 (X0 ◇ X1)]
+  have l40 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) = ((sK0 ◇ sK0) ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l35 sK0 X0]
+    conv => enter [1, 2]; rw [h4512 sK0 (sK0 ◇ sK0) ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0)]
+  have l41 : ∀ sK0 X0 : G, ((sK0 ◇ sK0) ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l36 sK0 X0]
+    conv => enter [1]; rw [h4512 sK0 (sK0 ◇ sK0) (sK0 ◇ X0)]
+  have l42 : ∀ X0 X1 sK0 : G, (X0 ◇ (X1 ◇ (sK0 ◇ sK0))) = (X0 ◇ ((sK0 ◇ sK0) ◇ X1)) := by
+    intro X0 X1 sK0
+    conv => enter [1]; rw [l39 X0 X1 sK0]
+    conv => enter [1]; rw [l38 X0 X1 X1 sK0]
+  have l43 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) = ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l40 sK0 X0]
+    conv => enter [1]; rw [l38 (sK0 ◇ sK0) (sK0 ◇ (sK0 ◇ sK0)) X0 sK0]
+  have l44 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l37 sK0 X0]
+    conv => enter [1]; rw [l41 sK0 X0]
+  have l45 : ∀ sK0 X0 : G, (sK0 ◇ ((sK0 ◇ sK0) ◇ X0)) = ((sK0 ◇ sK0) ◇ (sK0 ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1, 2]; rw [← h4512 sK0 sK0 X0]
+    conv => enter [1]; rw [h4512 sK0 sK0 (sK0 ◇ X0)]
+  have l46 : ∀ sK0 : G, (sK0 ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0)))) = ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ sK0)) := by
+    intro sK0
+    conv => enter [1, 2]; rw [h4321 (sK0 ◇ sK0) sK0]
+    conv => enter [1]; rw [h4512 sK0 sK0 ((sK0 ◇ sK0) ◇ sK0)]
+  have l47 : ∀ sK0 X0 : G, ((sK0 ◇ sK0) ◇ (X0 ◇ X0)) = (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [← h4512 sK0 sK0 (X0 ◇ X0)]
+    conv => enter [1, 2]; rw [← h4270 sK0 X0]
+  have l48 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ sK0) ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ sK0)) := by
+    intro sK0
+    conv => enter [1]; rw [l11 sK0]
+    conv => enter [1]; rw [h4512 sK0 sK0 ((sK0 ◇ (sK0 ◇ sK0)) ◇ sK0)]
+  have l49 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ sK0) ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [l22 sK0]
+    conv => enter [1]; rw [h4512 sK0 sK0 ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ sK0))]
+  have l50 : ∀ sK0 X0 : G, (sK0 ◇ ((sK0 ◇ X0) ◇ sK0)) = ((sK0 ◇ X0) ◇ ((sK0 ◇ sK0) ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [h4321 sK0 (sK0 ◇ X0)]
+    conv => enter [1, 2]; rw [h4512 sK0 sK0 X0]
+  have l51 : ∀ sK0 X0 : G, (sK0 ◇ ((sK0 ◇ X0) ◇ sK0)) = (sK0 ◇ (X0 ◇ ((sK0 ◇ sK0) ◇ X0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l50 sK0 X0]
+    conv => enter [1]; rw [← h4512 sK0 X0 ((sK0 ◇ sK0) ◇ X0)]
+  have l52 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ sK0)) := by
+    intro sK0
+    conv => enter [1]; rw [l49 sK0]
+    conv => enter [1]; rw [← l37 sK0 (sK0 ◇ sK0)]
+  have l53 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ sK0) := by
+    intro sK0
+    conv => enter [1]; rw [l48 sK0]
+    conv => enter [1]; rw [← l37 sK0 sK0]
+  have l54 : ∀ sK0 X0 : G, ((sK0 ◇ sK0) ◇ (X0 ◇ X0)) = (sK0 ◇ (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l47 sK0 X0]
+    conv => enter [1]; rw [← l10 sK0 sK0]
+  have l55 : ∀ sK0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ sK0) = (sK0 ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK0
+    conv => enter [1]; rw [l43 sK0 sK0]
+    conv => enter [1]; rw [← l46 sK0]
+  have l56 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) = ((sK0 ◇ sK0) ◇ (sK0 ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [← h4512 sK0 (sK0 ◇ sK0) X0]
+    conv => enter [1]; rw [l45 sK0 X0]
+  have l57 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ (X0 ◇ sK0))) = (sK0 ◇ (X0 ◇ ((sK0 ◇ sK0) ◇ X0))) := by
+    intro sK0 X0
+    conv => enter [1, 2]; rw [h4512 sK0 X0 sK0]
+    conv => enter [1]; rw [l51 sK0 X0]
+  have l58 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ sK0) ◇ (X0 ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l3 sK0 sK0]
+    conv => enter [1]; rw [← l54 sK0 X0]
+  have l59 : ∀ sK0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ sK0) := by
+    intro sK0
+    conv => enter [1]; rw [← h4512 sK0 (sK0 ◇ sK0) (sK0 ◇ (sK0 ◇ sK0))]
+    conv => enter [1]; rw [← l55 sK0]
+  have l60 : ∀ sK0 X0 : G, ((sK0 ◇ sK0) ◇ (X0 ◇ sK0)) = (sK0 ◇ (X0 ◇ ((sK0 ◇ sK0) ◇ X0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [← h4512 sK0 sK0 (X0 ◇ sK0)]
+    conv => enter [1]; rw [l57 sK0 X0]
+  have l61 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ sK0) ◇ (sK0 ◇ sK0)) := by
+    intro sK0
+    conv => enter [1]; rw [l58 sK0 sK0]
+  have l62 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [l53 sK0]
+    conv => enter [1]; rw [← l59 sK0]
+  have l63 : ∀ X0 sK0 : G, (X0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro X0 sK0
+    conv => enter [1]; rw [l0 X0 sK0 (sK0 ◇ sK0)]
+    conv => enter [1, 2]; rw [← l61 sK0]
+  have l64 : ∀ sK0 X0 : G, (sK0 ◇ (X0 ◇ ((sK0 ◇ sK0) ◇ X0))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (X0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1, 2]; rw [h4321 X0 (sK0 ◇ sK0)]
+    conv => enter [1]; rw [h4512 sK0 (sK0 ◇ sK0) (X0 ◇ (sK0 ◇ sK0))]
+  have l65 : ∀ sK0 X0 : G, ((sK0 ◇ sK0) ◇ (X0 ◇ sK0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (X0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l60 sK0 X0]
+    conv => enter [1]; rw [l64 sK0 X0]
+  have l66 : ∀ X0 sK0 X1 : G, ((X0 ◇ (sK0 ◇ sK0)) ◇ X1) = (X0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X1)) := by
+    intro X0 sK0 X1
+    conv => enter [1, 1]; rw [l63 X0 sK0]
+    conv => enter [1]; rw [← h4512 X0 (sK0 ◇ (sK0 ◇ sK0)) X1]
+  have l67 : ∀ X0 sK0 X1 : G, (X0 ◇ ((sK0 ◇ sK0) ◇ X1)) = (X0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X1)) := by
+    intro X0 sK0 X1
+    conv => enter [1]; rw [h4512 X0 (sK0 ◇ sK0) X1]
+    conv => enter [1]; rw [l66 X0 sK0 X1]
+  have l68 : ∀ sK2 sK1 : G, ((sK2 ◇ sK2) ◇ (sK1 ◇ (sK2 ◇ sK2))) = ((sK1 ◇ (sK2 ◇ sK2)) ◇ sK1) := by
+    intro sK2 sK1
+    conv => enter [1]; rw [h4321 (sK2 ◇ sK2) sK1]
+    conv => enter [1]; rw [h4512 sK1 (sK2 ◇ sK2) sK1]
+  have l69 : ∀ sK1 sK2 X0 : G, (sK1 ◇ (((sK2 ◇ sK2) ◇ X0) ◇ sK1)) = (((sK2 ◇ sK2) ◇ X0) ◇ ((sK1 ◇ (sK2 ◇ sK2)) ◇ X0)) := by
+    intro sK1 sK2 X0
+    conv => enter [1]; rw [h4321 sK1 ((sK2 ◇ sK2) ◇ X0)]
+    conv => enter [1, 2]; rw [h4512 sK1 (sK2 ◇ sK2) X0]
+  have l70 : ∀ sK1 sK2 X0 : G, (sK1 ◇ (((sK2 ◇ sK2) ◇ X0) ◇ sK1)) = ((sK2 ◇ sK2) ◇ (X0 ◇ ((sK1 ◇ (sK2 ◇ sK2)) ◇ X0))) := by
+    intro sK1 sK2 X0
+    conv => enter [1]; rw [l69 sK1 sK2 X0]
+    conv => enter [1]; rw [← h4512 (sK2 ◇ sK2) X0 ((sK1 ◇ (sK2 ◇ sK2)) ◇ X0)]
+  have l71 : ∀ sK2 X0 sK1 : G, ((sK2 ◇ sK2) ◇ (X0 ◇ ((sK1 ◇ (sK2 ◇ sK2)) ◇ X0))) = (sK1 ◇ ((sK2 ◇ sK2) ◇ (X0 ◇ sK1))) := by
+    intro sK2 X0 sK1
+    conv => enter [1]; rw [← l70 sK1 sK2 X0]
+    conv => enter [1, 2]; rw [← h4512 (sK2 ◇ sK2) X0 sK1]
+  have l72 : ∀ sK2 X0 sK1 : G, ((sK2 ◇ sK2) ◇ (X0 ◇ ((sK1 ◇ (sK2 ◇ sK2)) ◇ X0))) = ((sK1 ◇ (sK2 ◇ sK2)) ◇ (X0 ◇ sK1)) := by
+    intro sK2 X0 sK1
+    conv => enter [1]; rw [l71 sK2 X0 sK1]
+    conv => enter [1]; rw [h4512 sK1 (sK2 ◇ sK2) (X0 ◇ sK1)]
+  have l73 : ∀ sK1 sK2 X0 : G, ((sK1 ◇ (sK2 ◇ sK2)) ◇ (sK1 ◇ X0)) = (((sK2 ◇ sK2) ◇ (sK1 ◇ (sK2 ◇ sK2))) ◇ X0) := by
+    intro sK1 sK2 X0
+    conv => enter [1]; rw [h4512 (sK1 ◇ (sK2 ◇ sK2)) sK1 X0]
+    conv => enter [1, 1]; rw [← l68 sK2 sK1]
+  have l74 : ∀ sK1 sK2 : G, ((sK1 ◇ (sK2 ◇ sK2)) ◇ (sK1 ◇ (sK1 ◇ (sK2 ◇ sK2)))) = (sK1 ◇ ((sK2 ◇ sK2) ◇ (sK1 ◇ (sK2 ◇ sK2)))) := by
+    intro sK1 sK2
+    conv => enter [1]; rw [h4321 (sK1 ◇ (sK2 ◇ sK2)) sK1]
+    conv => enter [1, 2]; rw [← l68 sK2 sK1]
+  have l75 : ∀ sK1 sK2 : G, ((sK1 ◇ (sK2 ◇ sK2)) ◇ (sK1 ◇ (sK2 ◇ sK2))) = ((sK1 ◇ (sK2 ◇ sK2)) ◇ (sK1 ◇ (sK1 ◇ (sK2 ◇ sK2)))) := by
+    intro sK1 sK2
+    conv => enter [1]; rw [← h4512 sK1 (sK2 ◇ sK2) (sK1 ◇ (sK2 ◇ sK2))]
+    conv => enter [1]; rw [← l74 sK1 sK2]
+  have l76 : ∀ sK1 sK2 X0 : G, ((sK1 ◇ (sK2 ◇ sK2)) ◇ (sK1 ◇ X0)) = ((sK2 ◇ sK2) ◇ ((sK1 ◇ (sK2 ◇ sK2)) ◇ X0)) := by
+    intro sK1 sK2 X0
+    conv => enter [1]; rw [l73 sK1 sK2 X0]
+    conv => enter [1]; rw [← h4512 (sK2 ◇ sK2) (sK1 ◇ (sK2 ◇ sK2)) X0]
+  have l77 : ∀ sK0 sK1 sK2 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK1 ◇ (sK1 ◇ (sK2 ◇ sK2)))) := by
+    intro sK0 sK1 sK2
+    conv => enter [1, 2]; rw [l4 sK0 sK1 sK2]
+    conv => enter [1]; rw [← l44 sK0 (sK1 ◇ (sK1 ◇ (sK2 ◇ sK2)))]
+  have l78 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK1 ◇ (sK1 ◇ (sK2 ◇ sK2)))) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l62 sK0]
+    conv => enter [1]; rw [l77 sK0 sK1 sK2]
+  have l79 : ∀ sK0 X0 sK1 sK2 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ ((sK1 ◇ (sK1 ◇ (sK2 ◇ sK2))) ◇ X0)) := by
+    intro sK0 X0 sK1 sK2
+    conv => enter [1, 1]; rw [l78 sK0 sK1 sK2]
+    conv => enter [1]; rw [← h4512 (sK0 ◇ (sK0 ◇ sK0)) (sK1 ◇ (sK1 ◇ (sK2 ◇ sK2))) X0]
+  have l80 : ∀ sK1 sK2 sK0 : G, ((sK1 ◇ (sK1 ◇ (sK2 ◇ sK2))) ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ ((sK1 ◇ (sK1 ◇ (sK2 ◇ sK2))) ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK1 sK2 sK0
+    conv => enter [1, 2]; rw [l78 sK0 sK1 sK2]
+    conv => enter [1]; rw [h4321 (sK1 ◇ (sK1 ◇ (sK2 ◇ sK2))) (sK0 ◇ (sK0 ◇ sK0))]
+  have l81 : ∀ sK1 sK2 sK0 : G, (sK1 ◇ ((sK1 ◇ (sK2 ◇ sK2)) ◇ (sK0 ◇ (sK0 ◇ sK0)))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK1 ◇ ((sK1 ◇ (sK2 ◇ sK2)) ◇ (sK0 ◇ (sK0 ◇ sK0))))) := by
+    intro sK1 sK2 sK0
+    conv => enter [1]; rw [h4512 sK1 (sK1 ◇ (sK2 ◇ sK2)) (sK0 ◇ (sK0 ◇ sK0))]
+    conv => enter [1]; rw [l80 sK1 sK2 sK0]
+    conv => enter [1, 2]; rw [← h4512 sK1 (sK1 ◇ (sK2 ◇ sK2)) (sK0 ◇ (sK0 ◇ sK0))]
+  have l82 : ∀ sK0 X0 sK1 sK2 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK1 ◇ ((sK1 ◇ (sK2 ◇ sK2)) ◇ X0))) := by
+    intro sK0 X0 sK1 sK2
+    conv => enter [1]; rw [l79 sK0 X0 sK1 sK2]
+    conv => enter [1, 2]; rw [← h4512 sK1 (sK1 ◇ (sK2 ◇ sK2)) X0]
+  have l83 : ∀ sK1 sK2 sK0 : G, (sK1 ◇ ((sK1 ◇ (sK2 ◇ sK2)) ◇ (sK0 ◇ sK0))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK1 ◇ ((sK1 ◇ (sK2 ◇ sK2)) ◇ (sK0 ◇ sK0)))) := by
+    intro sK1 sK2 sK0
+    conv => enter [1, 2]; rw [l63 (sK1 ◇ (sK2 ◇ sK2)) sK0]
+    conv => enter [1]; rw [l81 sK1 sK2 sK0]
+    conv => enter [1, 2, 2]; rw [← l63 (sK1 ◇ (sK2 ◇ sK2)) sK0]
+  have l84 : ∀ sK0 sK1 sK2 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ sK0)) = (sK1 ◇ ((sK1 ◇ (sK2 ◇ sK2)) ◇ (sK0 ◇ sK0))) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l82 sK0 (sK0 ◇ sK0) sK1 sK2]
+    conv => enter [1]; rw [← l83 sK1 sK2 sK0]
+  have l85 : ∀ sK0 sK1 sK2 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ sK0)) = (sK1 ◇ ((sK0 ◇ sK0) ◇ (sK1 ◇ (sK2 ◇ sK2)))) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l84 sK0 sK1 sK2]
+    conv => enter [1]; rw [l42 sK1 (sK1 ◇ (sK2 ◇ sK2)) sK0]
+  have l86 : ∀ sK0 sK1 sK2 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ sK0)) = ((sK1 ◇ (sK2 ◇ sK2)) ◇ (sK1 ◇ (sK2 ◇ sK2))) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l85 sK0 sK1 sK2]
+    conv => enter [1]; rw [← l26 sK1 sK2 (sK1 ◇ (sK2 ◇ sK2)) sK0]
+  have l87 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK1 ◇ (sK2 ◇ sK2)) ◇ (sK1 ◇ (sK2 ◇ sK2))) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l52 sK0]
+    conv => enter [1]; rw [l86 sK0 sK1 sK2]
+  have l88 : ∀ sK0 X0 sK1 sK2 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) = ((sK1 ◇ (sK2 ◇ sK2)) ◇ ((sK1 ◇ (sK2 ◇ sK2)) ◇ X0)) := by
+    intro sK0 X0 sK1 sK2
+    conv => enter [1, 1]; rw [l87 sK0 sK1 sK2]
+    conv => enter [1]; rw [← h4512 (sK1 ◇ (sK2 ◇ sK2)) (sK1 ◇ (sK2 ◇ sK2)) X0]
+  have l89 : ∀ sK0 X0 : G, ((sK0 ◇ X0) ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0)) = ((sK0 ◇ sK0) ◇ ((sK0 ◇ X0) ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1, 2]; rw [l56 sK0 X0]
+    conv => enter [1]; rw [h4321 (sK0 ◇ X0) (sK0 ◇ sK0)]
+  have l90 : ∀ sK0 X0 : G, ((sK0 ◇ X0) ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0)) = ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ X0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l89 sK0 X0]
+    conv => enter [1]; rw [l42 (sK0 ◇ sK0) (sK0 ◇ X0) sK0]
+  have l91 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ X0)) = ((sK0 ◇ X0) ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l43 sK0 (sK0 ◇ X0)]
+    conv => enter [1]; rw [← l90 sK0 X0]
+  have l92 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ X0)) = (sK0 ◇ (X0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l91 sK0 X0]
+    conv => enter [1]; rw [← h4512 sK0 X0 ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0)]
+  have l93 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ X0)) = (sK0 ◇ (X0 ◇ ((sK0 ◇ sK0) ◇ X0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l92 sK0 X0]
+    conv => enter [1, 2]; rw [← l67 X0 sK0 X0]
+  have l94 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ X0)) = ((sK0 ◇ sK0) ◇ (X0 ◇ sK0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l93 sK0 X0]
+    conv => enter [1]; rw [← l60 sK0 X0]
+  have l95 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) = ((sK0 ◇ sK0) ◇ (X0 ◇ sK0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l44 sK0 X0]
+    conv => enter [1]; rw [l94 sK0 X0]
+  have l96 : ∀ sK1 sK2 : G, ((sK1 ◇ (sK2 ◇ sK2)) ◇ ((sK1 ◇ (sK1 ◇ (sK2 ◇ sK2))) ◇ (sK1 ◇ (sK2 ◇ sK2)))) = ((sK1 ◇ (sK1 ◇ (sK2 ◇ sK2))) ◇ ((sK1 ◇ (sK2 ◇ sK2)) ◇ (sK1 ◇ (sK2 ◇ sK2)))) := by
+    intro sK1 sK2
+    conv => enter [1]; rw [h4321 (sK1 ◇ (sK2 ◇ sK2)) (sK1 ◇ (sK1 ◇ (sK2 ◇ sK2)))]
+    conv => enter [1, 2]; rw [← l75 sK1 sK2]
+  have l97 : ∀ sK1 sK2 : G, ((sK1 ◇ (sK2 ◇ sK2)) ◇ ((sK1 ◇ (sK1 ◇ (sK2 ◇ sK2))) ◇ (sK1 ◇ (sK2 ◇ sK2)))) = (sK1 ◇ ((sK1 ◇ (sK2 ◇ sK2)) ◇ ((sK1 ◇ (sK2 ◇ sK2)) ◇ (sK1 ◇ (sK2 ◇ sK2))))) := by
+    intro sK1 sK2
+    conv => enter [1]; rw [l96 sK1 sK2]
+    conv => enter [1]; rw [← h4512 sK1 (sK1 ◇ (sK2 ◇ sK2)) ((sK1 ◇ (sK2 ◇ sK2)) ◇ (sK1 ◇ (sK2 ◇ sK2)))]
+  have l98 : ∀ sK1 sK0 sK2 : G, (sK1 ◇ ((sK0 ◇ sK0) ◇ (sK1 ◇ (sK2 ◇ sK2)))) = ((sK1 ◇ (sK2 ◇ sK2)) ◇ ((sK1 ◇ (sK1 ◇ (sK2 ◇ sK2))) ◇ (sK1 ◇ (sK2 ◇ sK2)))) := by
+    intro sK1 sK0 sK2
+    conv => enter [1]; rw [← l38 sK1 (sK1 ◇ (sK2 ◇ sK2)) (sK1 ◇ (sK2 ◇ sK2)) sK0]
+    conv => enter [1]; rw [← l97 sK1 sK2]
+  have l99 : ∀ sK1 sK0 sK2 : G, (sK1 ◇ ((sK0 ◇ sK0) ◇ (sK1 ◇ (sK2 ◇ sK2)))) = ((sK1 ◇ (sK2 ◇ sK2)) ◇ (sK1 ◇ ((sK1 ◇ (sK2 ◇ sK2)) ◇ (sK1 ◇ (sK2 ◇ sK2))))) := by
+    intro sK1 sK0 sK2
+    conv => enter [1]; rw [l98 sK1 sK0 sK2]
+    conv => enter [1, 2]; rw [← h4512 sK1 (sK1 ◇ (sK2 ◇ sK2)) (sK1 ◇ (sK2 ◇ sK2))]
+  have l100 : ∀ sK1 sK0 sK2 : G, (sK1 ◇ ((sK0 ◇ sK0) ◇ (sK1 ◇ (sK2 ◇ sK2)))) = ((sK2 ◇ sK2) ◇ ((sK1 ◇ (sK2 ◇ sK2)) ◇ ((sK1 ◇ (sK2 ◇ sK2)) ◇ (sK1 ◇ (sK2 ◇ sK2))))) := by
+    intro sK1 sK0 sK2
+    conv => enter [1]; rw [l99 sK1 sK0 sK2]
+    conv => enter [1]; rw [l76 sK1 sK2 ((sK1 ◇ (sK2 ◇ sK2)) ◇ (sK1 ◇ (sK2 ◇ sK2)))]
+  have l101 : ∀ sK1 sK0 sK2 : G, (sK1 ◇ ((sK0 ◇ sK0) ◇ (sK1 ◇ (sK2 ◇ sK2)))) = ((sK1 ◇ (sK2 ◇ sK2)) ◇ ((sK1 ◇ (sK2 ◇ sK2)) ◇ sK1)) := by
+    intro sK1 sK0 sK2
+    conv => enter [1]; rw [l100 sK1 sK0 sK2]
+    conv => enter [1]; rw [l72 sK2 (sK1 ◇ (sK2 ◇ sK2)) sK1]
+  have l102 : ∀ sK1 sK0 sK2 : G, (sK1 ◇ ((sK0 ◇ sK0) ◇ (sK1 ◇ (sK2 ◇ sK2)))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ sK1) := by
+    intro sK1 sK0 sK2
+    conv => enter [1]; rw [l101 sK1 sK0 sK2]
+    conv => enter [1]; rw [← l88 sK0 sK1 sK1 sK2]
+  have l103 : ∀ sK1 sK2 sK0 : G, ((sK1 ◇ (sK2 ◇ sK2)) ◇ (sK1 ◇ (sK2 ◇ sK2))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ sK1) := by
+    intro sK1 sK2 sK0
+    conv => enter [1]; rw [l26 sK1 sK2 (sK1 ◇ (sK2 ◇ sK2)) sK0]
+    conv => enter [1]; rw [l102 sK1 sK0 sK2]
+  have l104 : ∀ sK0 sK1 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ sK1) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [l87 sK0 sK1 sK0]
+    conv => enter [1]; rw [l103 sK1 sK0 sK0]
+  have l105 : ∀ sK1 sK0 : G, (sK1 ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK1 ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK1 sK0
+    conv => enter [1, 2]; rw [l104 sK0 sK1]
+    conv => enter [1]; rw [h4321 sK1 (sK0 ◇ (sK0 ◇ sK0))]
+  have l106 : ∀ sK1 sK0 : G, (sK1 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK1 ◇ (sK0 ◇ sK0))) := by
+    intro sK1 sK0
+    conv => enter [1]; rw [l63 sK1 sK0]
+    conv => enter [1]; rw [l105 sK1 sK0]
+    conv => enter [1, 2]; rw [← l63 sK1 sK0]
+  have l107 : ∀ sK1 sK0 : G, (sK1 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ sK0) ◇ (sK1 ◇ sK0)) := by
+    intro sK1 sK0
+    conv => enter [1]; rw [l106 sK1 sK0]
+    conv => enter [1]; rw [← l65 sK0 sK1]
+  have l108 : ∀ sK1 sK0 : G, (sK1 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ sK1) := by
+    intro sK1 sK0
+    conv => enter [1]; rw [l107 sK1 sK0]
+    conv => enter [1]; rw [← l95 sK0 sK1]
+  have l109 : ∀ sK0 sK1 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK1 ◇ (sK0 ◇ sK0)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [l104 sK0 sK1]
+    conv => enter [1]; rw [← l108 sK1 sK0]
+  have l110 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK1 ◇ (sK2 ◇ sK2)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l109 sK0 sK1]
+    conv => enter [1]; rw [l1 sK1 sK0 sK2]
+  intro x y z
+  conv => enter [1]; rw [l110 x y z]
+
+theorem Equation4275_4314_4512_implies_Equation4277 (G : Type*) [Magma G] (h4275 : Equation4275 G) (h4314 : Equation4314 G) (h4512 : Equation4512 G) : Equation4277 G := by
+  have l0 : ∀ X2 X0 X1 : G, (X2 ◇ (X2 ◇ (X0 ◇ X1))) = (X0 ◇ (X1 ◇ ((X0 ◇ X1) ◇ (X0 ◇ X1)))) := by
+    intro X2 X0 X1
+    conv => enter [1]; rw [← h4275 (X0 ◇ X1) X2]
+    conv => enter [1]; rw [← h4512 X0 X1 ((X0 ◇ X1) ◇ (X0 ◇ X1))]
+  have l1 : ∀ X2 X0 X1 : G, (X2 ◇ (X2 ◇ X2)) = (X0 ◇ (X1 ◇ ((X0 ◇ X1) ◇ X2))) := by
+    intro X2 X0 X1
+    conv => enter [1]; rw [h4275 X2 (X0 ◇ X1)]
+    conv => enter [1]; rw [← h4512 X0 X1 ((X0 ◇ X1) ◇ X2)]
+  have l2 : ∀ X2 X0 X1 : G, (X2 ◇ (X2 ◇ X2)) = (X0 ◇ (X1 ◇ (X0 ◇ (X1 ◇ X2)))) := by
+    intro X2 X0 X1
+    conv => enter [1]; rw [l1 X2 X0 X1]
+    conv => enter [1, 2, 2]; rw [← h4512 X0 X1 X2]
+  have l3 : ∀ X2 X0 X1 : G, (X2 ◇ (X2 ◇ (X0 ◇ X1))) = (X0 ◇ (X1 ◇ ((X0 ◇ X1) ◇ X1))) := by
+    intro X2 X0 X1
+    conv => enter [1]; rw [l0 X2 X0 X1]
+    conv => enter [1, 2]; rw [← h4314 X1 (X0 ◇ X1)]
+  have l4 : ∀ X2 X0 X1 : G, (X2 ◇ (X2 ◇ (X0 ◇ X1))) = (X0 ◇ (X1 ◇ (X0 ◇ (X1 ◇ X1)))) := by
+    intro X2 X0 X1
+    conv => enter [1]; rw [l3 X2 X0 X1]
+    conv => enter [1, 2, 2]; rw [← h4512 X0 X1 X1]
+  have l5 : ∀ X1 X2 X0 : G, (X1 ◇ (X1 ◇ X1)) = (X2 ◇ (X2 ◇ (X0 ◇ X1))) := by
+    intro X1 X2 X0
+    conv => enter [1]; rw [l2 X1 X0 X1]
+    conv => enter [1]; rw [← l4 X2 X0 X1]
+  have l6 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ (X0 ◇ sK0))) = ((sK0 ◇ sK0) ◇ (X0 ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1, 2]; rw [h4314 sK0 X0]
+    conv => enter [1]; rw [h4512 sK0 sK0 (X0 ◇ X0)]
+  have l7 : ∀ X0 sK0 : G, (X0 ◇ (X0 ◇ X0)) = ((sK0 ◇ sK0) ◇ X0) := by
+    intro X0 sK0
+    conv => enter [1]; rw [h4275 X0 sK0]
+    conv => enter [1]; rw [h4512 sK0 sK0 X0]
+  have l8 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ sK0) ◇ (X0 ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l5 sK0 sK0 X0]
+    conv => enter [1]; rw [l6 sK0 X0]
+  have l9 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [h4275 sK0 (sK0 ◇ sK0)]
+    conv => enter [1, 2]; rw [← h4512 sK0 sK0 sK0]
+  have l10 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ sK0) ◇ (sK0 ◇ sK0)) := by
+    intro sK0
+    conv => enter [1]; rw [l9 sK0]
+    conv => enter [1]; rw [h4314 (sK0 ◇ sK0) sK0]
+  have l11 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) = ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1, 1]; rw [l10 sK0]
+    conv => enter [1]; rw [← h4512 (sK0 ◇ sK0) (sK0 ◇ sK0) X0]
+  have l12 : ∀ X1 X0 sK0 : G, (X1 ◇ (X1 ◇ X0)) = ((sK0 ◇ sK0) ◇ X0) := by
+    intro X1 X0 sK0
+    conv => enter [1]; rw [← h4275 X0 X1]
+    conv => enter [1]; rw [l7 X0 sK0]
+  have l13 : ∀ X0 sK0 : G, ((X0 ◇ X0) ◇ (X0 ◇ X0)) = ((X0 ◇ X0) ◇ ((sK0 ◇ sK0) ◇ X0)) := by
+    intro X0 sK0
+    conv => enter [1]; rw [← h4314 (X0 ◇ X0) X0]
+    conv => enter [1, 2]; rw [l7 X0 sK0]
+  have l14 : ∀ X0 sK0 : G, ((X0 ◇ X0) ◇ (X0 ◇ X0)) = (X0 ◇ (X0 ◇ ((sK0 ◇ sK0) ◇ X0))) := by
+    intro X0 sK0
+    conv => enter [1]; rw [l13 X0 sK0]
+    conv => enter [1]; rw [← h4512 X0 X0 ((sK0 ◇ sK0) ◇ X0)]
+  have l15 : ∀ X0 sK0 : G, ((X0 ◇ X0) ◇ (X0 ◇ X0)) = ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ X0)) := by
+    intro X0 sK0
+    conv => enter [1]; rw [l14 X0 sK0]
+    conv => enter [1]; rw [l12 X0 ((sK0 ◇ sK0) ◇ X0) sK0]
+  have l16 : ∀ X0 sK0 : G, ((X0 ◇ X0) ◇ (X0 ◇ X0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) := by
+    intro X0 sK0
+    conv => enter [1]; rw [l15 X0 sK0]
+    conv => enter [1]; rw [← l11 sK0 X0]
+  have l17 : ∀ X0 sK0 : G, (X0 ◇ (X0 ◇ (X0 ◇ X0))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) := by
+    intro X0 sK0
+    conv => enter [1]; rw [h4512 X0 X0 (X0 ◇ X0)]
+    conv => enter [1]; rw [l16 X0 sK0]
+  have l18 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) = ((sK0 ◇ sK0) ◇ (X0 ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [← l17 X0 sK0]
+    conv => enter [1]; rw [l12 X0 (X0 ◇ X0) sK0]
+  have l19 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l8 sK0 X0]
+    conv => enter [1]; rw [← l18 sK0 X0]
+  have l20 : ∀ X0 sK0 : G, (X0 ◇ (X0 ◇ X0)) = (sK0 ◇ (sK0 ◇ sK0)) := by
+    intro X0 sK0
+    conv => enter [1]; rw [h4275 X0 (sK0 ◇ (sK0 ◇ sK0))]
+    conv => enter [1]; rw [← l19 sK0 ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0)]
+  have l21 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ sK0) ◇ X0) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l20 sK0 X0]
+    conv => enter [1]; rw [l12 X0 X0 sK0]
+  have l22 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK1 ◇ (sK1 ◇ sK2)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l21 sK0 sK2]
+    conv => enter [1]; rw [← l12 sK1 sK2 sK0]
+  intro x y z
+  conv => enter [1]; rw [l22 x y z]
+
+theorem Equation4270_4291_4512_implies_Equation4280 (G : Type*) [Magma G] (h4270 : Equation4270 G) (h4291 : Equation4291 G) (h4512 : Equation4512 G) : Equation4280 G := by
+  have l0 : ∀ X0 X1 sK0 : G, (X0 ◇ (X1 ◇ X1)) = (X0 ◇ (sK0 ◇ sK0)) := by
+    intro X0 X1 sK0
+    conv => enter [1]; rw [← h4270 X0 X1]
+    conv => enter [1]; rw [h4270 X0 sK0]
+  have l1 : ∀ X0 sK0 sK2 : G, (X0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK2 ◇ sK2)) := by
+    intro X0 sK0 sK2
+    conv => enter [1]; rw [← h4270 X0 sK0]
+    conv => enter [1]; rw [h4270 X0 sK2]
+  have l2 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK0 ◇ ((X0 ◇ X0) ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [h4270 sK0 (X0 ◇ X0)]
+    conv => enter [1, 2]; rw [l0 (X0 ◇ X0) X0 sK0]
+  have l3 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK0 ◇ (X0 ◇ (X0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l2 sK0 X0]
+    conv => enter [1, 2]; rw [← h4512 X0 X0 (sK0 ◇ sK0)]
+  have l4 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1, 2]; rw [l3 sK0 sK0]
+    conv => enter [1]; rw [h4291 sK0 (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0)))]
+    conv => enter [1, 2]; rw [← l3 sK0 sK0]
+  have l5 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) = (sK0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK0
+    conv => enter [1]; rw [l4 sK0]
+    conv => enter [1]; rw [← h4512 sK0 (sK0 ◇ (sK0 ◇ sK0)) (sK0 ◇ (sK0 ◇ sK0))]
+  have l6 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [h4270 sK0 (sK0 ◇ (sK0 ◇ sK0))]
+    conv => enter [1]; rw [← l5 sK0]
+  have l7 : ∀ sK0 sK2 : G, (sK0 ◇ (sK2 ◇ sK2)) = (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 sK2
+    conv => enter [1]; rw [← h4270 sK0 sK2]
+    conv => enter [1]; rw [l6 sK0]
+  have l8 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [l7 sK0 sK0]
+  have l9 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1, 2]; rw [l8 sK0]
+    conv => enter [1]; rw [h4291 sK0 (sK0 ◇ (sK0 ◇ sK0))]
+    conv => enter [1, 2]; rw [← l8 sK0]
+  have l10 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [l8 sK0]
+    conv => enter [1]; rw [l9 sK0]
+  have l11 : ∀ X0 sK0 : G, (X0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro X0 sK0
+    conv => enter [1]; rw [l0 X0 sK0 (sK0 ◇ (sK0 ◇ sK0))]
+    conv => enter [1, 2]; rw [← l10 sK0]
+  have l12 : ∀ sK0 X0 : G, (sK0 ◇ (X0 ◇ (X0 ◇ (sK0 ◇ sK0)))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (X0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1, 2]; rw [h4291 X0 (sK0 ◇ sK0)]
+    conv => enter [1]; rw [h4512 sK0 (sK0 ◇ sK0) (X0 ◇ (sK0 ◇ sK0))]
+  have l13 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (X0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l3 sK0 X0]
+    conv => enter [1]; rw [l12 sK0 X0]
+  have l14 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((X0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1, 2]; rw [l13 sK0 X0]
+    conv => enter [1]; rw [h4291 (sK0 ◇ (sK0 ◇ sK0)) (X0 ◇ (sK0 ◇ sK0))]
+    conv => enter [1, 2]; rw [← l13 sK0 X0]
+  have l15 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) = (X0 ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l14 sK0 X0]
+    conv => enter [1]; rw [← h4512 X0 (sK0 ◇ sK0) (sK0 ◇ (sK0 ◇ sK0))]
+  have l16 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) = (X0 ◇ (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l15 sK0 X0]
+    conv => enter [1, 2]; rw [← h4291 sK0 (sK0 ◇ sK0)]
+  have l17 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) = (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l16 sK0 X0]
+    conv => enter [1, 2]; rw [← l8 sK0]
+  have l18 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l10 sK0]
+    conv => enter [1]; rw [l17 sK0 X0]
+  have l19 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK0 ◇ sK0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l18 sK0 X0]
+    conv => enter [1]; rw [← l11 X0 sK0]
+  have l20 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK1 ◇ (sK2 ◇ sK2)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l19 sK0 sK1]
+    conv => enter [1]; rw [l1 sK1 sK0 sK2]
+  intro x y z
+  conv => enter [1]; rw [l20 x y z]
+
+theorem Equation4275_4293_implies_Equation4277 (G : Type*) [Magma G] (h4275 : Equation4275 G) (h4293 : Equation4293 G) : Equation4277 G := by
+  have l0 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK0 ◇ (sK0 ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [h4275 sK0 X0]
+    conv => enter [1]; rw [h4293 X0 sK0]
+  have l1 : ∀ X0 sK0 : G, (X0 ◇ (X0 ◇ X0)) = (sK0 ◇ (sK0 ◇ sK0)) := by
+    intro X0 sK0
+    conv => enter [1]; rw [h4275 X0 sK0]
+    conv => enter [1]; rw [← l0 sK0 X0]
+  have l2 : ∀ X1 X0 sK0 : G, (X1 ◇ (X1 ◇ X0)) = (sK0 ◇ (sK0 ◇ sK0)) := by
+    intro X1 X0 sK0
+    conv => enter [1]; rw [← h4275 X0 X1]
+    conv => enter [1]; rw [l1 X0 sK0]
+  intro x y z
+  conv => enter [1]; rw [← l2 y z x]
+
+theorem Equation4270_4343_implies_Equation4280 (G : Type*) [Magma G] (h4270 : Equation4270 G) (h4343 : Equation4343 G) : Equation4280 G := by
+  have l0 : ∀ X0 sK0 sK2 : G, (X0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK2 ◇ sK2)) := by
+    intro X0 sK0 sK2
+    conv => enter [1]; rw [← h4270 X0 sK0]
+    conv => enter [1]; rw [h4270 X0 sK2]
+  have l1 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK0 ◇ sK0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [h4270 sK0 X0]
+    conv => enter [1]; rw [h4343 sK0 X0]
+  have l2 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK1 ◇ (sK2 ◇ sK2)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l1 sK0 sK1]
+    conv => enter [1]; rw [l0 sK1 sK0 sK2]
+  intro x y z
+  conv => enter [1]; rw [l2 x y z]
+
+theorem Equation4275_4291_implies_Equation4296 (G : Type*) [Magma G] (h4275 : Equation4275 G) (h4291 : Equation4291 G) : Equation4296 G := by
+  have l0 : ∀ sK0 sK1 X0 : G, (sK0 ◇ (sK0 ◇ sK1)) = (X0 ◇ (X0 ◇ sK1)) := by
+    intro sK0 sK1 X0
+    conv => enter [1]; rw [← h4275 sK1 sK0]
+    conv => enter [1]; rw [h4275 sK1 X0]
+  have l1 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK1)) = (sK1 ◇ (sK2 ◇ sK1)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l0 sK0 sK1 sK2]
+    conv => enter [1]; rw [h4291 sK2 sK1]
+  intro x y z
+  conv => enter [1]; rw [l1 x y z]
+
+theorem Equation4270_4314_implies_Equation4318 (G : Type*) [Magma G] (h4270 : Equation4270 G) (h4314 : Equation4314 G) : Equation4318 G := by
+  have l0 : ∀ X0 X1 sK2 : G, (X0 ◇ (X1 ◇ X1)) = (X0 ◇ (sK2 ◇ sK2)) := by
+    intro X0 X1 sK2
+    conv => enter [1]; rw [← h4270 X0 X1]
+    conv => enter [1]; rw [h4270 X0 sK2]
+  have l1 : ∀ X0 X1 sK2 : G, (X0 ◇ (X1 ◇ X0)) = (X0 ◇ (sK2 ◇ sK2)) := by
+    intro X0 X1 sK2
+    conv => enter [1]; rw [h4314 X0 X1]
+    conv => enter [1]; rw [l0 X0 X1 sK2]
+  intro x y z
+  conv => enter [1]; rw [l1 x y z]
+
+theorem Equation4275_4290_implies_Equation4297 (G : Type*) [Magma G] (h4275 : Equation4275 G) (h4290 : Equation4290 G) : Equation4297 G := by
+  have l0 : ∀ X0 sK2 : G, (X0 ◇ (X0 ◇ X0)) = (X0 ◇ (sK2 ◇ sK2)) := by
+    intro X0 sK2
+    conv => enter [1]; rw [h4275 X0 sK2]
+    conv => enter [1]; rw [h4290 sK2 X0]
+  have l1 : ∀ X1 X0 sK2 : G, (X1 ◇ (X1 ◇ X0)) = (X0 ◇ (sK2 ◇ sK2)) := by
+    intro X1 X0 sK2
+    conv => enter [1]; rw [← h4275 X0 X1]
+    conv => enter [1]; rw [l0 X0 sK2]
+  intro x y z
+  conv => enter [1]; rw [l1 x y z]
+
+theorem Equation4270_4290_implies_Equation4297 (G : Type*) [Magma G] (h4270 : Equation4270 G) (h4290 : Equation4290 G) : Equation4297 G := by
+  have l0 : ∀ X0 X1 sK2 : G, (X0 ◇ (X1 ◇ X1)) = (X0 ◇ (sK2 ◇ sK2)) := by
+    intro X0 X1 sK2
+    conv => enter [1]; rw [← h4270 X0 X1]
+    conv => enter [1]; rw [h4270 X0 sK2]
+  have l1 : ∀ X0 X1 sK2 : G, (X0 ◇ (X0 ◇ X1)) = (X1 ◇ (sK2 ◇ sK2)) := by
+    intro X0 X1 sK2
+    conv => enter [1]; rw [h4290 X0 X1]
+    conv => enter [1]; rw [l0 X1 X0 sK2]
+  intro x y z
+  conv => enter [1]; rw [l1 x y z]
+
+theorem Equation4275_4284_implies_Equation4304 (G : Type*) [Magma G] (h4275 : Equation4275 G) (h4284 : Equation4284 G) : Equation4304 G := by
+  have l0 : ∀ sK1 X0 : G, (sK1 ◇ (sK1 ◇ sK1)) = (X0 ◇ (sK1 ◇ sK1)) := by
+    intro sK1 X0
+    conv => enter [1]; rw [h4275 sK1 X0]
+    conv => enter [1]; rw [h4284 X0 sK1]
+  have l1 : ∀ sK0 sK1 X0 : G, (sK0 ◇ (sK0 ◇ sK1)) = (X0 ◇ (sK1 ◇ sK1)) := by
+    intro sK0 sK1 X0
+    conv => enter [1]; rw [← h4275 sK1 sK0]
+    conv => enter [1]; rw [l0 sK1 X0]
+  intro x y z
+  conv => enter [1]; rw [l1 x y z]
+
+theorem Equation4270_4284_implies_Equation4288 (G : Type*) [Magma G] (h4270 : Equation4270 G) (h4284 : Equation4284 G) : Equation4288 G := by
+  have l0 : ∀ X0 X1 sK2 : G, (X0 ◇ (X1 ◇ X1)) = (X0 ◇ (sK2 ◇ sK2)) := by
+    intro X0 X1 sK2
+    conv => enter [1]; rw [← h4270 X0 X1]
+    conv => enter [1]; rw [h4270 X0 sK2]
+  have l1 : ∀ X0 X1 sK2 : G, (X0 ◇ (X0 ◇ X1)) = (X0 ◇ (sK2 ◇ sK2)) := by
+    intro X0 X1 sK2
+    conv => enter [1]; rw [h4284 X0 X1]
+    conv => enter [1]; rw [l0 X0 X1 sK2]
+  intro x y z
+  conv => enter [1]; rw [l1 x y z]
+
+theorem Equation4275_4283_implies_Equation4305 (G : Type*) [Magma G] (h4275 : Equation4275 G) (h4283 : Equation4283 G) : Equation4305 G := by
+  have l0 : ∀ X0 X1 X2 : G, (X0 ◇ (X0 ◇ X1)) = (X2 ◇ (X2 ◇ X1)) := by
+    intro X0 X1 X2
+    conv => enter [1]; rw [← h4275 X1 X0]
+    conv => enter [1]; rw [h4275 X1 X2]
+  have l1 : ∀ sK0 sK1 X0 : G, (sK0 ◇ (sK0 ◇ sK1)) = (X0 ◇ (sK1 ◇ X0)) := by
+    intro sK0 sK1 X0
+    conv => enter [1]; rw [l0 sK0 sK1 X0]
+    conv => enter [1]; rw [h4283 X0 sK1]
+  intro x y z
+  conv => enter [1]; rw [l1 x y z]
+
+theorem Equation4270_4320_implies_Equation4325 (G : Type*) [Magma G] (h4270 : Equation4270 G) (h4320 : Equation4320 G) : Equation4325 G := by
+  have l0 : ∀ X0 X1 sK2 : G, (X0 ◇ (X1 ◇ X1)) = (X0 ◇ (sK2 ◇ sK2)) := by
+    intro X0 X1 sK2
+    conv => enter [1]; rw [← h4270 X0 X1]
+    conv => enter [1]; rw [h4270 X0 sK2]
+  have l1 : ∀ X0 X1 sK2 : G, (X0 ◇ (X1 ◇ X0)) = (X1 ◇ (sK2 ◇ sK2)) := by
+    intro X0 X1 sK2
+    conv => enter [1]; rw [h4320 X0 X1]
+    conv => enter [1]; rw [l0 X1 X0 sK2]
+  intro x y z
+  conv => enter [1]; rw [l1 x y z]
+
+theorem Equation4275_4276_implies_Equation4277 (G : Type*) [Magma G] (h4275 : Equation4275 G) (h4276 : Equation4276 G) : Equation4277 G := by
+  have l0 : ∀ X0 X2 X1 : G, (X0 ◇ (X0 ◇ X0)) = (X2 ◇ (X2 ◇ X1)) := by
+    intro X0 X2 X1
+    conv => enter [1]; rw [h4276 X0 X1]
+    conv => enter [1]; rw [h4275 X1 X2]
+  have l1 : ∀ sK0 X2 X1 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X2 ◇ (X2 ◇ X1)) := by
+    intro sK0 X2 X1
+    conv => enter [1]; rw [l0 sK0 X2 X1]
+  intro x y z
+  conv => enter [1]; rw [l1 x y z]
+
+theorem Equation4270_4276_implies_Equation4280 (G : Type*) [Magma G] (h4270 : Equation4270 G) (h4276 : Equation4276 G) : Equation4280 G := by
+  have l0 : ∀ X0 X1 sK0 : G, (X0 ◇ (X1 ◇ X1)) = (X0 ◇ (sK0 ◇ sK0)) := by
+    intro X0 X1 sK0
+    conv => enter [1]; rw [← h4270 X0 X1]
+    conv => enter [1]; rw [h4270 X0 sK0]
+  have l1 : ∀ X0 sK0 sK2 : G, (X0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK2 ◇ sK2)) := by
+    intro X0 sK0 sK2
+    conv => enter [1]; rw [← h4270 X0 sK0]
+    conv => enter [1]; rw [h4270 X0 sK2]
+  have l2 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK0 ◇ sK0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [h4276 sK0 X0]
+    conv => enter [1]; rw [l0 X0 X0 sK0]
+  have l3 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK1 ◇ (sK2 ◇ sK2)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l2 sK0 sK1]
+    conv => enter [1]; rw [l1 sK1 sK0 sK2]
+  intro x y z
+  conv => enter [1]; rw [l3 x y z]
+
+theorem Equation4273_4343_4512_implies_Equation4279 (G : Type*) [Magma G] (h4273 : Equation4273 G) (h4343 : Equation4343 G) (h4512 : Equation4512 G) : Equation4279 G := by
+  have l0 : ∀ sK0 : G, ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ sK0))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [h4273 (sK0 ◇ sK0) (sK0 ◇ (sK0 ◇ sK0))]
+    conv => enter [1, 2]; rw [← h4273 sK0 (sK0 ◇ sK0)]
+  have l1 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) = (X0 ◇ ((sK0 ◇ sK0) ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [← l0 sK0]
+    conv => enter [1]; rw [h4273 (sK0 ◇ sK0) X0]
+  have l2 : ∀ sK0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) = (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [← h4512 sK0 (sK0 ◇ sK0) (sK0 ◇ (sK0 ◇ sK0))]
+    conv => enter [1, 2]; rw [← h4273 sK0 (sK0 ◇ sK0)]
+  have l3 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((X0 ◇ X0) ◇ (X0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [h4273 sK0 (X0 ◇ X0)]
+    conv => enter [1, 2]; rw [h4343 sK0 X0]
+  have l4 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (X0 ◇ (X0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l3 sK0 X0]
+    conv => enter [1]; rw [← h4512 X0 X0 (X0 ◇ (sK0 ◇ sK0))]
+  have l5 : ∀ sK0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) = (((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ sK0))) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [l1 sK0 ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ sK0)))]
+    conv => enter [1, 2]; rw [← l4 sK0 (sK0 ◇ sK0)]
+  have l6 : ∀ sK0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ sK0) ◇ (((sK0 ◇ sK0) ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK0
+    conv => enter [1]; rw [l5 sK0]
+    conv => enter [1]; rw [← h4512 (sK0 ◇ sK0) ((sK0 ◇ sK0) ◇ (sK0 ◇ sK0)) (sK0 ◇ (sK0 ◇ sK0))]
+  have l7 : ∀ sK0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))))) := by
+    intro sK0
+    conv => enter [1]; rw [l6 sK0]
+    conv => enter [1, 2]; rw [← h4512 (sK0 ◇ sK0) (sK0 ◇ sK0) (sK0 ◇ (sK0 ◇ sK0))]
+  have l8 : ∀ sK0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK0
+    conv => enter [1]; rw [l7 sK0]
+    conv => enter [1, 2, 2]; rw [← h4273 sK0 (sK0 ◇ sK0)]
+  have l9 : ∀ sK0 : G, ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1, 2]; rw [h4273 sK0 (sK0 ◇ sK0)]
+    conv => enter [1]; rw [← l8 sK0]
+  have l10 : ∀ sK0 : G, ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))) = (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [l9 sK0]
+    conv => enter [1]; rw [l2 sK0]
+  have l11 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [h4273 sK0 (sK0 ◇ sK0)]
+    conv => enter [1]; rw [l10 sK0]
+  have l12 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [h4273 sK0 (sK0 ◇ (sK0 ◇ sK0))]
+    conv => enter [1, 2]; rw [← l11 sK0]
+  have l13 : ∀ sK0 X0 X1 : G, (sK0 ◇ ((X0 ◇ X0) ◇ X1)) = ((X0 ◇ (sK0 ◇ sK0)) ◇ X1) := by
+    intro sK0 X0 X1
+    conv => enter [1]; rw [h4512 sK0 (X0 ◇ X0) X1]
+    conv => enter [1, 1]; rw [h4343 sK0 X0]
+  have l14 : ∀ sK0 X0 X1 : G, (sK0 ◇ ((X0 ◇ X0) ◇ X1)) = (X0 ◇ ((sK0 ◇ sK0) ◇ X1)) := by
+    intro sK0 X0 X1
+    conv => enter [1]; rw [l13 sK0 X0 X1]
+    conv => enter [1]; rw [← h4512 X0 (sK0 ◇ sK0) X1]
+  have l15 : ∀ X0 sK0 X1 : G, (X0 ◇ ((sK0 ◇ sK0) ◇ X1)) = (sK0 ◇ (X0 ◇ (X0 ◇ X1))) := by
+    intro X0 sK0 X1
+    conv => enter [1]; rw [l14 X0 sK0 X1]
+    conv => enter [1, 2]; rw [← h4512 X0 X0 X1]
+  have l16 : ∀ sK0 X0 : G, (sK0 ◇ (X0 ◇ (X0 ◇ X0))) = ((sK0 ◇ sK0) ◇ (X0 ◇ sK0)) := by
+    intro sK0 X0
+    conv => enter [1, 2]; rw [h4273 X0 sK0]
+    conv => enter [1]; rw [h4512 sK0 sK0 (X0 ◇ sK0)]
+  have l17 : ∀ X0 sK0 : G, (X0 ◇ ((sK0 ◇ sK0) ◇ X0)) = ((sK0 ◇ sK0) ◇ (X0 ◇ sK0)) := by
+    intro X0 sK0
+    conv => enter [1]; rw [l15 X0 sK0 X0]
+    conv => enter [1]; rw [l16 sK0 X0]
+  have l18 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ sK0) ◇ (X0 ◇ sK0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l1 sK0 X0]
+    conv => enter [1]; rw [l17 X0 sK0]
+  have l19 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ sK0) ◇ (X0 ◇ sK0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [← l2 sK0]
+    conv => enter [1]; rw [l18 sK0 X0]
+  have l20 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ sK0) ◇ (X0 ◇ sK0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l11 sK0]
+    conv => enter [1]; rw [l19 sK0 X0]
+  have l21 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((X0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l1 sK0 (X0 ◇ sK0)]
+    conv => enter [1, 2]; rw [← l20 sK0 X0]
+  have l22 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) = (X0 ◇ (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l21 sK0 X0]
+    conv => enter [1]; rw [← h4512 X0 sK0 (sK0 ◇ (sK0 ◇ sK0))]
+  have l23 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) = (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l22 sK0 X0]
+    conv => enter [1, 2]; rw [← l11 sK0]
+  have l24 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l12 sK0]
+    conv => enter [1]; rw [l23 sK0 X0]
+  have l25 : ∀ X0 sK0 : G, (X0 ◇ (X0 ◇ X0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro X0 sK0
+    conv => enter [1]; rw [h4273 X0 (sK0 ◇ (sK0 ◇ sK0))]
+    conv => enter [1, 2]; rw [← l24 sK0 X0]
+  have l26 : ∀ X0 sK0 : G, (X0 ◇ (X0 ◇ X0)) = (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro X0 sK0
+    conv => enter [1]; rw [l25 X0 sK0]
+    conv => enter [1]; rw [l2 sK0]
+  have l27 : ∀ X0 sK0 : G, (X0 ◇ (X0 ◇ X0)) = (sK0 ◇ (sK0 ◇ sK0)) := by
+    intro X0 sK0
+    conv => enter [1]; rw [l26 X0 sK0]
+    conv => enter [1]; rw [← l11 sK0]
+  have l28 : ∀ X1 X0 sK0 : G, (X1 ◇ (X0 ◇ X1)) = (sK0 ◇ (sK0 ◇ sK0)) := by
+    intro X1 X0 sK0
+    conv => enter [1]; rw [← h4273 X0 X1]
+    conv => enter [1]; rw [l27 X0 sK0]
+  intro x y z
+  conv => enter [1]; rw [← l28 y z x]
+
+theorem Equation4273_4293_4512_implies_Equation4279 (G : Type*) [Magma G] (h4273 : Equation4273 G) (h4293 : Equation4293 G) (h4512 : Equation4512 G) : Equation4279 G := by
+  have l0 : ∀ X0 X1 X2 : G, (X0 ◇ (X1 ◇ X0)) = (X2 ◇ (X1 ◇ X2)) := by
+    intro X0 X1 X2
+    conv => enter [1]; rw [← h4273 X1 X0]
+    conv => enter [1]; rw [h4273 X1 X2]
+  have l1 : ∀ sK0 : G, ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ sK0))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [h4273 (sK0 ◇ sK0) (sK0 ◇ (sK0 ◇ sK0))]
+    conv => enter [1, 2]; rw [← h4273 sK0 (sK0 ◇ sK0)]
+  have l2 : ∀ X0 sK0 : G, (X0 ◇ (X0 ◇ X0)) = ((sK0 ◇ X0) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro X0 sK0
+    conv => enter [1]; rw [h4273 X0 (sK0 ◇ X0)]
+    conv => enter [1, 2]; rw [← h4273 sK0 X0]
+  have l3 : ∀ X0 sK0 : G, (X0 ◇ (X0 ◇ X0)) = (sK0 ◇ (X0 ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro X0 sK0
+    conv => enter [1]; rw [l2 X0 sK0]
+    conv => enter [1]; rw [← h4512 sK0 X0 (sK0 ◇ (sK0 ◇ sK0))]
+  have l4 : ∀ sK2 sK1 X0 : G, ((sK2 ◇ sK1) ◇ (sK1 ◇ (sK2 ◇ sK1))) = (X0 ◇ (sK1 ◇ X0)) := by
+    intro sK2 sK1 X0
+    conv => enter [1]; rw [← h4273 sK1 (sK2 ◇ sK1)]
+    conv => enter [1]; rw [h4273 sK1 X0]
+  have l5 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) = (X0 ◇ ((sK0 ◇ sK0) ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [← l1 sK0]
+    conv => enter [1]; rw [h4273 (sK0 ◇ sK0) X0]
+  have l6 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK1 ◇ sK0) ◇ ((sK2 ◇ sK1) ◇ (sK1 ◇ (sK2 ◇ sK1)))) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [h4273 sK0 (sK1 ◇ sK0)]
+    conv => enter [1, 2]; rw [← l4 sK2 sK1 sK0]
+  have l7 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK1 ◇ (sK0 ◇ ((sK2 ◇ sK1) ◇ (sK1 ◇ (sK2 ◇ sK1))))) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l6 sK0 sK1 sK2]
+    conv => enter [1]; rw [← h4512 sK1 sK0 ((sK2 ◇ sK1) ◇ (sK1 ◇ (sK2 ◇ sK1)))]
+  have l8 : ∀ sK0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) = (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [← h4512 sK0 (sK0 ◇ sK0) (sK0 ◇ (sK0 ◇ sK0))]
+    conv => enter [1, 2]; rw [← h4273 sK0 (sK0 ◇ sK0)]
+  have l9 : ∀ X0 sK0 : G, (X0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro X0 sK0
+    conv => enter [1]; rw [← h4273 (sK0 ◇ (sK0 ◇ sK0)) X0]
+    conv => enter [1, 2]; rw [l8 sK0]
+  have l10 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [h4273 sK0 (sK0 ◇ (sK0 ◇ sK0))]
+    conv => enter [1]; rw [← l9 X0 sK0]
+  have l11 : ∀ X1 X0 X2 : G, (X1 ◇ ((X0 ◇ X1) ◇ X2)) = ((X0 ◇ (X0 ◇ X0)) ◇ X2) := by
+    intro X1 X0 X2
+    conv => enter [1]; rw [h4512 X1 (X0 ◇ X1) X2]
+    conv => enter [1, 1]; rw [← h4273 X0 X1]
+  have l12 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0)) = ((sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) ◇ X0) := by
+    intro sK0 X0
+    conv => enter [1]; rw [h4512 (sK0 ◇ (sK0 ◇ sK0)) (sK0 ◇ (sK0 ◇ sK0)) X0]
+    conv => enter [1, 1]; rw [l8 sK0]
+  have l13 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0)) = (sK0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l12 sK0 X0]
+    conv => enter [1]; rw [← h4512 sK0 (sK0 ◇ (sK0 ◇ sK0)) X0]
+  have l14 : ∀ X1 X0 X2 : G, (X1 ◇ ((X0 ◇ X1) ◇ X2)) = (X0 ◇ ((X0 ◇ X0) ◇ X2)) := by
+    intro X1 X0 X2
+    conv => enter [1]; rw [l11 X1 X0 X2]
+    conv => enter [1]; rw [← h4512 X0 (X0 ◇ X0) X2]
+  have l15 : ∀ X1 X0 X2 : G, (X1 ◇ ((X0 ◇ X1) ◇ X2)) = (X0 ◇ (X0 ◇ (X0 ◇ X2))) := by
+    intro X1 X0 X2
+    conv => enter [1]; rw [l14 X1 X0 X2]
+    conv => enter [1, 2]; rw [← h4512 X0 X0 X2]
+  have l16 : ∀ X1 X0 X2 : G, (X1 ◇ (X0 ◇ (X1 ◇ X2))) = (X0 ◇ (X0 ◇ (X0 ◇ X2))) := by
+    intro X1 X0 X2
+    conv => enter [1, 2]; rw [h4512 X0 X1 X2]
+    conv => enter [1]; rw [l15 X1 X0 X2]
+  have l17 : ∀ sK0 X0 : G, (sK0 ◇ ((sK0 ◇ sK0) ◇ X0)) = ((sK0 ◇ sK0) ◇ (sK0 ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1, 2]; rw [← h4512 sK0 sK0 X0]
+    conv => enter [1]; rw [h4512 sK0 sK0 (sK0 ◇ X0)]
+  have l18 : ∀ sK0 : G, (sK0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0)))) = ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ sK0)) := by
+    intro sK0
+    conv => enter [1, 2]; rw [l5 sK0 sK0]
+    conv => enter [1]; rw [h4512 sK0 sK0 ((sK0 ◇ sK0) ◇ sK0)]
+  have l19 : ∀ sK0 X0 : G, ((sK0 ◇ sK0) ◇ X0) = (X0 ◇ (X0 ◇ sK0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [← h4512 sK0 sK0 X0]
+    conv => enter [1]; rw [h4293 sK0 X0]
+  have l20 : ∀ sK0 : G, (sK0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0)))) = (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [l18 sK0]
+    conv => enter [1]; rw [h4293 (sK0 ◇ sK0) sK0]
+  have l21 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) = ((sK0 ◇ sK0) ◇ (sK0 ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [← h4512 sK0 (sK0 ◇ sK0) X0]
+    conv => enter [1]; rw [l17 sK0 X0]
+  have l22 : ∀ sK0 : G, ((sK0 ◇ sK0) ◇ (sK0 ◇ sK0)) = (sK0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK0
+    conv => enter [1]; rw [← h4512 sK0 sK0 (sK0 ◇ sK0)]
+    conv => enter [1]; rw [← l20 sK0]
+  have l23 : ∀ sK0 : G, ((sK0 ◇ sK0) ◇ (sK0 ◇ sK0)) = (sK0 ◇ (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK0
+    conv => enter [1]; rw [l22 sK0]
+    conv => enter [1, 2]; rw [l8 sK0]
+  have l24 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ sK0) ◇ (sK0 ◇ sK0)) := by
+    intro sK0
+    conv => enter [1]; rw [l3 sK0 sK0]
+    conv => enter [1]; rw [← l23 sK0]
+  have l25 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [l24 sK0]
+    conv => enter [1]; rw [← h4512 sK0 sK0 (sK0 ◇ sK0)]
+  have l26 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ sK0) ◇ sK0) := by
+    intro sK0
+    conv => enter [1]; rw [← l25 sK0]
+    conv => enter [1]; rw [← l19 sK0 sK0]
+  have l27 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [h4512 sK0 sK0 sK0]
+    conv => enter [1]; rw [← l26 sK0]
+  have l28 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) = (sK0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1, 1]; rw [l27 sK0]
+    conv => enter [1]; rw [← h4512 sK0 (sK0 ◇ (sK0 ◇ sK0)) X0]
+  have l29 : ∀ sK2 sK1 sK0 : G, ((sK2 ◇ sK1) ◇ (sK0 ◇ ((sK2 ◇ sK1) ◇ (sK1 ◇ (sK2 ◇ sK1))))) = (sK2 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK2 sK1 sK0
+    conv => enter [1]; rw [← h4512 sK2 sK1 (sK0 ◇ ((sK2 ◇ sK1) ◇ (sK1 ◇ (sK2 ◇ sK1))))]
+    conv => enter [1, 2]; rw [← l7 sK0 sK1 sK2]
+  have l30 : ∀ sK2 sK0 sK1 : G, (sK2 ◇ (sK0 ◇ (sK0 ◇ sK0))) = (sK0 ◇ (sK0 ◇ (sK0 ◇ (sK1 ◇ (sK2 ◇ sK1))))) := by
+    intro sK2 sK0 sK1
+    conv => enter [1]; rw [← l29 sK2 sK1 sK0]
+    conv => enter [1]; rw [l16 (sK2 ◇ sK1) sK0 (sK1 ◇ (sK2 ◇ sK1))]
+  have l31 : ∀ sK2 sK0 sK1 : G, (sK2 ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK1 ◇ (sK2 ◇ sK1)))) := by
+    intro sK2 sK0 sK1
+    conv => enter [1]; rw [l30 sK2 sK0 sK1]
+    conv => enter [1]; rw [h4512 sK0 sK0 (sK0 ◇ (sK1 ◇ (sK2 ◇ sK1)))]
+  have l32 : ∀ sK2 sK0 sK1 : G, (sK2 ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK1 ◇ (sK2 ◇ sK1))) := by
+    intro sK2 sK0 sK1
+    conv => enter [1]; rw [l31 sK2 sK0 sK1]
+    conv => enter [1]; rw [← l21 sK0 (sK1 ◇ (sK2 ◇ sK1))]
+  have l33 : ∀ X0 sK2 sK0 sK1 : G, (X0 ◇ (sK2 ◇ X0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK1 ◇ (sK2 ◇ sK1)))) := by
+    intro X0 sK2 sK0 sK1
+    conv => enter [1]; rw [l0 X0 sK2 (sK0 ◇ (sK0 ◇ sK0))]
+    conv => enter [1, 2]; rw [l32 sK2 sK0 sK1]
+  have l34 : ∀ X0 sK2 sK0 sK1 : G, (X0 ◇ (sK2 ◇ X0)) = (sK0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK1 ◇ (sK2 ◇ sK1)))) := by
+    intro X0 sK2 sK0 sK1
+    conv => enter [1]; rw [l33 X0 sK2 sK0 sK1]
+    conv => enter [1]; rw [l13 sK0 (sK1 ◇ (sK2 ◇ sK1))]
+  have l35 : ∀ sK0 sK1 sK2 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK1 ◇ (sK2 ◇ sK1))) = (X0 ◇ (sK2 ◇ X0)) := by
+    intro sK0 sK1 sK2 X0
+    conv => enter [1]; rw [l28 sK0 (sK1 ◇ (sK2 ◇ sK1))]
+    conv => enter [1]; rw [← l34 X0 sK2 sK0 sK1]
+  have l36 : ∀ sK1 sK2 sK0 : G, (sK1 ◇ (sK2 ◇ sK1)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK1 ◇ (sK2 ◇ sK1))) := by
+    intro sK1 sK2 sK0
+    conv => enter [1]; rw [← l35 sK0 sK1 sK2 sK1]
+  have l37 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK1 ◇ (sK2 ◇ sK1)) ◇ (sK1 ◇ (sK2 ◇ sK1))) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l10 sK0 (sK1 ◇ (sK2 ◇ sK1))]
+    conv => enter [1, 2]; rw [← l36 sK1 sK2 sK0]
+  have l38 : ∀ sK0 X0 sK1 sK2 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) = ((sK1 ◇ (sK2 ◇ sK1)) ◇ ((sK1 ◇ (sK2 ◇ sK1)) ◇ X0)) := by
+    intro sK0 X0 sK1 sK2
+    conv => enter [1, 1]; rw [l37 sK0 sK1 sK2]
+    conv => enter [1]; rw [← h4512 (sK1 ◇ (sK2 ◇ sK1)) (sK1 ◇ (sK2 ◇ sK1)) X0]
+  have l39 : ∀ sK1 sK2 : G, (sK1 ◇ (sK2 ◇ sK1)) = ((sK2 ◇ sK2) ◇ (sK1 ◇ (sK2 ◇ sK1))) := by
+    intro sK1 sK2
+    conv => enter [1]; rw [l0 sK1 sK2 (sK2 ◇ sK2)]
+    conv => enter [1, 2]; rw [l0 sK2 sK2 sK1]
+  have l40 : ∀ sK1 sK2 : G, (sK1 ◇ (sK2 ◇ sK1)) = (sK2 ◇ (sK2 ◇ (sK1 ◇ (sK2 ◇ sK1)))) := by
+    intro sK1 sK2
+    conv => enter [1]; rw [l39 sK1 sK2]
+    conv => enter [1]; rw [← h4512 sK2 sK2 (sK1 ◇ (sK2 ◇ sK1))]
+  have l41 : ∀ sK1 sK2 : G, (sK1 ◇ (sK2 ◇ sK1)) = ((sK1 ◇ (sK2 ◇ sK1)) ◇ ((sK1 ◇ (sK2 ◇ sK1)) ◇ sK2)) := by
+    intro sK1 sK2
+    conv => enter [1]; rw [l40 sK1 sK2]
+    conv => enter [1]; rw [h4293 sK2 (sK1 ◇ (sK2 ◇ sK1))]
+  have l42 : ∀ sK1 sK2 sK0 : G, (sK1 ◇ (sK2 ◇ sK1)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ sK2) := by
+    intro sK1 sK2 sK0
+    conv => enter [1]; rw [l41 sK1 sK2]
+    conv => enter [1]; rw [← l38 sK0 sK2 sK1 sK2]
+  have l43 : ∀ sK0 sK2 sK1 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK2 ◇ (sK1 ◇ (sK2 ◇ sK1))) := by
+    intro sK0 sK2 sK1
+    conv => enter [1]; rw [l10 sK0 sK2]
+    conv => enter [1, 2]; rw [← l42 sK1 sK2 sK0]
+  have l44 : ∀ sK1 sK2 sK0 : G, (sK1 ◇ (sK2 ◇ sK1)) = ((sK1 ◇ (sK2 ◇ sK1)) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK1 sK2 sK0
+    conv => enter [1]; rw [l0 sK1 sK2 (sK1 ◇ (sK2 ◇ sK1))]
+    conv => enter [1, 2]; rw [← l43 sK0 sK2 sK1]
+  have l45 : ∀ sK1 sK2 sK0 : G, ((sK1 ◇ (sK2 ◇ sK1)) ◇ (sK1 ◇ (sK2 ◇ sK1))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK1 ◇ (sK2 ◇ sK1)))) := by
+    intro sK1 sK2 sK0
+    conv => enter [1, 2]; rw [l44 sK1 sK2 sK0]
+    conv => enter [1]; rw [h4293 (sK1 ◇ (sK2 ◇ sK1)) (sK0 ◇ (sK0 ◇ sK0))]
+  have l46 : ∀ sK1 sK2 sK0 : G, ((sK1 ◇ (sK2 ◇ sK1)) ◇ (sK1 ◇ (sK2 ◇ sK1))) = (sK0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK1 ◇ (sK2 ◇ sK1)))) := by
+    intro sK1 sK2 sK0
+    conv => enter [1]; rw [l45 sK1 sK2 sK0]
+    conv => enter [1]; rw [l13 sK0 (sK1 ◇ (sK2 ◇ sK1))]
+  have l47 : ∀ sK1 sK2 sK0 : G, ((sK1 ◇ (sK2 ◇ sK1)) ◇ (sK1 ◇ (sK2 ◇ sK1))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK1 ◇ (sK2 ◇ sK1))) := by
+    intro sK1 sK2 sK0
+    conv => enter [1]; rw [l46 sK1 sK2 sK0]
+    conv => enter [1]; rw [← l28 sK0 (sK1 ◇ (sK2 ◇ sK1))]
+  have l48 : ∀ sK1 sK2 : G, (sK1 ◇ (sK2 ◇ sK1)) = ((sK1 ◇ (sK2 ◇ sK1)) ◇ (sK1 ◇ (sK2 ◇ sK1))) := by
+    intro sK1 sK2
+    conv => enter [1]; rw [l36 sK1 sK2 sK1]
+    conv => enter [1]; rw [← l47 sK1 sK2 sK1]
+  have l49 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK1 ◇ (sK2 ◇ sK1)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l37 sK0 sK1 sK2]
+    conv => enter [1]; rw [← l48 sK1 sK2]
+  intro x y z
+  conv => enter [1]; rw [l49 x y z]
+
+theorem Equation4273_4321_implies_Equation4279 (G : Type*) [Magma G] (h4273 : Equation4273 G) (h4321 : Equation4321 G) : Equation4279 G := by
+  have l0 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK0 ◇ (X0 ◇ sK0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [h4273 sK0 X0]
+    conv => enter [1]; rw [h4321 X0 sK0]
+  have l1 : ∀ X0 sK0 : G, (X0 ◇ (X0 ◇ X0)) = (sK0 ◇ (sK0 ◇ sK0)) := by
+    intro X0 sK0
+    conv => enter [1]; rw [h4273 X0 sK0]
+    conv => enter [1]; rw [← l0 sK0 X0]
+  have l2 : ∀ X1 X0 sK0 : G, (X1 ◇ (X0 ◇ X1)) = (sK0 ◇ (sK0 ◇ sK0)) := by
+    intro X1 X0 sK0
+    conv => enter [1]; rw [← h4273 X0 X1]
+    conv => enter [1]; rw [l1 X0 sK0]
+  intro x y z
+  conv => enter [1]; rw [← l2 y z x]
+
+theorem Equation4273_4320_implies_Equation4325 (G : Type*) [Magma G] (h4273 : Equation4273 G) (h4320 : Equation4320 G) : Equation4325 G := by
+  have l0 : ∀ sK2 sK1 X0 : G, ((sK2 ◇ sK2) ◇ (sK1 ◇ (sK2 ◇ sK2))) = (X0 ◇ (sK1 ◇ X0)) := by
+    intro sK2 sK1 X0
+    conv => enter [1]; rw [← h4273 sK1 (sK2 ◇ sK2)]
+    conv => enter [1]; rw [h4273 sK1 X0]
+  have l1 : ∀ sK2 sK1 X0 : G, ((sK2 ◇ sK2) ◇ (sK1 ◇ (sK2 ◇ sK2))) = (sK1 ◇ (X0 ◇ X0)) := by
+    intro sK2 sK1 X0
+    conv => enter [1]; rw [l0 sK2 sK1 X0]
+    conv => enter [1]; rw [h4320 X0 sK1]
+  have l2 : ∀ sK0 sK1 X0 : G, (sK0 ◇ (sK1 ◇ sK0)) = (sK1 ◇ (X0 ◇ X0)) := by
+    intro sK0 sK1 X0
+    conv => enter [1]; rw [← l0 sK0 sK1 sK0]
+    conv => enter [1]; rw [l1 sK0 sK1 X0]
+  intro x y z
+  conv => enter [1]; rw [l2 x y z]
+
+theorem Equation4273_4283_implies_Equation4305 (G : Type*) [Magma G] (h4273 : Equation4273 G) (h4283 : Equation4283 G) : Equation4305 G := by
+  have l0 : ∀ sK2 sK1 X0 : G, (sK2 ◇ (sK1 ◇ sK2)) = (X0 ◇ (sK1 ◇ X0)) := by
+    intro sK2 sK1 X0
+    conv => enter [1]; rw [← h4273 sK1 sK2]
+    conv => enter [1]; rw [h4273 sK1 X0]
+  have l1 : ∀ sK2 sK1 X0 : G, (sK2 ◇ (sK1 ◇ sK2)) = (X0 ◇ (X0 ◇ sK1)) := by
+    intro sK2 sK1 X0
+    conv => enter [1]; rw [l0 sK2 sK1 X0]
+    conv => enter [1]; rw [← h4283 X0 sK1]
+  intro x y z
+  conv => enter [1]; rw [← l1 z y x]
+
+theorem Equation4273_4314_implies_Equation4331 (G : Type*) [Magma G] (h4273 : Equation4273 G) (h4314 : Equation4314 G) : Equation4331 G := by
+  have l0 : ∀ sK1 X0 : G, (sK1 ◇ (sK1 ◇ sK1)) = (X0 ◇ (sK1 ◇ sK1)) := by
+    intro sK1 X0
+    conv => enter [1]; rw [h4273 sK1 X0]
+    conv => enter [1]; rw [h4314 X0 sK1]
+  have l1 : ∀ sK0 sK1 X0 : G, (sK0 ◇ (sK1 ◇ sK0)) = (X0 ◇ (sK1 ◇ sK1)) := by
+    intro sK0 sK1 X0
+    conv => enter [1]; rw [← h4273 sK1 sK0]
+    conv => enter [1]; rw [l0 sK1 X0]
+  intro x y z
+  conv => enter [1]; rw [l1 x y z]
+
+theorem Equation4273_4291_implies_Equation4301 (G : Type*) [Magma G] (h4273 : Equation4273 G) (h4291 : Equation4291 G) : Equation4301 G := by
+  have l0 : ∀ sK2 sK0 X0 : G, (sK2 ◇ (sK0 ◇ sK2)) = (X0 ◇ (sK0 ◇ X0)) := by
+    intro sK2 sK0 X0
+    conv => enter [1]; rw [← h4273 sK0 sK2]
+    conv => enter [1]; rw [h4273 sK0 X0]
+  have l1 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK1)) = (sK2 ◇ (sK0 ◇ sK2)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [h4291 sK0 sK1]
+    conv => enter [1]; rw [l0 sK1 sK0 sK2]
+  intro x y z
+  conv => enter [1]; rw [l1 x y z]
+
+theorem Equation4273_4284_4512_implies_Equation4279 (G : Type*) [Magma G] (h4273 : Equation4273 G) (h4284 : Equation4284 G) (h4512 : Equation4512 G) : Equation4279 G := by
+  have l0 : ∀ X0 X1 X2 : G, (X0 ◇ (X1 ◇ X0)) = (X2 ◇ (X1 ◇ X2)) := by
+    intro X0 X1 X2
+    conv => enter [1]; rw [← h4273 X1 X0]
+    conv => enter [1]; rw [h4273 X1 X2]
+  have l1 : ∀ sK0 : G, ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ sK0))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [h4273 (sK0 ◇ sK0) (sK0 ◇ (sK0 ◇ sK0))]
+    conv => enter [1, 2]; rw [← h4273 sK0 (sK0 ◇ sK0)]
+  have l2 : ∀ X0 sK0 : G, (X0 ◇ (X0 ◇ X0)) = ((sK0 ◇ X0) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro X0 sK0
+    conv => enter [1]; rw [h4273 X0 (sK0 ◇ X0)]
+    conv => enter [1, 2]; rw [← h4273 sK0 X0]
+  have l3 : ∀ X0 sK0 : G, (X0 ◇ (X0 ◇ X0)) = (sK0 ◇ (X0 ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro X0 sK0
+    conv => enter [1]; rw [l2 X0 sK0]
+    conv => enter [1]; rw [← h4512 sK0 X0 (sK0 ◇ (sK0 ◇ sK0))]
+  have l4 : ∀ sK2 sK1 X0 : G, ((sK2 ◇ sK1) ◇ (sK1 ◇ (sK2 ◇ sK1))) = (X0 ◇ (sK1 ◇ X0)) := by
+    intro sK2 sK1 X0
+    conv => enter [1]; rw [← h4273 sK1 (sK2 ◇ sK1)]
+    conv => enter [1]; rw [h4273 sK1 X0]
+  have l5 : ∀ sK0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) = (((sK0 ◇ sK0) ◇ (sK0 ◇ sK0)) ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK0
+    conv => enter [1]; rw [← l1 sK0]
+    conv => enter [1]; rw [h4273 (sK0 ◇ sK0) ((sK0 ◇ sK0) ◇ (sK0 ◇ sK0))]
+    conv => enter [1, 2]; rw [l1 sK0]
+  have l6 : ∀ sK0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))))) := by
+    intro sK0
+    conv => enter [1]; rw [l5 sK0]
+    conv => enter [1]; rw [← h4512 (sK0 ◇ sK0) (sK0 ◇ sK0) ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0)))]
+  have l7 : ∀ sK0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))))) := by
+    intro sK0
+    conv => enter [1]; rw [l6 sK0]
+    conv => enter [1, 2]; rw [← h4284 (sK0 ◇ sK0) (sK0 ◇ (sK0 ◇ sK0))]
+  have l8 : ∀ sK0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK0
+    conv => enter [1]; rw [l7 sK0]
+    conv => enter [1, 2, 2]; rw [← h4273 sK0 (sK0 ◇ sK0)]
+  have l9 : ∀ sK0 : G, ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1, 2]; rw [h4273 sK0 (sK0 ◇ sK0)]
+    conv => enter [1]; rw [← l8 sK0]
+  have l10 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [h4273 sK0 (sK0 ◇ sK0)]
+    conv => enter [1]; rw [l9 sK0]
+  have l11 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) = (X0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1, 2]; rw [l10 sK0]
+    conv => enter [1]; rw [h4273 (sK0 ◇ (sK0 ◇ sK0)) X0]
+  have l12 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l10 sK0]
+    conv => enter [1]; rw [l11 sK0 X0]
+  have l13 : ∀ sK2 sK1 sK0 : G, ((sK2 ◇ sK1) ◇ (sK1 ◇ (sK2 ◇ sK1))) = ((sK0 ◇ sK1) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK2 sK1 sK0
+    conv => enter [1]; rw [l4 sK2 sK1 (sK0 ◇ sK1)]
+    conv => enter [1, 2]; rw [← h4273 sK0 sK1]
+  have l14 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK1 ◇ (sK0 ◇ (sK0 ◇ sK0))) ◇ ((sK2 ◇ sK1) ◇ (sK1 ◇ (sK2 ◇ sK1)))) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l12 sK0 (sK1 ◇ (sK0 ◇ (sK0 ◇ sK0)))]
+    conv => enter [1, 2]; rw [← l4 sK2 sK1 (sK0 ◇ (sK0 ◇ sK0))]
+  have l15 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK1 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ ((sK2 ◇ sK1) ◇ (sK1 ◇ (sK2 ◇ sK1))))) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l14 sK0 sK1 sK2]
+    conv => enter [1]; rw [← h4512 sK1 (sK0 ◇ (sK0 ◇ sK0)) ((sK2 ◇ sK1) ◇ (sK1 ◇ (sK2 ◇ sK1)))]
+  have l16 : ∀ sK2 sK1 sK0 : G, ((sK2 ◇ sK1) ◇ (sK1 ◇ (sK2 ◇ sK1))) = (sK0 ◇ (sK1 ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK2 sK1 sK0
+    conv => enter [1]; rw [l13 sK2 sK1 sK0]
+    conv => enter [1]; rw [← h4512 sK0 sK1 (sK0 ◇ (sK0 ◇ sK0))]
+  have l17 : ∀ sK0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) = (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [← h4512 sK0 (sK0 ◇ sK0) (sK0 ◇ (sK0 ◇ sK0))]
+    conv => enter [1, 2]; rw [← h4273 sK0 (sK0 ◇ sK0)]
+  have l18 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [l10 sK0]
+    conv => enter [1]; rw [l17 sK0]
+  have l19 : ∀ X0 sK0 : G, (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) = (X0 ◇ (X0 ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro X0 sK0
+    conv => enter [1, 2]; rw [l10 sK0]
+    conv => enter [1]; rw [← h4284 X0 (sK0 ◇ (sK0 ◇ sK0))]
+  have l20 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (((sK0 ◇ (sK0 ◇ sK0)) ◇ sK0) ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [l12 sK0 ((sK0 ◇ (sK0 ◇ sK0)) ◇ sK0)]
+    conv => enter [1, 2]; rw [h4284 (sK0 ◇ (sK0 ◇ sK0)) sK0]
+  have l21 : ∀ sK0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ sK0)))) := by
+    intro sK0
+    conv => enter [1]; rw [l20 sK0]
+    conv => enter [1]; rw [← h4512 (sK0 ◇ (sK0 ◇ sK0)) sK0 ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ sK0))]
+  have l22 : ∀ X1 X0 X2 : G, (X1 ◇ ((X0 ◇ X1) ◇ X2)) = ((X0 ◇ (X0 ◇ X0)) ◇ X2) := by
+    intro X1 X0 X2
+    conv => enter [1]; rw [h4512 X1 (X0 ◇ X1) X2]
+    conv => enter [1, 1]; rw [← h4273 X0 X1]
+  have l23 : ∀ X0 sK0 X1 : G, (X0 ◇ ((sK0 ◇ X0) ◇ X1)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ X1) := by
+    intro X0 sK0 X1
+    conv => enter [1]; rw [h4512 X0 (sK0 ◇ X0) X1]
+    conv => enter [1, 1]; rw [← h4273 sK0 X0]
+  have l24 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) = (sK0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1, 1]; rw [l18 sK0]
+    conv => enter [1]; rw [← h4512 sK0 (sK0 ◇ (sK0 ◇ sK0)) X0]
+  have l25 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1, 1]; rw [l10 sK0]
+    conv => enter [1]; rw [← h4512 (sK0 ◇ (sK0 ◇ sK0)) (sK0 ◇ (sK0 ◇ sK0)) X0]
+  have l26 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ ((sK0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ sK0))) ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1, 1]; rw [l21 sK0]
+    conv => enter [1]; rw [← h4512 (sK0 ◇ (sK0 ◇ sK0)) (sK0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ sK0))) X0]
+  have l27 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ sK0)) ◇ X0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l26 sK0 X0]
+    conv => enter [1, 2]; rw [← h4512 sK0 ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ sK0)) X0]
+  have l28 : ∀ sK0 X1 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X1) = (X0 ◇ (sK0 ◇ (X0 ◇ X1))) := by
+    intro sK0 X1 X0
+    conv => enter [1]; rw [← l23 X0 sK0 X1]
+    conv => enter [1, 2]; rw [← h4512 sK0 X0 X1]
+  have l29 : ∀ X1 X0 X2 : G, (X1 ◇ ((X0 ◇ X1) ◇ X2)) = (X0 ◇ ((X0 ◇ X0) ◇ X2)) := by
+    intro X1 X0 X2
+    conv => enter [1]; rw [l22 X1 X0 X2]
+    conv => enter [1]; rw [← h4512 X0 (X0 ◇ X0) X2]
+  have l30 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ ((sK0 ◇ sK0) ◇ X0)))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l27 sK0 X0]
+    conv => enter [1, 2, 2]; rw [← h4512 (sK0 ◇ (sK0 ◇ sK0)) (sK0 ◇ sK0) X0]
+  have l31 : ∀ X1 X0 X2 : G, (X1 ◇ ((X0 ◇ X1) ◇ X2)) = (X0 ◇ (X0 ◇ (X0 ◇ X2))) := by
+    intro X1 X0 X2
+    conv => enter [1]; rw [l29 X1 X0 X2]
+    conv => enter [1, 2]; rw [← h4512 X0 X0 X2]
+  have l32 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ ((sK0 ◇ sK0) ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l30 sK0 X0]
+    conv => enter [1]; rw [← l28 sK0 ((sK0 ◇ sK0) ◇ X0) (sK0 ◇ (sK0 ◇ sK0))]
+  have l33 : ∀ X1 X0 X2 : G, (X1 ◇ (X0 ◇ (X1 ◇ X2))) = (X0 ◇ (X0 ◇ (X0 ◇ X2))) := by
+    intro X1 X0 X2
+    conv => enter [1, 2]; rw [h4512 X0 X1 X2]
+    conv => enter [1]; rw [l31 X1 X0 X2]
+  have l34 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (X0 ◇ X0)) = (sK0 ◇ ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ X0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [← h4512 sK0 (sK0 ◇ sK0) (X0 ◇ X0)]
+    conv => enter [1, 2]; rw [← h4284 (sK0 ◇ sK0) X0]
+  have l35 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (X0 ◇ X0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ ((sK0 ◇ sK0) ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l34 sK0 X0]
+    conv => enter [1]; rw [h4512 sK0 (sK0 ◇ sK0) ((sK0 ◇ sK0) ◇ X0)]
+  have l36 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (X0 ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l32 sK0 X0]
+    conv => enter [1]; rw [← l35 sK0 X0]
+  have l37 : ∀ sK1 sK2 X0 : G, ((sK1 ◇ (sK2 ◇ sK1)) ◇ ((sK2 ◇ sK1) ◇ (sK2 ◇ sK1))) = (sK1 ◇ (X0 ◇ ((sK2 ◇ sK1) ◇ X0))) := by
+    intro sK1 sK2 X0
+    conv => enter [1]; rw [← h4512 sK1 (sK2 ◇ sK1) ((sK2 ◇ sK1) ◇ (sK2 ◇ sK1))]
+    conv => enter [1, 2]; rw [h4273 (sK2 ◇ sK1) X0]
+  have l38 : ∀ sK1 sK2 : G, (sK1 ◇ (sK1 ◇ (sK2 ◇ sK1))) = ((sK1 ◇ (sK2 ◇ sK1)) ◇ (sK2 ◇ sK1)) := by
+    intro sK1 sK2
+    conv => enter [1]; rw [h4284 sK1 (sK2 ◇ sK1)]
+    conv => enter [1]; rw [h4512 sK1 (sK2 ◇ sK1) (sK2 ◇ sK1)]
+  have l39 : ∀ sK1 sK2 X0 : G, ((sK1 ◇ (sK2 ◇ sK1)) ◇ ((sK2 ◇ sK1) ◇ X0)) = ((sK1 ◇ (sK1 ◇ (sK2 ◇ sK1))) ◇ X0) := by
+    intro sK1 sK2 X0
+    conv => enter [1]; rw [h4512 (sK1 ◇ (sK2 ◇ sK1)) (sK2 ◇ sK1) X0]
+    conv => enter [1, 1]; rw [← l38 sK1 sK2]
+  have l40 : ∀ sK1 sK2 : G, ((sK1 ◇ (sK2 ◇ sK1)) ◇ ((sK2 ◇ sK1) ◇ (sK2 ◇ sK1))) = ((sK1 ◇ (sK2 ◇ sK1)) ◇ (sK1 ◇ (sK1 ◇ (sK2 ◇ sK1)))) := by
+    intro sK1 sK2
+    conv => enter [1]; rw [← h4284 (sK1 ◇ (sK2 ◇ sK1)) (sK2 ◇ sK1)]
+    conv => enter [1, 2]; rw [← l38 sK1 sK2]
+  have l41 : ∀ sK1 sK2 : G, (sK1 ◇ (sK1 ◇ sK1)) = ((sK1 ◇ (sK2 ◇ sK1)) ◇ ((sK2 ◇ sK1) ◇ (sK2 ◇ sK1))) := by
+    intro sK1 sK2
+    conv => enter [1]; rw [h4273 sK1 (sK1 ◇ (sK2 ◇ sK1))]
+    conv => enter [1]; rw [← l40 sK1 sK2]
+  have l42 : ∀ sK1 sK2 X0 : G, ((sK1 ◇ (sK2 ◇ sK1)) ◇ ((sK2 ◇ sK1) ◇ X0)) = (sK1 ◇ ((sK1 ◇ (sK2 ◇ sK1)) ◇ X0)) := by
+    intro sK1 sK2 X0
+    conv => enter [1]; rw [l39 sK1 sK2 X0]
+    conv => enter [1]; rw [← h4512 sK1 (sK1 ◇ (sK2 ◇ sK1)) X0]
+  have l43 : ∀ sK2 sK1 : G, ((sK2 ◇ sK1) ◇ (sK1 ◇ (sK2 ◇ sK1))) = ((sK1 ◇ (sK2 ◇ sK1)) ◇ ((sK2 ◇ sK1) ◇ (sK2 ◇ sK1))) := by
+    intro sK2 sK1
+    conv => enter [1]; rw [← h4273 sK1 (sK2 ◇ sK1)]
+    conv => enter [1]; rw [l41 sK1 sK2]
+  have l44 : ∀ sK2 sK1 : G, ((sK2 ◇ sK1) ◇ (sK1 ◇ (sK2 ◇ sK1))) = (sK1 ◇ ((sK1 ◇ (sK2 ◇ sK1)) ◇ (sK2 ◇ sK1))) := by
+    intro sK2 sK1
+    conv => enter [1]; rw [l43 sK2 sK1]
+    conv => enter [1]; rw [l42 sK1 sK2 (sK2 ◇ sK1)]
+  have l45 : ∀ sK2 sK1 : G, ((sK2 ◇ sK1) ◇ (sK1 ◇ (sK2 ◇ sK1))) = (sK1 ◇ (sK1 ◇ (sK1 ◇ (sK2 ◇ sK1)))) := by
+    intro sK2 sK1
+    conv => enter [1]; rw [l44 sK2 sK1]
+    conv => enter [1, 2]; rw [← l38 sK1 sK2]
+  have l46 : ∀ sK2 sK0 sK1 : G, (sK2 ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK2 ◇ sK1) ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ ((sK2 ◇ sK1) ◇ (sK1 ◇ (sK2 ◇ sK1))))) := by
+    intro sK2 sK0 sK1
+    conv => enter [1, 2]; rw [l15 sK0 sK1 sK2]
+    conv => enter [1]; rw [h4512 sK2 sK1 ((sK0 ◇ (sK0 ◇ sK0)) ◇ ((sK2 ◇ sK1) ◇ (sK1 ◇ (sK2 ◇ sK1))))]
+  have l47 : ∀ sK2 sK1 X0 : G, (sK2 ◇ (sK1 ◇ (sK1 ◇ X0))) = ((sK2 ◇ sK1) ◇ (X0 ◇ X0)) := by
+    intro sK2 sK1 X0
+    conv => enter [1, 2]; rw [h4284 sK1 X0]
+    conv => enter [1]; rw [h4512 sK2 sK1 (X0 ◇ X0)]
+  have l48 : ∀ sK2 sK1 X0 : G, (sK2 ◇ (sK2 ◇ sK2)) = ((sK1 ◇ X0) ◇ ((sK2 ◇ sK1) ◇ X0)) := by
+    intro sK2 sK1 X0
+    conv => enter [1]; rw [h4273 sK2 (sK1 ◇ X0)]
+    conv => enter [1, 2]; rw [h4512 sK2 sK1 X0]
+  have l49 : ∀ sK2 sK1 X0 : G, (sK2 ◇ (sK2 ◇ sK2)) = (sK1 ◇ (X0 ◇ ((sK2 ◇ sK1) ◇ X0))) := by
+    intro sK2 sK1 X0
+    conv => enter [1]; rw [l48 sK2 sK1 X0]
+    conv => enter [1]; rw [← h4512 sK1 X0 ((sK2 ◇ sK1) ◇ X0)]
+  have l50 : ∀ sK2 sK1 X0 : G, ((sK2 ◇ sK1) ◇ (sK1 ◇ X0)) = ((sK2 ◇ sK1) ◇ (X0 ◇ X0)) := by
+    intro sK2 sK1 X0
+    conv => enter [1]; rw [← h4512 sK2 sK1 (sK1 ◇ X0)]
+    conv => enter [1]; rw [l47 sK2 sK1 X0]
+  have l51 : ∀ sK2 sK0 sK1 : G, (sK2 ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK1 ◇ (sK2 ◇ sK1))))) := by
+    intro sK2 sK0 sK1
+    conv => enter [1]; rw [l46 sK2 sK0 sK1]
+    conv => enter [1]; rw [l33 (sK2 ◇ sK1) (sK0 ◇ (sK0 ◇ sK0)) (sK1 ◇ (sK2 ◇ sK1))]
+  have l52 : ∀ sK2 sK1 : G, (sK2 ◇ (sK2 ◇ sK2)) = ((sK1 ◇ (sK2 ◇ sK1)) ◇ ((sK2 ◇ sK1) ◇ (sK2 ◇ sK1))) := by
+    intro sK2 sK1
+    conv => enter [1]; rw [l49 sK2 sK1 sK2]
+    conv => enter [1]; rw [← l37 sK1 sK2 sK2]
+  have l53 : ∀ sK2 sK0 sK1 : G, (sK2 ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK1 ◇ (sK2 ◇ sK1)))) := by
+    intro sK2 sK0 sK1
+    conv => enter [1]; rw [l51 sK2 sK0 sK1]
+    conv => enter [1, 2]; rw [← l25 sK0 (sK1 ◇ (sK2 ◇ sK1))]
+  have l54 : ∀ sK2 sK1 : G, (sK2 ◇ (sK2 ◇ sK2)) = (sK1 ◇ ((sK1 ◇ (sK2 ◇ sK1)) ◇ (sK2 ◇ sK1))) := by
+    intro sK2 sK1
+    conv => enter [1]; rw [l52 sK2 sK1]
+    conv => enter [1]; rw [l42 sK1 sK2 (sK2 ◇ sK1)]
+  have l55 : ∀ sK2 sK0 sK1 : G, (sK2 ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK1 ◇ (sK2 ◇ sK1))) := by
+    intro sK2 sK0 sK1
+    conv => enter [1]; rw [l53 sK2 sK0 sK1]
+    conv => enter [1]; rw [← l25 sK0 (sK1 ◇ (sK2 ◇ sK1))]
+  have l56 : ∀ sK2 sK1 : G, (sK2 ◇ (sK2 ◇ sK2)) = (sK1 ◇ (sK1 ◇ (sK1 ◇ (sK2 ◇ sK1)))) := by
+    intro sK2 sK1
+    conv => enter [1]; rw [l54 sK2 sK1]
+    conv => enter [1, 2]; rw [← l38 sK1 sK2]
+  have l57 : ∀ sK2 sK1 : G, ((sK2 ◇ sK1) ◇ (sK1 ◇ (sK2 ◇ sK1))) = (sK2 ◇ (sK2 ◇ sK2)) := by
+    intro sK2 sK1
+    conv => enter [1]; rw [l45 sK2 sK1]
+    conv => enter [1]; rw [← l56 sK2 sK1]
+  have l58 : ∀ sK2 sK1 sK0 : G, ((sK2 ◇ sK1) ◇ (sK1 ◇ (sK2 ◇ sK1))) = (sK0 ◇ (sK2 ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK2 sK1 sK0
+    conv => enter [1]; rw [l57 sK2 sK1]
+    conv => enter [1]; rw [l3 sK2 sK0]
+  have l59 : ∀ sK2 sK1 sK0 : G, ((sK2 ◇ sK1) ◇ (sK1 ◇ (sK2 ◇ sK1))) = (sK0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK1 ◇ (sK2 ◇ sK1)))) := by
+    intro sK2 sK1 sK0
+    conv => enter [1]; rw [l58 sK2 sK1 sK0]
+    conv => enter [1, 2]; rw [l55 sK2 sK0 sK1]
+  have l60 : ∀ sK2 sK1 sK0 : G, ((sK2 ◇ sK1) ◇ (sK1 ◇ (sK2 ◇ sK1))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK1 ◇ (sK2 ◇ sK1))) := by
+    intro sK2 sK1 sK0
+    conv => enter [1]; rw [l59 sK2 sK1 sK0]
+    conv => enter [1]; rw [← l24 sK0 (sK1 ◇ (sK2 ◇ sK1))]
+  have l61 : ∀ sK2 sK1 sK0 : G, ((sK2 ◇ sK1) ◇ ((sK2 ◇ sK1) ◇ (sK2 ◇ sK1))) = ((sK1 ◇ (sK2 ◇ sK1)) ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK1 ◇ (sK2 ◇ sK1)))) := by
+    intro sK2 sK1 sK0
+    conv => enter [1]; rw [h4273 (sK2 ◇ sK1) (sK1 ◇ (sK2 ◇ sK1))]
+    conv => enter [1, 2]; rw [l60 sK2 sK1 sK0]
+  have l62 : ∀ sK0 sK2 sK1 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0)))) = ((sK2 ◇ sK1) ◇ ((sK2 ◇ sK1) ◇ (sK2 ◇ sK1))) := by
+    intro sK0 sK2 sK1
+    conv => enter [1]; rw [h4273 (sK0 ◇ (sK0 ◇ sK0)) (sK1 ◇ (sK2 ◇ sK1))]
+    conv => enter [1]; rw [← l61 sK2 sK1 sK0]
+  have l63 : ∀ sK2 sK1 sK0 : G, ((sK2 ◇ sK1) ◇ (sK1 ◇ (sK2 ◇ sK1))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK2 sK1 sK0
+    conv => enter [1]; rw [l50 sK2 sK1 (sK2 ◇ sK1)]
+    conv => enter [1]; rw [← l62 sK0 sK2 sK1]
+  have l64 : ∀ sK2 sK1 sK0 : G, ((sK2 ◇ sK1) ◇ (sK1 ◇ (sK2 ◇ sK1))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK2 sK1 sK0
+    conv => enter [1]; rw [l63 sK2 sK1 sK0]
+    conv => enter [1]; rw [← l36 sK0 (sK0 ◇ (sK0 ◇ sK0))]
+  have l65 : ∀ sK0 sK2 sK1 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK2 ◇ sK1) ◇ (sK1 ◇ (sK2 ◇ sK1))) := by
+    intro sK0 sK2 sK1
+    conv => enter [1]; rw [l10 sK0]
+    conv => enter [1]; rw [← l64 sK2 sK1 sK0]
+  have l66 : ∀ sK0 sK1 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK1 ◇ (sK1 ◇ sK1)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [l65 sK0 sK0 sK1]
+    conv => enter [1]; rw [← h4273 sK1 (sK0 ◇ sK1)]
+  have l67 : ∀ sK0 sK1 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK0 ◇ (sK1 ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [l66 sK0 sK1]
+    conv => enter [1]; rw [l3 sK1 sK0]
+  have l68 : ∀ sK0 sK2 sK1 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK2 ◇ sK1) ◇ (sK1 ◇ (sK2 ◇ sK1))) := by
+    intro sK0 sK2 sK1
+    conv => enter [1]; rw [l67 sK0 sK1]
+    conv => enter [1]; rw [← l16 sK2 sK1 sK0]
+  have l69 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK1 ◇ (sK2 ◇ sK1))) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l68 sK0 sK2 sK1]
+    conv => enter [1]; rw [l60 sK2 sK1 sK0]
+  have l70 : ∀ sK0 sK1 sK2 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK1 ◇ (sK2 ◇ sK1))) = (sK2 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK1 ◇ (sK2 ◇ sK1)))) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [← l55 sK2 sK0 sK1]
+    conv => enter [1]; rw [l19 sK2 sK0]
+    conv => enter [1, 2]; rw [l55 sK2 sK0 sK1]
+  have l71 : ∀ sK0 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK2 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 sK2
+    conv => enter [1]; rw [l69 sK0 sK0 sK2]
+    conv => enter [1]; rw [l70 sK0 sK0 sK2]
+    conv => enter [1, 2]; rw [← l69 sK0 sK0 sK2]
+  have l72 : ∀ sK0 X0 sK2 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) = (X0 ◇ (sK2 ◇ X0)) := by
+    intro sK0 X0 sK2
+    conv => enter [1, 2]; rw [l71 sK0 sK2]
+    conv => enter [1]; rw [l0 (sK0 ◇ (sK0 ◇ sK0)) sK2 X0]
+  have l73 : ∀ sK0 X0 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK2 ◇ X0)) := by
+    intro sK0 X0 sK2
+    conv => enter [1]; rw [l10 sK0]
+    conv => enter [1]; rw [l72 sK0 X0 sK2]
+  have l74 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK1 ◇ (sK2 ◇ sK1)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l73 sK0 sK0 sK2]
+    conv => enter [1]; rw [l0 sK0 sK2 sK1]
+  intro x y z
+  conv => enter [1]; rw [l74 x y z]
+
+theorem Equation4273_4276_4512_implies_Equation4279 (G : Type*) [Magma G] (h4273 : Equation4273 G) (h4276 : Equation4276 G) (h4512 : Equation4512 G) : Equation4279 G := by
+  have l0 : ∀ sK0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) = (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0
+    conv => enter [1]; rw [← h4512 sK0 (sK0 ◇ sK0) (sK0 ◇ (sK0 ◇ sK0))]
+    conv => enter [1, 2]; rw [← h4273 sK0 (sK0 ◇ sK0)]
+  have l1 : ∀ X0 sK0 : G, (X0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro X0 sK0
+    conv => enter [1]; rw [← h4273 (sK0 ◇ (sK0 ◇ sK0)) X0]
+    conv => enter [1, 2]; rw [l0 sK0]
+  have l2 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [h4273 sK0 (sK0 ◇ (sK0 ◇ sK0))]
+    conv => enter [1]; rw [← l1 X0 sK0]
+  have l3 : ∀ X0 sK0 : G, (X0 ◇ (X0 ◇ X0)) = (sK0 ◇ (sK0 ◇ sK0)) := by
+    intro X0 sK0
+    conv => enter [1]; rw [h4276 X0 (sK0 ◇ (sK0 ◇ sK0))]
+    conv => enter [1]; rw [← l2 sK0 (sK0 ◇ (sK0 ◇ sK0))]
+  have l4 : ∀ X1 X0 sK0 : G, (X1 ◇ (X0 ◇ X1)) = (sK0 ◇ (sK0 ◇ sK0)) := by
+    intro X1 X0 sK0
+    conv => enter [1]; rw [← h4273 X0 X1]
+    conv => enter [1]; rw [l3 X0 sK0]
+  intro x y z
+  conv => enter [1]; rw [← l4 y z x]
+
+theorem Equation4273_4275_implies_Equation4305 (G : Type*) [Magma G] (h4273 : Equation4273 G) (h4275 : Equation4275 G) : Equation4305 G := by
+  have l0 : ∀ sK2 sK1 X0 : G, (sK2 ◇ (sK1 ◇ sK2)) = (X0 ◇ (X0 ◇ sK1)) := by
+    intro sK2 sK1 X0
+    conv => enter [1]; rw [← h4273 sK1 sK2]
+    conv => enter [1]; rw [h4275 sK1 X0]
+  intro x y z
+  conv => enter [1]; rw [← l0 z y x]
+
+theorem Equation4270_4273_implies_Equation4325 (G : Type*) [Magma G] (h4270 : Equation4270 G) (h4273 : Equation4273 G) : Equation4325 G := by
+  have l0 : ∀ X0 X1 sK2 : G, (X0 ◇ (X1 ◇ X1)) = (X0 ◇ (sK2 ◇ sK2)) := by
+    intro X0 X1 sK2
+    conv => enter [1]; rw [← h4270 X0 X1]
+    conv => enter [1]; rw [h4270 X0 sK2]
+  have l1 : ∀ X0 X1 sK2 : G, (X0 ◇ (X1 ◇ X0)) = (X1 ◇ (sK2 ◇ sK2)) := by
+    intro X0 X1 sK2
+    conv => enter [1]; rw [← h4273 X1 X0]
+    conv => enter [1]; rw [l0 X1 X1 sK2]
+  intro x y z
+  conv => enter [1]; rw [l1 x y z]
+
+theorem Equation4272_4343_implies_Equation4280 (G : Type*) [Magma G] (h4272 : Equation4272 G) (h4343 : Equation4343 G) : Equation4280 G := by
+  have l0 : ∀ sK1 sK2 X0 : G, (sK1 ◇ (sK2 ◇ sK2)) = (X0 ◇ (sK2 ◇ sK2)) := by
+    intro sK1 sK2 X0
+    conv => enter [1]; rw [← h4272 sK2 sK1]
+    conv => enter [1]; rw [h4272 sK2 X0]
+  have l1 : ∀ sK1 sK2 X0 : G, (sK1 ◇ (sK2 ◇ sK2)) = (sK2 ◇ (X0 ◇ X0)) := by
+    intro sK1 sK2 X0
+    conv => enter [1]; rw [l0 sK1 sK2 X0]
+    conv => enter [1]; rw [h4343 X0 sK2]
+  have l2 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK1 ◇ (sK2 ◇ sK2)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [h4272 sK0 sK2]
+    conv => enter [1]; rw [← l1 sK1 sK2 sK0]
+  intro x y z
+  conv => enter [1]; rw [l2 x y z]
+
+theorem Equation4268_4293_implies_Equation4277 (G : Type*) [Magma G] (h4268 : Equation4268 G) (h4293 : Equation4293 G) : Equation4277 G := by
+  have l0 : ∀ sK1 sK2 X0 : G, (sK1 ◇ (sK1 ◇ sK2)) = (sK1 ◇ (sK1 ◇ X0)) := by
+    intro sK1 sK2 X0
+    conv => enter [1]; rw [← h4268 sK1 sK2]
+    conv => enter [1]; rw [h4268 sK1 X0]
+  have l1 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (X0 ◇ sK0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [h4268 sK0 X0]
+    conv => enter [1]; rw [h4293 sK0 X0]
+  have l2 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK1 ◇ (sK1 ◇ sK2)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l1 sK0 sK1]
+    conv => enter [1]; rw [l0 sK1 sK0 sK2]
+  intro x y z
+  conv => enter [1]; rw [l2 x y z]
+
+theorem Equation4272_4321_4512_implies_Equation4280 (G : Type*) [Magma G] (h4272 : Equation4272 G) (h4321 : Equation4321 G) (h4512 : Equation4512 G) : Equation4280 G := by
+  have l0 : ∀ sK1 sK2 X0 : G, (sK1 ◇ (sK2 ◇ sK2)) = (X0 ◇ (sK2 ◇ sK2)) := by
+    intro sK1 sK2 X0
+    conv => enter [1]; rw [← h4272 sK2 sK1]
+    conv => enter [1]; rw [h4272 sK2 X0]
+  have l1 : ∀ sK0 X0 : G, ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))) = (X0 ◇ ((sK0 ◇ sK0) ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1, 2]; rw [h4272 sK0 X0]
+    conv => enter [1]; rw [h4321 (sK0 ◇ sK0) X0]
+  have l2 : ∀ sK0 sK2 sK1 : G, ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK2 ◇ sK2) ◇ (sK1 ◇ (sK2 ◇ sK2))) := by
+    intro sK0 sK2 sK1
+    conv => enter [1]; rw [l1 sK0 (sK2 ◇ sK2)]
+    conv => enter [1, 2]; rw [l0 (sK0 ◇ sK0) sK2 sK1]
+  have l3 : ∀ sK0 X0 X1 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (X1 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0 X1
+    conv => enter [1]; rw [h4272 sK0 (X0 ◇ X1)]
+    conv => enter [1]; rw [← h4512 X0 X1 (sK0 ◇ sK0)]
+  have l4 : ∀ sK1 sK2 X0 X1 : G, (sK1 ◇ (sK2 ◇ sK2)) = (X0 ◇ (X1 ◇ (sK2 ◇ sK2))) := by
+    intro sK1 sK2 X0 X1
+    conv => enter [1]; rw [l0 sK1 sK2 (X0 ◇ X1)]
+    conv => enter [1]; rw [← h4512 X0 X1 (sK2 ◇ sK2)]
+  have l5 : ∀ sK1 sK2 X0 : G, (sK1 ◇ (sK2 ◇ sK2)) = (X0 ◇ (sK1 ◇ (sK2 ◇ sK2))) := by
+    intro sK1 sK2 X0
+    conv => enter [1]; rw [l4 sK1 sK2 X0 sK1]
+  have l6 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l3 sK0 X0 sK0]
+  have l7 : ∀ sK1 sK2 sK0 : G, (sK1 ◇ (sK2 ◇ sK2)) = ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK1 sK2 sK0
+    conv => enter [1]; rw [l5 sK1 sK2 (sK2 ◇ sK2)]
+    conv => enter [1]; rw [← l2 sK0 sK2 sK1]
+  have l8 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK1 ◇ (sK2 ◇ sK2)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l6 sK0 (sK0 ◇ sK0)]
+    conv => enter [1]; rw [← l7 sK1 sK2 sK0]
+  intro x y z
+  conv => enter [1]; rw [l8 x y z]
+
+theorem Equation4268_4321_4512_implies_Equation4277 (G : Type*) [Magma G] (h4268 : Equation4268 G) (h4321 : Equation4321 G) (h4512 : Equation4512 G) : Equation4277 G := by
+  have l0 : ∀ sK1 sK2 X0 : G, (sK1 ◇ (sK1 ◇ sK2)) = (sK1 ◇ (sK1 ◇ X0)) := by
+    intro sK1 sK2 X0
+    conv => enter [1]; rw [← h4268 sK1 sK2]
+    conv => enter [1]; rw [h4268 sK1 X0]
+  have l1 : ∀ sK1 sK2 : G, (sK1 ◇ (sK1 ◇ sK2)) = (sK1 ◇ (sK1 ◇ (sK1 ◇ sK2))) := by
+    intro sK1 sK2
+    conv => enter [1]; rw [← h4268 sK1 sK2]
+    conv => enter [1]; rw [h4268 sK1 (sK1 ◇ sK1)]
+    conv => enter [1, 2]; rw [h4268 sK1 sK2]
+  have l2 : ∀ sK1 sK2 X1 X0 : G, ((sK1 ◇ (sK1 ◇ sK2)) ◇ X1) = (sK1 ◇ ((sK1 ◇ X0) ◇ X1)) := by
+    intro sK1 sK2 X1 X0
+    conv => enter [1, 1]; rw [l0 sK1 sK2 X0]
+    conv => enter [1]; rw [← h4512 sK1 (sK1 ◇ X0) X1]
+  have l3 : ∀ sK1 sK2 X1 X0 : G, ((sK1 ◇ (sK1 ◇ sK2)) ◇ X1) = (sK1 ◇ (sK1 ◇ (X0 ◇ X1))) := by
+    intro sK1 sK2 X1 X0
+    conv => enter [1]; rw [l2 sK1 sK2 X1 X0]
+    conv => enter [1, 2]; rw [← h4512 sK1 X0 X1]
+  have l4 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ sK0) ◇ X0) := by
+    intro sK0 X0
+    conv => enter [1]; rw [h4268 sK0 X0]
+    conv => enter [1]; rw [h4512 sK0 sK0 X0]
+  have l5 : ∀ sK1 sK2 X1 : G, (sK1 ◇ (sK1 ◇ sK1)) = ((sK1 ◇ (sK1 ◇ sK2)) ◇ X1) := by
+    intro sK1 sK2 X1
+    conv => enter [1]; rw [h4268 sK1 (sK1 ◇ X1)]
+    conv => enter [1]; rw [← l3 sK1 sK2 X1 sK1]
+  have l6 : ∀ sK1 sK2 X1 : G, (sK1 ◇ (sK1 ◇ (sK1 ◇ sK2))) = ((sK1 ◇ (sK1 ◇ sK2)) ◇ X1) := by
+    intro sK1 sK2 X1
+    conv => enter [1]; rw [← h4268 sK1 (sK1 ◇ sK2)]
+    conv => enter [1]; rw [l5 sK1 sK2 X1]
+  have l7 : ∀ sK1 sK2 X1 : G, (sK1 ◇ (sK1 ◇ sK2)) = ((sK1 ◇ (sK1 ◇ sK2)) ◇ X1) := by
+    intro sK1 sK2 X1
+    conv => enter [1]; rw [l1 sK1 sK2]
+    conv => enter [1]; rw [l6 sK1 sK2 X1]
+  have l8 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ ((sK0 ◇ sK0) ◇ X0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l4 sK0 (X0 ◇ (sK0 ◇ sK0))]
+    conv => enter [1]; rw [h4321 (sK0 ◇ sK0) X0]
+  have l9 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l8 sK0 X0]
+    conv => enter [1, 2]; rw [← l4 sK0 X0]
+  have l10 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK1 ◇ (sK1 ◇ sK2)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l9 sK0 (sK1 ◇ (sK1 ◇ sK2))]
+    conv => enter [1]; rw [← l7 sK1 sK2 (sK0 ◇ (sK0 ◇ sK0))]
+  intro x y z
+  conv => enter [1]; rw [l10 x y z]
+
+theorem Equation4272_4320_implies_Equation4327 (G : Type*) [Magma G] (h4272 : Equation4272 G) (h4320 : Equation4320 G) : Equation4327 G := by
+  have l0 : ∀ sK2 sK0 X0 : G, (sK2 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK0 ◇ sK0)) := by
+    intro sK2 sK0 X0
+    conv => enter [1]; rw [← h4272 sK0 sK2]
+    conv => enter [1]; rw [h4272 sK0 X0]
+  have l1 : ∀ sK2 sK0 X0 : G, (sK2 ◇ (sK0 ◇ sK0)) = (sK0 ◇ (X0 ◇ sK0)) := by
+    intro sK2 sK0 X0
+    conv => enter [1]; rw [l0 sK2 sK0 X0]
+    conv => enter [1]; rw [← h4320 sK0 X0]
+  intro x y z
+  conv => enter [1]; rw [← l1 z x y]
+
+theorem Equation4268_4283_implies_Equation4286 (G : Type*) [Magma G] (h4268 : Equation4268 G) (h4283 : Equation4283 G) : Equation4286 G := by
+  have l0 : ∀ sK0 sK1 : G, (sK0 ◇ (sK0 ◇ sK1)) = (sK0 ◇ (sK0 ◇ (sK0 ◇ sK1))) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [← h4268 sK0 sK1]
+    conv => enter [1]; rw [h4268 sK0 (sK0 ◇ sK0)]
+    conv => enter [1, 2]; rw [h4268 sK0 sK1]
+  have l1 : ∀ sK0 sK2 : G, (sK0 ◇ (sK2 ◇ sK0)) = (sK0 ◇ (sK0 ◇ sK0)) := by
+    intro sK0 sK2
+    conv => enter [1]; rw [← h4283 sK0 sK2]
+    conv => enter [1]; rw [← h4268 sK0 sK2]
+  have l2 : ∀ sK0 sK2 sK1 : G, (sK0 ◇ (sK2 ◇ sK0)) = (sK0 ◇ (sK0 ◇ (sK0 ◇ sK1))) := by
+    intro sK0 sK2 sK1
+    conv => enter [1]; rw [l1 sK0 sK2]
+    conv => enter [1]; rw [h4268 sK0 (sK0 ◇ sK1)]
+  have l3 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK1)) = (sK0 ◇ (sK2 ◇ sK0)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l0 sK0 sK1]
+    conv => enter [1]; rw [← l2 sK0 sK2 sK1]
+  intro x y z
+  conv => enter [1]; rw [l3 x y z]
+
+theorem Equation4272_4314_implies_Equation4331 (G : Type*) [Magma G] (h4272 : Equation4272 G) (h4314 : Equation4314 G) : Equation4331 G := by
+  have l0 : ∀ sK2 sK1 X0 : G, (sK2 ◇ (sK1 ◇ sK1)) = (X0 ◇ (sK1 ◇ sK1)) := by
+    intro sK2 sK1 X0
+    conv => enter [1]; rw [← h4272 sK1 sK2]
+    conv => enter [1]; rw [h4272 sK1 X0]
+  have l1 : ∀ sK2 sK1 X0 : G, (sK2 ◇ (sK1 ◇ sK1)) = (X0 ◇ (sK1 ◇ X0)) := by
+    intro sK2 sK1 X0
+    conv => enter [1]; rw [l0 sK2 sK1 X0]
+    conv => enter [1]; rw [← h4314 X0 sK1]
+  have l2 : ∀ sK0 sK1 : G, (sK0 ◇ (sK1 ◇ sK0)) = (sK1 ◇ (sK1 ◇ sK1)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [h4314 sK0 sK1]
+    conv => enter [1]; rw [← h4272 sK1 sK0]
+  have l3 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK1 ◇ sK0)) = (sK2 ◇ (sK1 ◇ sK1)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l2 sK0 sK1]
+    conv => enter [1]; rw [← l1 sK2 sK1 sK1]
+  intro x y z
+  conv => enter [1]; rw [l3 x y z]
+
+theorem Equation4268_4291_implies_Equation4301 (G : Type*) [Magma G] (h4268 : Equation4268 G) (h4291 : Equation4291 G) : Equation4301 G := by
+  have l0 : ∀ sK0 sK1 X0 : G, (sK0 ◇ (sK0 ◇ sK1)) = (sK0 ◇ (sK0 ◇ X0)) := by
+    intro sK0 sK1 X0
+    conv => enter [1]; rw [← h4268 sK0 sK1]
+    conv => enter [1]; rw [h4268 sK0 X0]
+  have l1 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK1)) = (sK2 ◇ (sK0 ◇ sK2)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l0 sK0 sK1 sK2]
+    conv => enter [1]; rw [h4291 sK0 sK2]
+  intro x y z
+  conv => enter [1]; rw [l1 x y z]
+
+theorem Equation4272_4293_4512_implies_Equation4280 (G : Type*) [Magma G] (h4272 : Equation4272 G) (h4293 : Equation4293 G) (h4512 : Equation4512 G) : Equation4280 G := by
+  have l0 : ∀ sK0 X0 : G, ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))) = (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1, 2]; rw [h4272 sK0 (sK0 ◇ sK0)]
+    conv => enter [1]; rw [h4272 (sK0 ◇ sK0) X0]
+    conv => enter [1, 2]; rw [← h4272 sK0 (sK0 ◇ sK0)]
+  have l1 : ∀ sK2 X0 : G, ((sK2 ◇ sK2) ◇ (sK2 ◇ (sK2 ◇ sK2))) = (X0 ◇ (sK2 ◇ (sK2 ◇ sK2))) := by
+    intro sK2 X0
+    conv => enter [1, 2]; rw [h4272 sK2 (sK2 ◇ sK2)]
+    conv => enter [1]; rw [h4272 (sK2 ◇ sK2) X0]
+    conv => enter [1, 2]; rw [← h4272 sK2 (sK2 ◇ sK2)]
+  have l2 : ∀ sK2 sK1 X0 : G, ((sK2 ◇ sK2) ◇ (sK1 ◇ (sK2 ◇ sK2))) = (X0 ◇ (sK1 ◇ (sK2 ◇ sK2))) := by
+    intro sK2 sK1 X0
+    conv => enter [1, 2]; rw [← h4272 sK2 sK1]
+    conv => enter [1]; rw [l1 sK2 X0]
+    conv => enter [1, 2]; rw [h4272 sK2 sK1]
+  have l3 : ∀ sK1 sK2 X0 : G, (sK1 ◇ (sK2 ◇ sK2)) = (X0 ◇ (sK2 ◇ sK2)) := by
+    intro sK1 sK2 X0
+    conv => enter [1]; rw [← h4272 sK2 sK1]
+    conv => enter [1]; rw [h4272 sK2 X0]
+  have l4 : ∀ X0 sK0 X1 : G, (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) = (X1 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro X0 sK0 X1
+    conv => enter [1]; rw [← l0 sK0 X0]
+    conv => enter [1]; rw [l0 sK0 X1]
+  have l5 : ∀ X0 sK1 sK2 X1 : G, (X0 ◇ (sK1 ◇ (sK2 ◇ sK2))) = (X1 ◇ (sK1 ◇ (sK2 ◇ sK2))) := by
+    intro X0 sK1 sK2 X1
+    conv => enter [1]; rw [← l2 sK2 sK1 X0]
+    conv => enter [1]; rw [l2 sK2 sK1 X1]
+  have l6 : ∀ X0 sK0 : G, (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ X0)) := by
+    intro X0 sK0
+    conv => enter [1, 2]; rw [h4272 sK0 X0]
+    conv => enter [1]; rw [h4293 X0 (sK0 ◇ sK0)]
+  have l7 : ∀ sK1 sK2 sK0 X0 : G, ((sK1 ◇ (sK2 ◇ sK2)) ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ sK0) ◇ (X0 ◇ (sK1 ◇ (sK2 ◇ sK2)))) := by
+    intro sK1 sK2 sK0 X0
+    conv => enter [1]; rw [l6 (sK1 ◇ (sK2 ◇ sK2)) sK0]
+    conv => enter [1, 2]; rw [l5 (sK0 ◇ sK0) sK1 sK2 X0]
+  have l8 : ∀ sK0 X0 sK1 sK2 : G, ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ sK0) ◇ (X0 ◇ (sK1 ◇ (sK2 ◇ sK2)))) := by
+    intro sK0 X0 sK1 sK2
+    conv => enter [1]; rw [l0 sK0 (sK1 ◇ (sK2 ◇ sK2))]
+    conv => enter [1]; rw [l7 sK1 sK2 sK0 X0]
+  have l9 : ∀ sK0 X0 sK1 sK2 : G, ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0)))) = ((X0 ◇ (sK1 ◇ (sK2 ◇ sK2))) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0 sK1 sK2
+    conv => enter [1, 2]; rw [l8 sK0 X0 sK1 sK2]
+    conv => enter [1]; rw [← l6 (X0 ◇ (sK1 ◇ (sK2 ◇ sK2))) sK0]
+  have l10 : ∀ sK0 X0 sK1 sK2 : G, ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0)))) = (X0 ◇ ((sK1 ◇ (sK2 ◇ sK2)) ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK0 X0 sK1 sK2
+    conv => enter [1]; rw [l9 sK0 X0 sK1 sK2]
+    conv => enter [1]; rw [← h4512 X0 (sK1 ◇ (sK2 ◇ sK2)) (sK0 ◇ (sK0 ◇ sK0))]
+  have l11 : ∀ X0 sK0 : G, (X0 ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0)))) = ((sK0 ◇ sK0) ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro X0 sK0
+    conv => enter [1, 2]; rw [l0 sK0 (X0 ◇ (X0 ◇ X0))]
+    conv => enter [1]; rw [← l10 sK0 X0 X0 X0]
+  have l12 : ∀ sK0 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ (sK0 ◇ (sK0 ◇ sK0))) = (X0 ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l6 (sK0 ◇ (sK0 ◇ sK0)) sK0]
+    conv => enter [1]; rw [← l11 X0 sK0]
+  have l13 : ∀ sK0 X0 : G, ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))) = (X0 ◇ ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l0 sK0 (sK0 ◇ (sK0 ◇ sK0))]
+    conv => enter [1]; rw [l12 sK0 X0]
+  have l14 : ∀ X0 sK0 X1 : G, (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) = (X1 ◇ (X0 ◇ (sK0 ◇ (sK0 ◇ sK0)))) := by
+    intro X0 sK0 X1
+    conv => enter [1]; rw [l4 X0 sK0 (sK0 ◇ sK0)]
+    conv => enter [1]; rw [l13 sK0 X1]
+    conv => enter [1, 2]; rw [l4 (sK0 ◇ sK0) sK0 X0]
+  have l15 : ∀ X0 sK0 : G, (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0)) := by
+    intro X0 sK0
+    conv => enter [1]; rw [l14 X0 sK0 X0]
+    conv => enter [1]; rw [h4293 X0 (sK0 ◇ (sK0 ◇ sK0))]
+  have l16 : ∀ X0 sK0 X1 : G, ((X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) ◇ X1) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ (((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) ◇ X1)) := by
+    intro X0 sK0 X1
+    conv => enter [1, 1]; rw [l15 X0 sK0]
+    conv => enter [1]; rw [← h4512 (sK0 ◇ (sK0 ◇ sK0)) ((sK0 ◇ (sK0 ◇ sK0)) ◇ X0) X1]
+  have l17 : ∀ sK0 X0 X1 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (X1 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0 X1
+    conv => enter [1]; rw [h4272 sK0 (X0 ◇ X1)]
+    conv => enter [1]; rw [← h4512 X0 X1 (sK0 ◇ sK0)]
+  have l18 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l17 sK0 X0 sK0]
+  have l19 : ∀ X0 sK0 X1 : G, ((X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) ◇ X1) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ (X0 ◇ X1))) := by
+    intro X0 sK0 X1
+    conv => enter [1]; rw [l16 X0 sK0 X1]
+    conv => enter [1, 2]; rw [← h4512 (sK0 ◇ (sK0 ◇ sK0)) X0 X1]
+  have l20 : ∀ X0 sK0 X1 : G, ((X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) ◇ X1) = ((X0 ◇ X1) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro X0 sK0 X1
+    conv => enter [1]; rw [l19 X0 sK0 X1]
+    conv => enter [1]; rw [← l15 (X0 ◇ X1) sK0]
+  have l21 : ∀ X0 X1 sK0 : G, (X0 ◇ (X1 ◇ (sK0 ◇ (sK0 ◇ sK0)))) = ((X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) ◇ X1) := by
+    intro X0 X1 sK0
+    conv => enter [1]; rw [h4512 X0 X1 (sK0 ◇ (sK0 ◇ sK0))]
+    conv => enter [1]; rw [← l20 X0 sK0 X1]
+  have l22 : ∀ X0 X1 sK0 : G, (X0 ◇ (X1 ◇ (sK0 ◇ (sK0 ◇ sK0)))) = (X0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X1)) := by
+    intro X0 X1 sK0
+    conv => enter [1]; rw [l21 X0 X1 sK0]
+    conv => enter [1]; rw [← h4512 X0 (sK0 ◇ (sK0 ◇ sK0)) X1]
+  have l23 : ∀ X1 sK0 X0 : G, (X1 ◇ (sK0 ◇ (sK0 ◇ sK0))) = (X0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X1)) := by
+    intro X1 sK0 X0
+    conv => enter [1]; rw [l14 X1 sK0 X0]
+    conv => enter [1]; rw [l22 X0 X1 sK0]
+  have l24 : ∀ sK0 X0 X1 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X1)) := by
+    intro sK0 X0 X1
+    conv => enter [1]; rw [l18 sK0 X1]
+    conv => enter [1]; rw [l23 X1 sK0 X0]
+  have l25 : ∀ sK0 X1 X0 : G, ((sK0 ◇ (sK0 ◇ sK0)) ◇ X1) = (X0 ◇ ((sK0 ◇ (sK0 ◇ sK0)) ◇ X1)) := by
+    intro sK0 X1 X0
+    conv => enter [1, 1]; rw [l18 sK0 X0]
+    conv => enter [1]; rw [← h4512 X0 (sK0 ◇ (sK0 ◇ sK0)) X1]
+  have l26 : ∀ sK0 X1 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK0 ◇ (sK0 ◇ sK0)) ◇ X1) := by
+    intro sK0 X1
+    conv => enter [1]; rw [l24 sK0 sK0 X1]
+    conv => enter [1]; rw [← l25 sK0 X1 sK0]
+  have l27 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK1 ◇ (sK2 ◇ sK2)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l26 sK0 (sK2 ◇ sK2)]
+    conv => enter [1]; rw [l3 (sK0 ◇ (sK0 ◇ sK0)) sK2 sK1]
+  intro x y z
+  conv => enter [1]; rw [l27 x y z]
+
+theorem Equation4268_4343_4512_implies_Equation4277 (G : Type*) [Magma G] (h4268 : Equation4268 G) (h4343 : Equation4343 G) (h4512 : Equation4512 G) : Equation4277 G := by
+  have l0 : ∀ sK1 sK2 X0 : G, (sK1 ◇ (sK1 ◇ sK2)) = (sK1 ◇ (sK1 ◇ X0)) := by
+    intro sK1 sK2 X0
+    conv => enter [1]; rw [← h4268 sK1 sK2]
+    conv => enter [1]; rw [h4268 sK1 X0]
+  have l1 : ∀ sK1 sK2 : G, (sK1 ◇ (sK1 ◇ sK2)) = (sK1 ◇ (sK1 ◇ (sK1 ◇ sK2))) := by
+    intro sK1 sK2
+    conv => enter [1]; rw [← h4268 sK1 sK2]
+    conv => enter [1]; rw [h4268 sK1 (sK1 ◇ sK1)]
+    conv => enter [1, 2]; rw [h4268 sK1 sK2]
+  have l2 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK0 ◇ (X0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [h4268 sK0 (X0 ◇ X0)]
+    conv => enter [1, 2]; rw [h4343 sK0 X0]
+  have l3 : ∀ sK1 X0 X1 sK2 : G, (sK1 ◇ ((sK1 ◇ X0) ◇ X1)) = ((sK1 ◇ (sK1 ◇ sK2)) ◇ X1) := by
+    intro sK1 X0 X1 sK2
+    conv => enter [1]; rw [h4512 sK1 (sK1 ◇ X0) X1]
+    conv => enter [1, 1]; rw [l0 sK1 X0 sK2]
+  have l4 : ∀ sK1 sK2 X1 X0 : G, ((sK1 ◇ (sK1 ◇ sK2)) ◇ X1) = (sK1 ◇ (sK1 ◇ (X0 ◇ X1))) := by
+    intro sK1 sK2 X1 X0
+    conv => enter [1]; rw [← l3 sK1 X0 X1 sK2]
+    conv => enter [1, 2]; rw [← h4512 sK1 X0 X1]
+  have l5 : ∀ sK1 sK2 X1 : G, (sK1 ◇ (sK1 ◇ sK1)) = ((sK1 ◇ (sK1 ◇ sK2)) ◇ X1) := by
+    intro sK1 sK2 X1
+    conv => enter [1]; rw [h4268 sK1 (sK1 ◇ X1)]
+    conv => enter [1]; rw [← l4 sK1 sK2 X1 sK1]
+  have l6 : ∀ sK1 sK2 X1 : G, (sK1 ◇ (sK1 ◇ (sK1 ◇ sK2))) = ((sK1 ◇ (sK1 ◇ sK2)) ◇ X1) := by
+    intro sK1 sK2 X1
+    conv => enter [1]; rw [← h4268 sK1 (sK1 ◇ sK2)]
+    conv => enter [1]; rw [l5 sK1 sK2 X1]
+  have l7 : ∀ sK1 sK2 X1 : G, (sK1 ◇ (sK1 ◇ sK2)) = ((sK1 ◇ (sK1 ◇ sK2)) ◇ X1) := by
+    intro sK1 sK2 X1
+    conv => enter [1]; rw [l1 sK1 sK2]
+    conv => enter [1]; rw [l6 sK1 sK2 X1]
+  have l8 : ∀ sK1 sK2 sK0 : G, ((sK1 ◇ (sK1 ◇ sK2)) ◇ (sK0 ◇ sK0)) = (sK0 ◇ (sK1 ◇ (sK1 ◇ sK2))) := by
+    intro sK1 sK2 sK0
+    conv => enter [1]; rw [h4343 (sK1 ◇ (sK1 ◇ sK2)) sK0]
+    conv => enter [1, 2]; rw [← l7 sK1 sK2 (sK1 ◇ (sK1 ◇ sK2))]
+  have l9 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK0 ◇ (sK1 ◇ (sK1 ◇ sK2))) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l2 sK0 (sK1 ◇ (sK1 ◇ sK2))]
+    conv => enter [1, 2]; rw [← l7 sK1 sK2 (sK0 ◇ sK0)]
+  have l10 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = ((sK1 ◇ (sK1 ◇ sK2)) ◇ (sK0 ◇ sK0)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l9 sK0 sK1 sK2]
+    conv => enter [1]; rw [← l8 sK1 sK2 sK0]
+  have l11 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK1 ◇ (sK1 ◇ sK2)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l10 sK0 sK1 sK2]
+    conv => enter [1]; rw [← l7 sK1 sK2 (sK0 ◇ sK0)]
+  intro x y z
+  conv => enter [1]; rw [l11 x y z]
+
+theorem Equation4272_4290_implies_Equation4299 (G : Type*) [Magma G] (h4272 : Equation4272 G) (h4290 : Equation4290 G) : Equation4299 G := by
+  have l0 : ∀ sK2 sK0 X0 : G, (sK2 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK0 ◇ sK0)) := by
+    intro sK2 sK0 X0
+    conv => enter [1]; rw [← h4272 sK0 sK2]
+    conv => enter [1]; rw [h4272 sK0 X0]
+  have l1 : ∀ sK2 sK0 X0 : G, (sK2 ◇ (sK0 ◇ sK0)) = (sK0 ◇ (sK0 ◇ X0)) := by
+    intro sK2 sK0 X0
+    conv => enter [1]; rw [l0 sK2 sK0 X0]
+    conv => enter [1]; rw [← h4290 sK0 X0]
+  intro x y z
+  conv => enter [1]; rw [← l1 z x y]
+
+theorem Equation4268_4290_implies_Equation4299 (G : Type*) [Magma G] (h4268 : Equation4268 G) (h4290 : Equation4290 G) : Equation4299 G := by
+  have l0 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK0 ◇ sK0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [h4268 sK0 X0]
+    conv => enter [1]; rw [h4290 sK0 X0]
+  have l1 : ∀ sK0 sK1 X0 : G, (sK0 ◇ (sK0 ◇ sK1)) = (X0 ◇ (sK0 ◇ sK0)) := by
+    intro sK0 sK1 X0
+    conv => enter [1]; rw [← h4268 sK0 sK1]
+    conv => enter [1]; rw [l0 sK0 X0]
+  intro x y z
+  conv => enter [1]; rw [l1 x y z]
+
+theorem Equation4272_4284_implies_Equation4304 (G : Type*) [Magma G] (h4272 : Equation4272 G) (h4284 : Equation4284 G) : Equation4304 G := by
+  have l0 : ∀ sK2 sK1 X0 : G, (sK2 ◇ (sK1 ◇ sK1)) = (X0 ◇ (sK1 ◇ sK1)) := by
+    intro sK2 sK1 X0
+    conv => enter [1]; rw [← h4272 sK1 sK2]
+    conv => enter [1]; rw [h4272 sK1 X0]
+  have l1 : ∀ sK2 sK1 X0 : G, (sK2 ◇ (sK1 ◇ sK1)) = (X0 ◇ (X0 ◇ sK1)) := by
+    intro sK2 sK1 X0
+    conv => enter [1]; rw [l0 sK2 sK1 X0]
+    conv => enter [1]; rw [← h4284 X0 sK1]
+  have l2 : ∀ sK0 sK1 : G, (sK0 ◇ (sK0 ◇ sK1)) = (sK1 ◇ (sK1 ◇ sK1)) := by
+    intro sK0 sK1
+    conv => enter [1]; rw [h4284 sK0 sK1]
+    conv => enter [1]; rw [← h4272 sK1 sK0]
+  have l3 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK1)) = (sK2 ◇ (sK1 ◇ sK1)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l2 sK0 sK1]
+    conv => enter [1]; rw [← l1 sK2 sK1 sK1]
+  intro x y z
+  conv => enter [1]; rw [l3 x y z]
+
+theorem Equation4268_4284_implies_Equation4288 (G : Type*) [Magma G] (h4268 : Equation4268 G) (h4284 : Equation4284 G) : Equation4288 G := by
+  have l0 : ∀ sK0 sK1 X0 : G, (sK0 ◇ (sK0 ◇ sK1)) = (sK0 ◇ (sK0 ◇ X0)) := by
+    intro sK0 sK1 X0
+    conv => enter [1]; rw [← h4268 sK0 sK1]
+    conv => enter [1]; rw [h4268 sK0 X0]
+  have l1 : ∀ sK0 sK1 X0 : G, (sK0 ◇ (sK0 ◇ sK1)) = (sK0 ◇ (X0 ◇ X0)) := by
+    intro sK0 sK1 X0
+    conv => enter [1]; rw [l0 sK0 sK1 X0]
+    conv => enter [1]; rw [h4284 sK0 X0]
+  intro x y z
+  conv => enter [1]; rw [l1 x y z]
+
+theorem Equation4272_4283_4512_implies_Equation4280 (G : Type*) [Magma G] (h4272 : Equation4272 G) (h4283 : Equation4283 G) (h4512 : Equation4512 G) : Equation4280 G := by
+  have l0 : ∀ sK0 X0 : G, ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))) = (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1, 2]; rw [h4272 sK0 (sK0 ◇ sK0)]
+    conv => enter [1]; rw [h4272 (sK0 ◇ sK0) X0]
+    conv => enter [1, 2]; rw [← h4272 sK0 (sK0 ◇ sK0)]
+  have l1 : ∀ sK1 sK2 X0 : G, (sK1 ◇ (sK2 ◇ sK2)) = (X0 ◇ (sK2 ◇ sK2)) := by
+    intro sK1 sK2 X0
+    conv => enter [1]; rw [← h4272 sK2 sK1]
+    conv => enter [1]; rw [h4272 sK2 X0]
+  have l2 : ∀ X0 sK0 : G, (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) = (X0 ◇ ((sK0 ◇ sK0) ◇ X0)) := by
+    intro X0 sK0
+    conv => enter [1, 2]; rw [h4272 sK0 X0]
+    conv => enter [1]; rw [h4283 X0 (sK0 ◇ sK0)]
+  have l3 : ∀ sK2 sK1 sK0 : G, ((sK2 ◇ sK2) ◇ (sK1 ◇ (sK2 ◇ sK2))) = ((sK2 ◇ sK2) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK2 sK1 sK0
+    conv => enter [1, 2]; rw [l1 sK1 sK2 (sK0 ◇ sK0)]
+    conv => enter [1]; rw [← l2 (sK2 ◇ sK2) sK0]
+  have l4 : ∀ sK0 sK2 sK1 : G, ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))) = ((sK2 ◇ sK2) ◇ (sK1 ◇ (sK2 ◇ sK2))) := by
+    intro sK0 sK2 sK1
+    conv => enter [1]; rw [l0 sK0 (sK2 ◇ sK2)]
+    conv => enter [1]; rw [← l3 sK2 sK1 sK0]
+  have l5 : ∀ sK0 X0 X1 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (X1 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0 X1
+    conv => enter [1]; rw [h4272 sK0 (X0 ◇ X1)]
+    conv => enter [1]; rw [← h4512 X0 X1 (sK0 ◇ sK0)]
+  have l6 : ∀ sK1 sK2 X0 X1 : G, (sK1 ◇ (sK2 ◇ sK2)) = (X0 ◇ (X1 ◇ (sK2 ◇ sK2))) := by
+    intro sK1 sK2 X0 X1
+    conv => enter [1]; rw [l1 sK1 sK2 (X0 ◇ X1)]
+    conv => enter [1]; rw [← h4512 X0 X1 (sK2 ◇ sK2)]
+  have l7 : ∀ sK1 sK2 X0 : G, (sK1 ◇ (sK2 ◇ sK2)) = (X0 ◇ (sK1 ◇ (sK2 ◇ sK2))) := by
+    intro sK1 sK2 X0
+    conv => enter [1]; rw [l6 sK1 sK2 X0 sK1]
+  have l8 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l5 sK0 X0 sK0]
+  have l9 : ∀ sK1 sK2 sK0 : G, (sK1 ◇ (sK2 ◇ sK2)) = ((sK0 ◇ sK0) ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK1 sK2 sK0
+    conv => enter [1]; rw [l7 sK1 sK2 (sK2 ◇ sK2)]
+    conv => enter [1]; rw [← l4 sK0 sK2 sK1]
+  have l10 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK1 ◇ (sK2 ◇ sK2)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l8 sK0 (sK0 ◇ sK0)]
+    conv => enter [1]; rw [← l9 sK1 sK2 sK0]
+  intro x y z
+  conv => enter [1]; rw [l10 x y z]
+
+theorem Equation4268_4320_4512_implies_Equation4277 (G : Type*) [Magma G] (h4268 : Equation4268 G) (h4320 : Equation4320 G) (h4512 : Equation4512 G) : Equation4277 G := by
+  have l0 : ∀ sK1 sK2 X0 : G, (sK1 ◇ (sK1 ◇ sK2)) = (sK1 ◇ (sK1 ◇ X0)) := by
+    intro sK1 sK2 X0
+    conv => enter [1]; rw [← h4268 sK1 sK2]
+    conv => enter [1]; rw [h4268 sK1 X0]
+  have l1 : ∀ X0 X1 : G, ((X0 ◇ X0) ◇ (X1 ◇ (X0 ◇ X0))) = (X1 ◇ (X0 ◇ ((X0 ◇ X0) ◇ X0))) := by
+    intro X0 X1
+    conv => enter [1]; rw [h4320 (X0 ◇ X0) X1]
+    conv => enter [1, 2]; rw [← h4320 X0 (X0 ◇ X0)]
+  have l2 : ∀ X1 X0 : G, (X1 ◇ (X1 ◇ X1)) = (X1 ◇ (X0 ◇ (X1 ◇ X0))) := by
+    intro X1 X0
+    conv => enter [1]; rw [h4268 X1 (X0 ◇ X0)]
+    conv => enter [1, 2]; rw [← h4320 X0 X1]
+  have l3 : ∀ X0 X1 : G, ((X0 ◇ X0) ◇ (X1 ◇ (X0 ◇ X0))) = (X1 ◇ (X0 ◇ (X0 ◇ (X0 ◇ X0)))) := by
+    intro X0 X1
+    conv => enter [1]; rw [l1 X0 X1]
+    conv => enter [1, 2, 2]; rw [← h4512 X0 X0 X0]
+  have l4 : ∀ X0 X1 : G, ((X0 ◇ X0) ◇ (X1 ◇ (X0 ◇ X0))) = (X1 ◇ (X0 ◇ (X0 ◇ X0))) := by
+    intro X0 X1
+    conv => enter [1]; rw [l3 X0 X1]
+    conv => enter [1, 2]; rw [← l2 X0 X0]
+  have l5 : ∀ X1 X0 : G, (X1 ◇ (X0 ◇ (X0 ◇ X0))) = (X0 ◇ (X0 ◇ (X1 ◇ (X0 ◇ X0)))) := by
+    intro X1 X0
+    conv => enter [1]; rw [← l4 X0 X1]
+    conv => enter [1]; rw [← h4512 X0 X0 (X1 ◇ (X0 ◇ X0))]
+  have l6 : ∀ X0 X1 : G, (X0 ◇ (X0 ◇ X0)) = (X1 ◇ (X0 ◇ (X0 ◇ X0))) := by
+    intro X0 X1
+    conv => enter [1]; rw [h4268 X0 (X1 ◇ (X0 ◇ X0))]
+    conv => enter [1]; rw [← l5 X1 X0]
+  have l7 : ∀ sK1 sK2 sK0 : G, (sK1 ◇ (sK1 ◇ sK2)) = (sK1 ◇ (sK0 ◇ (sK0 ◇ sK0))) := by
+    intro sK1 sK2 sK0
+    conv => enter [1]; rw [l0 sK1 sK2 (sK0 ◇ (sK0 ◇ sK0))]
+    conv => enter [1, 2]; rw [← l6 sK0 sK1]
+  have l8 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK1 ◇ (sK1 ◇ sK2)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l6 sK0 sK1]
+    conv => enter [1]; rw [← l7 sK1 sK2 sK0]
+  intro x y z
+  conv => enter [1]; rw [l8 x y z]
+
+theorem Equation4272_4276_implies_Equation4280 (G : Type*) [Magma G] (h4272 : Equation4272 G) (h4276 : Equation4276 G) : Equation4280 G := by
+  have l0 : ∀ sK1 sK2 X0 : G, (sK1 ◇ (sK2 ◇ sK2)) = (X0 ◇ (sK2 ◇ sK2)) := by
+    intro sK1 sK2 X0
+    conv => enter [1]; rw [← h4272 sK2 sK1]
+    conv => enter [1]; rw [h4272 sK2 X0]
+  have l1 : ∀ X0 sK1 sK2 : G, (X0 ◇ (X0 ◇ X0)) = (sK1 ◇ (sK2 ◇ sK2)) := by
+    intro X0 sK1 sK2
+    conv => enter [1]; rw [h4276 X0 sK2]
+    conv => enter [1]; rw [l0 sK2 sK2 sK1]
+  intro x y z
+  conv => enter [1]; rw [l1 x y z]
+
+theorem Equation4268_4276_implies_Equation4277 (G : Type*) [Magma G] (h4268 : Equation4268 G) (h4276 : Equation4276 G) : Equation4277 G := by
+  have l0 : ∀ sK1 sK2 X0 : G, (sK1 ◇ (sK1 ◇ sK2)) = (sK1 ◇ (sK1 ◇ X0)) := by
+    intro sK1 sK2 X0
+    conv => enter [1]; rw [← h4268 sK1 sK2]
+    conv => enter [1]; rw [h4268 sK1 X0]
+  have l1 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK1 ◇ (sK1 ◇ sK2)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [h4276 sK0 sK1]
+    conv => enter [1]; rw [l0 sK1 sK1 sK2]
+  intro x y z
+  conv => enter [1]; rw [l1 x y z]
+
+theorem Equation4272_4275_implies_Equation4304 (G : Type*) [Magma G] (h4272 : Equation4272 G) (h4275 : Equation4275 G) : Equation4304 G := by
+  have l0 : ∀ sK2 sK1 X0 : G, (sK2 ◇ (sK1 ◇ sK1)) = (X0 ◇ (sK1 ◇ sK1)) := by
+    intro sK2 sK1 X0
+    conv => enter [1]; rw [← h4272 sK1 sK2]
+    conv => enter [1]; rw [h4272 sK1 X0]
+  have l1 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK1)) = (sK2 ◇ (sK1 ◇ sK1)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [← h4275 sK1 sK0]
+    conv => enter [1]; rw [l0 sK1 sK1 sK2]
+  intro x y z
+  conv => enter [1]; rw [l1 x y z]
+
+theorem Equation4268_4270_implies_Equation4288 (G : Type*) [Magma G] (h4268 : Equation4268 G) (h4270 : Equation4270 G) : Equation4288 G := by
+  have l0 : ∀ sK0 sK1 X0 : G, (sK0 ◇ (sK0 ◇ sK1)) = (sK0 ◇ (sK0 ◇ X0)) := by
+    intro sK0 sK1 X0
+    conv => enter [1]; rw [← h4268 sK0 sK1]
+    conv => enter [1]; rw [h4268 sK0 X0]
+  have l1 : ∀ sK0 sK1 X0 : G, (sK0 ◇ (sK0 ◇ sK1)) = (sK0 ◇ (X0 ◇ X0)) := by
+    intro sK0 sK1 X0
+    conv => enter [1]; rw [l0 sK0 sK1 sK0]
+    conv => enter [1]; rw [h4270 sK0 X0]
+  intro x y z
+  conv => enter [1]; rw [l1 x y z]
+
+theorem Equation4272_4273_implies_Equation4331 (G : Type*) [Magma G] (h4272 : Equation4272 G) (h4273 : Equation4273 G) : Equation4331 G := by
+  have l0 : ∀ sK1 X0 : G, ((sK1 ◇ sK1) ◇ (sK1 ◇ (sK1 ◇ sK1))) = (X0 ◇ (sK1 ◇ (sK1 ◇ sK1))) := by
+    intro sK1 X0
+    conv => enter [1, 2]; rw [h4272 sK1 (sK1 ◇ sK1)]
+    conv => enter [1]; rw [h4272 (sK1 ◇ sK1) X0]
+    conv => enter [1, 2]; rw [← h4272 sK1 (sK1 ◇ sK1)]
+  have l1 : ∀ sK1 sK2 X0 : G, ((sK1 ◇ sK1) ◇ (sK2 ◇ (sK1 ◇ sK1))) = (X0 ◇ (sK2 ◇ (sK1 ◇ sK1))) := by
+    intro sK1 sK2 X0
+    conv => enter [1, 2]; rw [← h4272 sK1 sK2]
+    conv => enter [1]; rw [l0 sK1 X0]
+    conv => enter [1, 2]; rw [h4272 sK1 sK2]
+  have l2 : ∀ sK2 sK1 X0 : G, (sK2 ◇ (sK1 ◇ sK1)) = (X0 ◇ (sK1 ◇ sK1)) := by
+    intro sK2 sK1 X0
+    conv => enter [1]; rw [← h4272 sK1 sK2]
+    conv => enter [1]; rw [h4272 sK1 X0]
+  have l3 : ∀ X0 sK2 sK1 X1 : G, (X0 ◇ (sK2 ◇ (sK1 ◇ sK1))) = (X1 ◇ (sK2 ◇ (sK1 ◇ sK1))) := by
+    intro X0 sK2 sK1 X1
+    conv => enter [1]; rw [← l1 sK1 sK2 X0]
+    conv => enter [1]; rw [l1 sK1 sK2 X1]
+  have l4 : ∀ sK2 sK1 X0 : G, ((sK2 ◇ (sK1 ◇ sK1)) ◇ ((sK1 ◇ sK1) ◇ (sK2 ◇ (sK1 ◇ sK1)))) = (X0 ◇ ((sK1 ◇ sK1) ◇ (sK2 ◇ (sK1 ◇ sK1)))) := by
+    intro sK2 sK1 X0
+    conv => enter [1, 2]; rw [l1 sK1 sK2 (sK2 ◇ (sK1 ◇ sK1))]
+    conv => enter [1]; rw [h4272 (sK2 ◇ (sK1 ◇ sK1)) X0]
+    conv => enter [1, 2]; rw [← l1 sK1 sK2 (sK2 ◇ (sK1 ◇ sK1))]
+  have l5 : ∀ sK1 X0 sK2 : G, ((sK1 ◇ sK1) ◇ ((sK1 ◇ sK1) ◇ (sK1 ◇ sK1))) = (X0 ◇ ((sK1 ◇ sK1) ◇ (sK2 ◇ (sK1 ◇ sK1)))) := by
+    intro sK1 X0 sK2
+    conv => enter [1]; rw [h4273 (sK1 ◇ sK1) (sK2 ◇ (sK1 ◇ sK1))]
+    conv => enter [1]; rw [l4 sK2 sK1 X0]
+  have l6 : ∀ sK1 X0 sK2 : G, ((sK1 ◇ sK1) ◇ (sK1 ◇ (sK1 ◇ sK1))) = (X0 ◇ ((sK1 ◇ sK1) ◇ (sK2 ◇ (sK1 ◇ sK1)))) := by
+    intro sK1 X0 sK2
+    conv => enter [1, 2]; rw [h4272 sK1 (sK1 ◇ sK1)]
+    conv => enter [1]; rw [l5 sK1 X0 sK2]
+  have l7 : ∀ sK1 X0 sK2 : G, (sK1 ◇ (sK1 ◇ sK1)) = (X0 ◇ ((sK1 ◇ sK1) ◇ (sK2 ◇ (sK1 ◇ sK1)))) := by
+    intro sK1 X0 sK2
+    conv => enter [1]; rw [h4273 sK1 (sK1 ◇ sK1)]
+    conv => enter [1]; rw [l6 sK1 X0 sK2]
+  have l8 : ∀ sK2 sK1 X0 : G, (sK2 ◇ (sK1 ◇ sK1)) = (X0 ◇ ((sK1 ◇ sK1) ◇ (sK2 ◇ (sK1 ◇ sK1)))) := by
+    intro sK2 sK1 X0
+    conv => enter [1]; rw [l2 sK2 sK1 sK1]
+    conv => enter [1]; rw [l7 sK1 X0 sK2]
+  have l9 : ∀ sK2 sK1 X1 X0 : G, (sK2 ◇ (sK1 ◇ sK1)) = (X1 ◇ (X0 ◇ (sK2 ◇ (sK1 ◇ sK1)))) := by
+    intro sK2 sK1 X1 X0
+    conv => enter [1]; rw [l8 sK2 sK1 X1]
+    conv => enter [1, 2]; rw [l3 (sK1 ◇ sK1) sK2 sK1 X0]
+  have l10 : ∀ X0 sK2 sK1 : G, (X0 ◇ (X0 ◇ X0)) = (sK2 ◇ (sK1 ◇ sK1)) := by
+    intro X0 sK2 sK1
+    conv => enter [1]; rw [h4273 X0 (sK2 ◇ (sK1 ◇ sK1))]
+    conv => enter [1]; rw [← l9 sK2 sK1 (sK2 ◇ (sK1 ◇ sK1)) X0]
+  have l11 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK1 ◇ sK0)) = (sK2 ◇ (sK1 ◇ sK1)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [← h4273 sK1 sK0]
+    conv => enter [1]; rw [l10 sK1 sK2 sK1]
+  intro x y z
+  conv => enter [1]; rw [l11 x y z]
+
+theorem Equation4268_4273_implies_Equation4301 (G : Type*) [Magma G] (h4268 : Equation4268 G) (h4273 : Equation4273 G) : Equation4301 G := by
+  have l0 : ∀ sK0 sK1 X0 : G, (sK0 ◇ (sK0 ◇ sK1)) = (sK0 ◇ (sK0 ◇ X0)) := by
+    intro sK0 sK1 X0
+    conv => enter [1]; rw [← h4268 sK0 sK1]
+    conv => enter [1]; rw [h4268 sK0 X0]
+  have l1 : ∀ sK0 sK1 X0 : G, (sK0 ◇ (sK0 ◇ sK1)) = (X0 ◇ (sK0 ◇ X0)) := by
+    intro sK0 sK1 X0
+    conv => enter [1]; rw [l0 sK0 sK1 sK0]
+    conv => enter [1]; rw [h4273 sK0 X0]
+  have l2 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK1)) = (sK2 ◇ (sK0 ◇ sK2)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l1 sK0 sK1 sK0]
+    conv => enter [1]; rw [h4273 sK0 sK2]
+  intro x y z
+  conv => enter [1]; rw [l2 x y z]
+
+theorem Equation4270_4275_implies_Equation4297 (G : Type*) [Magma G] (h4270 : Equation4270 G) (h4275 : Equation4275 G) : Equation4297 G := by
+  have l0 : ∀ X0 X1 sK2 : G, (X0 ◇ (X1 ◇ X1)) = (X0 ◇ (sK2 ◇ sK2)) := by
+    intro X0 X1 sK2
+    conv => enter [1]; rw [← h4270 X0 X1]
+    conv => enter [1]; rw [h4270 X0 sK2]
+  have l1 : ∀ X0 X1 sK2 : G, (X0 ◇ (X0 ◇ X1)) = (X1 ◇ (sK2 ◇ sK2)) := by
+    intro X0 X1 sK2
+    conv => enter [1]; rw [← h4275 X1 X0]
+    conv => enter [1]; rw [l0 X1 X1 sK2]
+  intro x y z
+  conv => enter [1]; rw [l1 x y z]
+
+theorem Equation4270_4272_implies_Equation4280 (G : Type*) [Magma G] (h4270 : Equation4270 G) (h4272 : Equation4272 G) : Equation4280 G := by
+  have l0 : ∀ X0 X1 sK0 : G, (X0 ◇ (X1 ◇ X1)) = (X0 ◇ (sK0 ◇ sK0)) := by
+    intro X0 X1 sK0
+    conv => enter [1]; rw [← h4270 X0 X1]
+    conv => enter [1]; rw [h4270 X0 sK0]
+  have l1 : ∀ X0 sK0 sK2 : G, (X0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK2 ◇ sK2)) := by
+    intro X0 sK0 sK2
+    conv => enter [1]; rw [← h4270 X0 sK0]
+    conv => enter [1]; rw [h4270 X0 sK2]
+  have l2 : ∀ X0 sK0 : G, (X0 ◇ (X0 ◇ X0)) = (sK0 ◇ (sK0 ◇ sK0)) := by
+    intro X0 sK0
+    conv => enter [1]; rw [h4272 X0 sK0]
+    conv => enter [1]; rw [← h4270 sK0 X0]
+  have l3 : ∀ sK0 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK0 ◇ sK0)) := by
+    intro sK0 X0
+    conv => enter [1]; rw [l2 sK0 X0]
+    conv => enter [1]; rw [l0 X0 X0 sK0]
+  have l4 : ∀ X0 sK2 sK0 : G, (X0 ◇ (sK2 ◇ sK2)) = (sK2 ◇ (sK0 ◇ sK0)) := by
+    intro X0 sK2 sK0
+    conv => enter [1]; rw [← h4272 sK2 X0]
+    conv => enter [1]; rw [l1 sK2 sK2 sK0]
+  have l5 : ∀ sK0 X0 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK2 ◇ sK2)) := by
+    intro sK0 X0 sK2
+    conv => enter [1]; rw [l3 sK0 sK2]
+    conv => enter [1]; rw [← l4 X0 sK2 sK0]
+  intro x y z
+  conv => enter [1]; rw [l5 x y z]
+
+theorem Equation4268_4275_implies_Equation4277 (G : Type*) [Magma G] (h4268 : Equation4268 G) (h4275 : Equation4275 G) : Equation4277 G := by
+  have l0 : ∀ sK1 sK2 X0 : G, (sK1 ◇ (sK1 ◇ sK2)) = (sK1 ◇ (sK1 ◇ X0)) := by
+    intro sK1 sK2 X0
+    conv => enter [1]; rw [← h4268 sK1 sK2]
+    conv => enter [1]; rw [h4268 sK1 X0]
+  have l1 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK1 ◇ (sK1 ◇ sK2)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [h4275 sK0 sK1]
+    conv => enter [1]; rw [l0 sK1 sK0 sK2]
+  intro x y z
+  conv => enter [1]; rw [l1 x y z]
+
+theorem Equation4280_4300_4512_implies_Equation4274 (G : Type*) [Magma G] (h4280 : Equation4280 G) (h4300 : Equation4300 G) (h4512 : Equation4512 G) : Equation4274 G := by
+  have l0 : ∀ sK1 sK0 sK2 X0 : G, (sK1 ◇ (sK0 ◇ sK2)) = (X0 ◇ (sK0 ◇ sK2)) := by
+    intro sK1 sK0 sK2 X0
+    conv => enter [1]; rw [← h4300 sK0 sK2 sK1]
+    conv => enter [1]; rw [h4300 sK0 sK2 X0]
+  have l1 : ∀ sK0 X0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK1 ◇ (sK0 ◇ sK2))) := by
+    intro sK0 X0 sK1 sK2
+    conv => enter [1]; rw [h4280 sK0 X0 (sK0 ◇ sK2)]
+    conv => enter [1, 2]; rw [l0 (sK0 ◇ sK2) sK0 sK2 sK1]
+  have l2 : ∀ sK1 sK0 sK2 X0 X1 : G, (sK1 ◇ (sK0 ◇ sK2)) = (X0 ◇ (X1 ◇ (sK0 ◇ sK2))) := by
+    intro sK1 sK0 sK2 X0 X1
+    conv => enter [1]; rw [l0 sK1 sK0 sK2 (X0 ◇ X1)]
+    conv => enter [1]; rw [← h4512 X0 X1 (sK0 ◇ sK2)]
+  have l3 : ∀ sK1 sK0 sK2 X0 : G, (sK1 ◇ (sK0 ◇ sK2)) = (X0 ◇ (sK1 ◇ (sK0 ◇ sK2))) := by
+    intro sK1 sK0 sK2 X0
+    conv => enter [1]; rw [l2 sK1 sK0 sK2 X0 sK1]
+  have l4 : ∀ sK0 sK1 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (sK1 ◇ (sK0 ◇ sK2)) := by
+    intro sK0 sK1 sK2
+    conv => enter [1]; rw [l1 sK0 sK0 sK1 sK2]
+    conv => enter [1]; rw [← l3 sK1 sK0 sK2 sK0]
+  intro x y z
+  conv => enter [1]; rw [l4 x y z]
+
+theorem Equation4277_4315_4339_implies_Equation4274 (G : Type*) [Magma G] (h4277 : Equation4277 G) (h4315 : Equation4315 G) (h4339 : Equation4339 G) : Equation4274 G := by
+  have l0 : ∀ sK0 X1 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X1 ◇ (X0 ◇ (X0 ◇ X0))) := by
+    intro sK0 X1 X0
+    conv => enter [1]; rw [h4277 sK0 X1 (X1 ◇ sK0)]
+    conv => enter [1, 2]; rw [← h4277 X0 X1 sK0]
+  have l1 : ∀ sK0 X1 X0 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X1 ◇ (X0 ◇ X0)) := by
+    intro sK0 X1 X0
+    conv => enter [1]; rw [l0 sK0 X1 X0]
+    conv => enter [1]; rw [← h4339 X1 X0 (X0 ◇ X0)]
+  have l2 : ∀ X0 X1 sK0 : G, (X0 ◇ (X1 ◇ X0)) = (sK0 ◇ (sK0 ◇ sK0)) := by
+    intro X0 X1 sK0
+    conv => enter [1]; rw [h4315 X0 X1 X1]
+    conv => enter [1]; rw [← l1 sK0 X0 X1]
+  have l3 : ∀ sK0 X0 sK2 : G, (sK0 ◇ (sK0 ◇ sK0)) = (X0 ◇ (sK0 ◇ sK2)) := by
+    intro sK0 X0 sK2
+    conv => enter [1]; rw [← l2 X0 sK0 sK0]
+    conv => enter [1]; rw [h4315 X0 sK0 sK2]
+  intro x y z
+  conv => enter [1]; rw [l3 x y z]
+
+end Semigroup4
