@@ -2,14 +2,14 @@
 
 Results of attribute exploration, a method of formal concept analysis, on families of laws of the [Equational Theories Project](https://github.com/teorth/equational_theories) (ETP). For each family, the exploration decides which implications between sets of its laws hold. An implication can have several premises and several conclusions, for example `E28, E43 => E2`. The exploration gives two things:
 
-- **Rules.** Every implication that holds follows from these. The rules are proved in Lean.
-- **Magmas.** Every implication that does not follow from the rules fails in one of these magmas. Each magma's facts are proved in Lean.
+- **Implications.** Every implication that holds follows from these. They are proved in Lean.
+- **Magmas.** Every implication that does not follow from them fails in one of these magmas. Each magma's facts are proved in Lean.
 
 Laws are numbered and written as in the ETP. Numbers above 4694 follow the ETP's scheme (`scripts/find_equation_id.py`). The code that ran the explorations, and checks these results, is in [conceptual-exploration](https://github.com/objectivcp/conceptual-exploration).
 
 ## Case studies
 
-| Case study | Laws | Assumed | Rules | New to the ETP | Magmas |
+| Case study | Laws | Assumed | Implications | New to the ETP | Magmas |
 |---|---|---|---|---|---|
 | `Order2` | 24 | — | 69 | 49 | 30 |
 | `OneVariable` | 31 | — | 99 | 92 | 1,672 finite, 3,858 free |
@@ -17,7 +17,7 @@ Laws are numbered and written as in the ETP. Numbers above 4694 follow the ETP's
 | `CommutativeSemigroup5` | 160 | associativity, commutativity (E4512, E43) | 201 | 190 | 17 |
 | `Semigroup5` | 388 | associativity (E4512) | 1,701 | 1,607 | 216 |
 
-Rules are counted with their duals.
+Implications are counted with their duals.
 
 - **`Order2`:** laws of order at most 2. Equivalent laws are grouped into classes, and one law per class is kept. The set is closed under duality.
 - **`OneVariable`:** all one-variable laws of order at most 4.
@@ -32,16 +32,16 @@ Rules are counted with their duals.
 
 The order of a law is its number of operations.
 
-**When a law is assumed,** the implications are about the magmas that satisfy it. So the rules of the semigroup case studies hold in all semigroups, and their magmas are semigroups. Under associativity, the dual of a law is its reversal.
+**When a law is assumed,** the implications are about the magmas that satisfy it. So the implications of the semigroup case studies hold in all semigroups, and their magmas are semigroups. Under associativity, the dual of a law is its reversal.
 
-**For `CommutativeSemigroup5`,** every law is equivalent to its dual, so its rules come without duals.
+**For `CommutativeSemigroup5`,** every law is equivalent to its dual, so its implications come without duals.
 
 ## Contents
 
 ```
 data/<case study>/
   laws.txt              the laws: "N: law"
-  implications.txt      the rules, one per line
+  implications.txt      the implications, one per line
   implications.json     the same, as {name, premise, conclusion, source, origin, new}
   magmas.txt            the magmas: Table, Satisfies, Refutes
   free_magmas.json      OneVariable and CommutativeSemigroup5 only
@@ -51,14 +51,14 @@ ExplorationLaws.lean    the 2,630 laws the ETP does not declare: equation N := .
 lakefile.toml           the ETP as a dependency, at commit 1aec8a7
 ```
 
-## The rules
+## The implications
 
-The rules form the canonical basis relative to the background, simplified. The background is closed under duality, and the basis is given up to duality.
+The implications form the canonical basis relative to the background, simplified. The background is closed under duality, and the basis is given up to duality.
 
 - **Premises:** each premise is cut to the laws that the rest of it does not entail.
-- **Conclusions:** each conclusion is cut to the laws that do not follow from the background, the other rules and their duals.
+- **Conclusions:** each conclusion is cut to the laws that do not follow from the background, the other implications and their duals.
 
-**Format.** Each rule is followed by its dual, unless the dual coincides with it:
+**Format.** Each implication is followed by its dual, unless the dual coincides with it:
 
 ```
 [B3] E3: x = x ◇ x => E23: x = (x ◇ x) ◇ x   (background: ETP)
@@ -67,7 +67,7 @@ The rules form the canonical basis relative to the background, simplified. The b
 [19^op] E9: x = x ◇ (x ◇ y), E43: x ◇ y = y ◇ x => E2: x = y   (dual of 19, new)
 ```
 
-**Background rules** were given to the exploration from the start. Each is labelled with its origin:
+**Background implications** were given to the exploration from the start. Each is labelled with its origin:
 
 | Label | Case studies | Origin |
 |---|---|---|
@@ -75,19 +75,19 @@ The rules form the canonical basis relative to the background, simplified. The b
 | `equational reasoning` | `OneVariable` | derivations through laws of bounded order |
 | `Semigroup4` | `CommutativeSemigroup5`, `Semigroup5` | the result of `Semigroup4` |
 
-**`and reversal`** is added when a background rule also needs the reversals of these implications. The background is closed under the duality, which for semigroups is reversal. For example, the ETP has `E10 => E3322` (`x = xyx` gives `xy = xyzy`). Reversing it gives `E10 => E3326` (`xy = xzxy`), which holds in semigroups but not in all magmas. So `Semigroup4` has:
+**`and reversal`** is added when a background implication also needs the reversals of the implications it comes from. The background is closed under the duality, which for semigroups is reversal. For example, the ETP has `E10 => E3322` (`x = xyx` gives `xy = xyzy`). Reversing it gives `E10 => E3326` (`xy = xzxy`), which holds in semigroups but not in all magmas. So `Semigroup4` has:
 
 ```
 [B5] E10: … => E8: …, E432: …, E3326: …, E4269: …   (background: ETP and reversal)
 ```
 
-The Lean files prove the background rules like all the other rules.
+The Lean files prove the background implications like all the others.
 
-**`new`** marks a rule that the ETP's implications do not give. That is, some law of its conclusion does not follow from any single law of its premise, nor from an assumed law, by chains of the ETP's implications and their duals (reversals, for semigroups). The chains can pass through any ETP law, not just the explored ones.
+**`new`** marks an implication that the ETP's own implications do not give. That is, some law of its conclusion does not follow from any single law of its premise, nor from an assumed law, by chains of the ETP's implications and their duals (reversals, for semigroups). The chains can pass through any ETP law, not just the explored ones.
 
-- **Several premises.** The ETP studies implications from one law, so rules with several premises are usually new.
-- **Semigroups.** Associativity counts as a premise of every rule. So does commutativity in `CommutativeSemigroup5`.
-- **Proved rules need not be new.** Nine proved rules of `Semigroup4` follow from ETP implications chained through laws outside the exploration, which its background did not include.
+- **Several premises.** The ETP studies implications from one law, so implications with several premises are usually new.
+- **Semigroups.** Associativity counts as a premise of every implication. So does commutativity in `CommutativeSemigroup5`.
+- **Proved implications need not be new.** Nine proved implications of `Semigroup4` follow from ETP implications chained through laws outside the exploration, which its background did not include.
 
 ## Lean
 
@@ -106,7 +106,7 @@ lake build Semigroup5
 | `Magmas*.lean`, `Semigroups*.lean` | Their `Facts`, by `decideFin!`. Each lists the refuted laws, and enough satisfied laws for the implications to give the rest. |
 | `SemigroupParts*.lean` | The laws satisfied in the larger semigroups, proved one value of the first variable at a time. |
 
-**The rules and the Lean files.** The implications in the Lean files entail all the rules. Together with the facts, they give exactly the result: for every set of laws, the laws it implies are those satisfied in every magma that satisfies it.
+**The implications and the Lean files.** The implications proved in the Lean files entail all those listed in `implications.txt`. Together with the facts, they give exactly the result: for every set of laws, the laws it implies are those satisfied in every magma that satisfies it.
 
 That the Lean statements give exactly the result is checked by `verify.py --lean` in conceptual-exploration.
 
