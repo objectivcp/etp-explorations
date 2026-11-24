@@ -19,7 +19,7 @@ Laws are numbered and written as in the ETP. Numbers above 4694 follow the ETP's
 
 Implications are counted with their duals.
 
-- **`Order2`:** laws of order at most 2. Equivalent laws are grouped into classes, and one law per class is kept. The set is closed under duality.
+- **`Order2`:** laws of order at most 2. Equivalent laws are grouped into classes, and one law per class is kept, except for the class of E14 and its dual E29, which keeps both. The set is closed under duality.
 - **`OneVariable`:** all one-variable laws of order at most 4.
 - **`Semigroup4`:** laws of order at most 4, up to equivalence for semigroups. The set has three parts:
   - the first law of each ETP class of the 653 right-associated laws;
