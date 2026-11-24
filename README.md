@@ -129,6 +129,10 @@ That the Lean statements give exactly the result is checked by `verify.py --lean
 - It is the free object of that variety on two generators, truncated: the monomials of degree at most 3 with no cube, plus a zero, 8 elements in all.
 - It is in Lean like the other magmas.
 
+## Open questions
+
+[`open_questions/order3.md`](open_questions/order3.md): the implications between the 149 laws of order at most 3 (one per ETP class) that the exploration could not decide, with what was tried on each. This exploration is not finished. Its results come from automated tools and are not in Lean.
+
 ## License
 
 [Apache 2.0](LICENSE), as the ETP.
