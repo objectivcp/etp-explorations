@@ -131,7 +131,7 @@ That the Lean statements give exactly the result is checked by `verify.py --lean
 
 ## Open questions
 
-[`open_questions/order3.md`](open_questions/order3.md): the implications between the 149 laws of order at most 3 that the exploration could not decide, with what was tried on each. The laws represent the 146 ETP classes of these laws. [`open_questions/order3_open_implications.json`](open_questions/order3_open_implications.json) lists all its open implications with a single law as conclusion, by premise. This exploration is not finished. Its results come from automated tools and are not in Lean.
+[`open_questions/order3.md`](open_questions/order3.md): the implications between the 149 laws of order at most 3 that the exploration could not decide, with what was tried on each. The laws represent the 146 ETP classes of these laws. [`open_questions/order3_open_implications.md`](open_questions/order3_open_implications.md) lists all its open implications with a single law as conclusion, by premise, up to duality, and [`open_questions/order3_open_implications.json`](open_questions/order3_open_implications.json) all of them as data. This exploration is not finished. Its results come from automated tools and are not in Lean.
 
 ## License
 
