@@ -12,6 +12,7 @@ Laws are numbered and written as in the ETP. Numbers above 4694 follow the ETP's
 | Case study | Laws | Assumed | Implications | New to the ETP | Magmas |
 |---|---|---|---|---|---|
 | `Order2` | 24 | — | 69 | 49 | 30 |
+| `Order3` | 149 | — | 1,867 | 1,725 | 703 finite, 181 free |
 | `OneVariable` | 31 | — | 99 | 92 | 1,672 finite, 3,858 free |
 | `Semigroup4` | 248 | associativity (E4512) | 621 | 349 | 77 |
 | `CommutativeSemigroup5` | 160 | associativity, commutativity (E4512, E43) | 201 | 190 | 17 |
@@ -20,6 +21,7 @@ Laws are numbered and written as in the ETP. Numbers above 4694 follow the ETP's
 Implications are counted with their duals.
 
 - **`Order2`:** laws of order at most 2. Equivalent laws are grouped into classes, and one law per class is kept, except for the class of E14 and its dual E29, which keeps both. The set is closed under duality.
+- **`Order3`:** laws of order at most 3. One law per ETP class is kept, except for three classes that keep a law and its dual: E14 and E29, E66 and E281, E332 and E387. So there are 149 laws for 146 classes. The set is closed under duality. The exploration is not finished: see [Open questions](#open-questions).
 - **`OneVariable`:** all one-variable laws of order at most 4.
 - **`Semigroup4`:** laws of order at most 4, up to equivalence for semigroups. The set has three parts:
   - the first law of each ETP class of the 653 right-associated laws;
@@ -44,7 +46,7 @@ data/<case study>/
   implications.txt      the implications, one per line
   implications.json     the same, as {name, premise, conclusion, source, origin, new}
   magmas.txt            the magmas: Table, Satisfies, Refutes
-  free_magmas.json      OneVariable and CommutativeSemigroup5 only
+  free_magmas.json      OneVariable, CommutativeSemigroup5 and Order3 only
 ExplorationLaws.lean    the 2,630 laws the ETP does not declare: equation N := ...
 <CaseStudy>.lean, <CaseStudy>/
                         one Lean library per case study, in its own namespace
@@ -71,7 +73,7 @@ The implications form the canonical basis relative to the background, simplified
 
 | Label | Case studies | Origin |
 |---|---|---|
-| `ETP` | `Order2`, `Semigroup4` | the ETP's implications between two laws |
+| `ETP` | `Order2`, `Order3`, `Semigroup4` | the ETP's implications between two laws |
 | `equational reasoning` | `OneVariable` | derivations through laws of bounded order |
 | `Semigroup4` | `CommutativeSemigroup5`, `Semigroup5` | the result of `Semigroup4` |
 
@@ -93,7 +95,7 @@ The Lean files prove the background implications like all the others.
 
 ```
 lake exe cache get
-lake build Order2 OneVariable Semigroup4 CommutativeSemigroup5
+lake build Order2 Order3 OneVariable Semigroup4 CommutativeSemigroup5
 lake build Semigroup5
 ```
 
@@ -110,12 +112,14 @@ lake build Semigroup5
 
 That the Lean statements give exactly the result is checked by `verify.py --lean` in conceptual-exploration.
 
+For `Order3`, every implication P ⇒ a between its laws, with a single law a as conclusion, is proved, refuted by a magma, or open. If it is open, [`open_questions/order3_open_implications.md`](open_questions/order3_open_implications.md) lists R ⇒ a or its dual, for a premise R that P implies, and that implies P, by the proved implications. So deciding the implications listed there would decide every implication between these laws. Some refutations need a free magma (see below). `verify.py --lean --free-rows --open` checks this.
+
 **Axioms:**
 - The implication theorems use no axioms.
 - The facts use `propext`, `Classical.choice` and `Quot.sound`.
 - Nothing uses `sorryAx`, `Lean.ofReduceBool` or `Lean.trustCompiler`.
 
-**Build cost.** `Semigroup5` takes far longer to build than the other four libraries together, most of it in `SemigroupParts*`. These decide, in parts, the laws of the larger semigroups that are too costly to decide at once. Lake runs one Lean process per core, and each may need up to about 5 GB of memory. With less memory, build those modules a few at a time, such as `lake build Semigroup5.SemigroupParts0 Semigroup5.SemigroupParts1`.
+**Build cost.** `Semigroup5` takes far longer to build than the other five libraries together, most of it in `SemigroupParts*`. These decide, in parts, the laws of the larger semigroups that are too costly to decide at once. Lake runs one Lean process per core, and each may need up to about 5 GB of memory. With less memory, build those modules a few at a time, such as `lake build Semigroup5.SemigroupParts0 Semigroup5.SemigroupParts1`.
 
 ## Free magmas
 
@@ -129,9 +133,24 @@ That the Lean statements give exactly the result is checked by `verify.py --lean
 - It is the free object of that variety on two generators, truncated: the monomials of degree at most 3 with no cube, plus a zero, 8 elements in all.
 - It is in Lean like the other magmas.
 
+**`Order3`.** Besides the finite magmas, the exploration used two kinds of rows that have no table:
+
+- 181 free magmas over the premises of its questions;
+- 20 rows from refutations in the ETP, such as E65 not implying E359.
+
+Of these 201 rows, 82 refute an implication that no finite magma of the result refutes.
+
+- **Stand-ins.** The other 119 rows are no longer needed: finite stand-ins found by Mace4 refute everything those rows refuted that no other finite magma does. 61 of the 703 magmas are such stand-ins, and they are in Lean like the other magmas.
+- **Rewrite systems.** In `free_magmas.json`, 169 of the free magmas have a convergent rewrite system and its termination order:
+  - `kbo`: the Knuth–Bendix order with all weights 1;
+  - `lpo` or `lpo-rl`: the lexicographic path order, comparing the two arguments left to right or right to left.
+  - A rule may rewrite to a constant `c0`, an element of the free magma: the single value of a term such as x◇(x◇x) when the premise makes it the same for every x.
+- **What is left.** Every refutation that only these rows give is certified by a rewrite system or comes from the ETP.
+- These rows are not in Lean.
+
 ## Open questions
 
-[`open_questions/order3.md`](open_questions/order3.md): the implications between the 149 laws of order at most 3 that the exploration could not decide, with what was tried on each. The laws represent the 146 ETP classes of these laws. [`open_questions/order3_open_implications.md`](open_questions/order3_open_implications.md) lists all its open implications with a single law as conclusion, by premise, up to duality, and [`open_questions/order3_open_implications.json`](open_questions/order3_open_implications.json) all of them as data. This exploration is not finished. Its results come from automated tools and are not in Lean.
+[`open_questions/order3.md`](open_questions/order3.md): the implications between the 149 laws of order at most 3 that the exploration could not decide, with what was tried on each. The laws represent the 146 ETP classes of these laws. [`open_questions/order3_open_implications.md`](open_questions/order3_open_implications.md) lists all its open implications with a single law as conclusion, by premise, up to duality, and [`open_questions/order3_open_implications.json`](open_questions/order3_open_implications.json) all of them as data. This exploration is not finished. Its implications and magmas are in Lean as `Order3`, and the open questions are what it leaves undecided.
 
 ## License
 
