@@ -1,5 +1,5 @@
 name = "etp_explorations"
-defaultTargets = ["ExplorationLaws", "Order2", "OneVariable", "Semigroup4", "CommutativeSemigroup5", "Semigroup5"]
+defaultTargets = ["ExplorationLaws", "Order2", "OneVariable", "Semigroup4", "CommutativeSemigroup5", "Semigroup5", "Order3"]
 
 [leanOptions]
 pp.unicode.fun = true
@@ -28,3 +28,6 @@ name = "CommutativeSemigroup5"
 
 [[lean_lib]]
 name = "Semigroup5"
+
+[[lean_lib]]
+name = "Order3"
