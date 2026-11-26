@@ -12,7 +12,7 @@ Laws are numbered and written as in the ETP. Numbers above 4694 follow the ETP's
 | Case study | Laws | Assumed | Implications | New to the ETP | Magmas |
 |---|---|---|---|---|---|
 | `Order2` | 24 | — | 69 | 49 | 30 |
-| `Order3` | 149 | — | 1,867 | 1,725 | 703 finite, 181 free |
+| `Order3` | 149 | — | 1,867 | 1,725 | 705 finite, 181 free |
 | `OneVariable` | 31 | — | 99 | 92 | 1,672 finite, 3,858 free |
 | `Semigroup4` | 248 | associativity (E4512) | 621 | 349 | 77 |
 | `CommutativeSemigroup5` | 160 | associativity, commutativity (E4512, E43) | 201 | 190 | 17 |
@@ -140,7 +140,7 @@ For `Order3`, every implication P ⇒ a between its laws, with a single law a as
 
 Of these 201 rows, 82 refute an implication that no finite magma of the result refutes.
 
-- **Stand-ins.** The other 119 rows are no longer needed: finite stand-ins found by Mace4 refute everything those rows refuted that no other finite magma does. 61 of the 703 magmas are such stand-ins, and they are in Lean like the other magmas.
+- **Stand-ins.** The other 119 rows are no longer needed: finite stand-ins found by Mace4 refute everything those rows refuted that no other finite magma does. 61 of the 705 magmas are such stand-ins, and they are in Lean like the other magmas.
 - **Rewrite systems.** In `free_magmas.json`, 169 of the free magmas have a convergent rewrite system and its termination order:
   - `kbo`: the Knuth–Bendix order with all weights 1;
   - `lpo` or `lpo-rl`: the lexicographic path order, comparing the two arguments left to right or right to left.
